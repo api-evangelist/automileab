@@ -1,23 +1,911 @@
 aid: automileab
+
 name: Automileab
-description: 'Automileab is a company surfaced via the API Evangelist harvest backlog (source: secondary-market)
-  and added to the network as a stub for full-pipeline profiling.'
+
+image: https://www.datocms-assets.com/157698/1745410434-automile-meta.png?auto=format&fit=max&w=1200
+
+description: Automileab (Automile AB) provides automatic mileage logging and fleet tracking solutions. Their platform combines GPS hardware with
+  a mobile app to deliver real‑time vehicle tracking, mileage reports, driver behavior analytics, and integration with expense systems. Serving
+  over 15,000 companies and 100,000+ users, Automile simplifies fleet management for businesses of all sizes, offering plug‑and‑play devices,
+  web and mobile dashboards, and robust API access for custom integrations.
+
 url: https://raw.githubusercontent.com/api-evangelist/automileab/refs/heads/main/apis.yml
+
 x-type: company
+
 x-source: harvest:secondary-market
-x-tier: stub
-x-tier-reason: harvest
+
+x-tier: profiled
+x-tier-reason: enrichment pass 2026-09-26 (modular-v1; was harvest)
+
 specificationVersion: '0.20'
+
 created: '2026-09-26'
+
 modified: '2026-09-26'
+
 tags:
-- Company
-apis: []
+- Fleet Management
+- GPS Tracking
+- Mileage Logging
+- API
+- SaaS
+
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
 - FN: APIs.json
   email: info@apis.io
+
 common:
+- type: AgenticAccess
+  url: agentic-access/automileab-agentic-access.yml
+- type: Spectral
+  url: rules/automileab-rules.yml
+- type: DataModel
+  url: data-model/automileab-data-model.yml
+- type: ErrorCatalog
+  url: errors/automileab-problem-types.yml
+- type: Conformance
+  url: conformance/automileab-conformance.yml
+- type: Hosts
+  url: hosts/automileab-hosts.yml
+- type: OAuthScopes
+  url: scopes/automileab-scopes.yml
+- type: Authentication
+  url: authentication/automileab-authentication.yml
+- type: DomainSecurity
+  url: security/automileab-domain-security.yml
 - type: Website
-  url: https://equityzen.com/company/automileab
+  url: https://automile.com
+- type: Documentation
+  url: https://automile.com/en/knowledge-base
+- type: GettingStarted
+  url: https://automile.com/en
+- type: Support
+  url: https://automile.com/en/contact
+- type: Blog
+  url: https://automile.com/en/blog
+- type: TermsOfService
+  url: https://automile.com/en/terms-and-conditions
+- type: PrivacyPolicy
+  url: https://automile.com/en/privacy-policy
+
+apis:
+- aid: automileab:automileab-clientapi-api
+  name: Automileab Client API
+  description: The ClientApi API from Automileab — 1 operation(s) for clientapi.
+  humanURL: https://automile.com/en/developers
+  baseURL: https://api.automile.com
+  tags:
+  - ClientApi
+  properties:
+  - type: OpenAPI
+    url: openapi/automileab-clientapi-api-openapi.yml
+- aid: automileab:automileab-clientapiauthorizations-api
+  name: Automileab Client API Authorizations API
+  description: >-
+    The ClientApiAuthorizations API from Automileab — 2 operation(s) for clientapiauthorizations.
+  humanURL: https://automile.com/en/developers
+  baseURL: https://api.automile.com
+  tags:
+  - ClientApiAuthorizations
+  properties:
+  - type: OpenAPI
+    url: openapi/automileab-clientapiauthorizations-api-openapi.yml
+- aid: automileab:automileab-clientcontracts-api
+  name: Automileab Client Contracts API
+  description: The ClientContracts API from Automileab — 3 operation(s) for clientcontracts.
+  humanURL: https://automile.com/en/developers
+  baseURL: https://api.automile.com
+  tags:
+  - ClientContracts
+  properties:
+  - type: OpenAPI
+    url: openapi/automileab-clientcontracts-api-openapi.yml
+- aid: automileab:automileab-clientcustom-api
+  name: Automileab Client Custom API
+  description: The ClientCustom API from Automileab — 10 operation(s) for clientcustom.
+  humanURL: https://automile.com/en/developers
+  baseURL: https://api.automile.com
+  tags:
+  - ClientCustom
+  properties:
+  - type: OpenAPI
+    url: openapi/automileab-clientcustom-api-openapi.yml
+- aid: automileab:automileab-clientonboarding-api
+  name: Automileab Client Onboarding API
+  description: The ClientOnboarding API from Automileab — 2 operation(s) for clientonboarding.
+  humanURL: https://automile.com/en/developers
+  baseURL: https://api.automile.com
+  tags:
+  - ClientOnboarding
+  properties:
+  - type: OpenAPI
+    url: openapi/automileab-clientonboarding-api-openapi.yml
+- aid: automileab:automileab-clientorder-api
+  name: Automileab Client Order API
+  description: The ClientOrder API from Automileab — 2 operation(s) for clientorder.
+  humanURL: https://automile.com/en/developers
+  baseURL: https://api.automile.com
+  tags:
+  - ClientOrder
+  properties:
+  - type: OpenAPI
+    url: openapi/automileab-clientorder-api-openapi.yml
+- aid: automileab:automileab-clienttextmessage-api
+  name: Automileab Client Text Message API
+  description: The ClientTextMessage API from Automileab — 2 operation(s) for clienttextmessage.
+  humanURL: https://automile.com/en/developers
+  baseURL: https://api.automile.com
+  tags:
+  - ClientTextMessage
+  properties:
+  - type: OpenAPI
+    url: openapi/automileab-clienttextmessage-api-openapi.yml
+- aid: automileab:automileab-echo-api
+  name: Automileab Echo API
+  description: The Echo API from Automileab — 1 operation(s) for echo.
+  humanURL: https://automile.com/en/developers
+  baseURL: https://api.automile.com
+  tags:
+  - Echo
+  properties:
+  - type: OpenAPI
+    url: openapi/automileab-echo-api-openapi.yml
+- aid: automileab:automileab-home-api
+  name: Automileab Home API
+  description: The Home API from Automileab — 2 operation(s) for home.
+  humanURL: https://automile.com/en/developers
+  baseURL: https://api.automile.com
+  tags:
+  - Home
+  properties:
+  - type: OpenAPI
+    url: openapi/automileab-home-api-openapi.yml
+- aid: automileab:automileab-login-api
+  name: Automileab Login API
+  description: The Login API from Automileab — 1 operation(s) for login.
+  humanURL: https://automile.com/en/developers
+  baseURL: https://api.automile.com
+  tags:
+  - Login
+  properties:
+  - type: OpenAPI
+    url: openapi/automileab-login-api-openapi.yml
+- aid: automileab:automileab-oauth-api
+  name: Automileab OAuth API
+  description: The OAuth API from Automileab — 1 operation(s) for oauth.
+  humanURL: https://automile.com/en/developers
+  baseURL: https://api.automile.com
+  tags:
+  - OAuth
+  properties:
+  - type: OpenAPI
+    url: openapi/automileab-oauth-api-openapi.yml
+- aid: automileab:automileab-order-api
+  name: Automileab Order API
+  description: The Order API from Automileab — 1 operation(s) for order.
+  humanURL: https://automile.com/en/developers
+  baseURL: https://api.automile.com
+  tags:
+  - Order
+  properties:
+  - type: OpenAPI
+    url: openapi/automileab-order-api-openapi.yml
+- aid: automileab:automileab-phone-api
+  name: Automileab Phone API
+  description: The Phone API from Automileab — 2 operation(s) for phone.
+  humanURL: https://automile.com/en/developers
+  baseURL: https://api.automile.com
+  tags:
+  - Phone
+  properties:
+  - type: OpenAPI
+    url: openapi/automileab-phone-api-openapi.yml
+- aid: automileab:automileab-resourceownercompany-api
+  name: Automileab Resource Owner Company API
+  description: The ResourceOwnerCompany API from Automileab — 2 operation(s) for resourceownercompany.
+  humanURL: https://automile.com/en/developers
+  baseURL: https://api.automile.com
+  tags:
+  - ResourceOwnerCompany
+  properties:
+  - type: OpenAPI
+    url: openapi/automileab-resourceownercompany-api-openapi.yml
+- aid: automileab:automileab-resourceownercompanycontacts-api
+  name: Automileab Resource Owner Company Contacts API
+  description: >-
+    The ResourceOwnerCompanyContacts API from Automileab — 4 operation(s) for resourceownercompanycontacts.
+  humanURL: https://automile.com/en/developers
+  baseURL: https://api.automile.com
+  tags:
+  - ResourceOwnerCompanyContacts
+  properties:
+  - type: OpenAPI
+    url: openapi/automileab-resourceownercompanycontacts-api-openapi.yml
+- aid: automileab:automileab-resourceownercompanyvehicles-api
+  name: Automileab Resource Owner Company Vehicles API
+  description: >-
+    The ResourceOwnerCompanyVehicles API from Automileab — 4 operation(s) for resourceownercompanyvehicles.
+  humanURL: https://automile.com/en/developers
+  baseURL: https://api.automile.com
+  tags:
+  - ResourceOwnerCompanyVehicles
+  properties:
+  - type: OpenAPI
+    url: openapi/automileab-resourceownercompanyvehicles-api-openapi.yml
+- aid: automileab:automileab-resourceownercontact-api
+  name: Automileab Resource Owner Contact API
+  description: The ResourceOwnerContact API from Automileab — 5 operation(s) for resourceownercontact.
+  humanURL: https://automile.com/en/developers
+  baseURL: https://api.automile.com
+  tags:
+  - ResourceOwnerContact
+  properties:
+  - type: OpenAPI
+    url: openapi/automileab-resourceownercontact-api-openapi.yml
+- aid: automileab:automileab-resourceownercontact2-api
+  name: Automileab Resource Owner Contact2 API
+  description: >-
+    The ResourceOwnerContact2 API from Automileab — 12 operation(s) for resourceownercontact2.
+  humanURL: https://automile.com/en/developers
+  baseURL: https://api.automile.com
+  tags:
+  - ResourceOwnerContact2
+  properties:
+  - type: OpenAPI
+    url: openapi/automileab-resourceownercontact2-api-openapi.yml
+- aid: automileab:automileab-resourceownercontact3-api
+  name: Automileab Resource Owner Contact3 API
+  description: >-
+    The ResourceOwnerContact3 API from Automileab — 12 operation(s) for resourceownercontact3.
+  humanURL: https://automile.com/en/developers
+  baseURL: https://api.automile.com
+  tags:
+  - ResourceOwnerContact3
+  properties:
+  - type: OpenAPI
+    url: openapi/automileab-resourceownercontact3-api-openapi.yml
+- aid: automileab:automileab-resourceownercontactsetting-api
+  name: Automileab Resource Owner Contact Setting API
+  description: >-
+    The ResourceOwnerContactSetting API from Automileab — 2 operation(s) for resourceownercontactsetting.
+  humanURL: https://automile.com/en/developers
+  baseURL: https://api.automile.com
+  tags:
+  - ResourceOwnerContactSetting
+  properties:
+  - type: OpenAPI
+    url: openapi/automileab-resourceownercontactsetting-api-openapi.yml
+- aid: automileab:automileab-resourceownercontactvehicle-api
+  name: Automileab Resource Owner Contact Vehicle API
+  description: >-
+    The ResourceOwnerContactVehicle API from Automileab — 4 operation(s) for resourceownercontactvehicle.
+  humanURL: https://automile.com/en/developers
+  baseURL: https://api.automile.com
+  tags:
+  - ResourceOwnerContactVehicle
+  properties:
+  - type: OpenAPI
+    url: openapi/automileab-resourceownercontactvehicle-api-openapi.yml
+- aid: automileab:automileab-resourceownercontent-api
+  name: Automileab Resource Owner Content API
+  description: The ResourceOwnerContent API from Automileab — 2 operation(s) for resourceownercontent.
+  humanURL: https://automile.com/en/developers
+  baseURL: https://api.automile.com
+  tags:
+  - ResourceOwnerContent
+  properties:
+  - type: OpenAPI
+    url: openapi/automileab-resourceownercontent-api-openapi.yml
+- aid: automileab:automileab-resourceownerexpensereport3v2-api
+  name: Automileab Resource Owner Expense Report3 V2 API
+  description: >-
+    The ResourceOwnerExpenseReport3V2 API from Automileab — 5 operation(s) for resourceownerexpensereport3v2.
+  humanURL: https://automile.com/en/developers
+  baseURL: https://api.automile.com
+  tags:
+  - ResourceOwnerExpenseReport3V2
+  properties:
+  - type: OpenAPI
+    url: openapi/automileab-resourceownerexpensereport3v2-api-openapi.yml
+- aid: automileab:automileab-resourceownerexpensereportrow3v2-api
+  name: Automileab Resource Owner Expense Report Row3 V2 API
+  description: >-
+    The ResourceOwnerExpenseReportRow3V2 API from Automileab — 2 operation(s) for resourceownerexpensereportrow3v2.
+  humanURL: https://automile.com/en/developers
+  baseURL: https://api.automile.com
+  tags:
+  - ResourceOwnerExpenseReportRow3V2
+  properties:
+  - type: OpenAPI
+    url: openapi/automileab-resourceownerexpensereportrow3v2-api-openapi.yml
+- aid: automileab:automileab-resourceownerexpensereportrowcontent3v2-api
+  name: Automileab Resource Owner Expense Report Row Content3 V2 API
+  description: >-
+    The ResourceOwnerExpenseReportRowContent3V2 API from Automileab — 2 operation(s) for resourceownerexpensereportrowcontent3v2.
+  humanURL: https://automile.com/en/developers
+  baseURL: https://api.automile.com
+  tags:
+  - ResourceOwnerExpenseReportRowContent3V2
+  properties:
+  - type: OpenAPI
+    url: openapi/automileab-resourceownerexpensereportrowcontent3v2-api-openapi.yml
+- aid: automileab:automileab-resourceownerexpensereportrowcontentv2-api
+  name: Automileab Resource Owner Expense Report Row Content V2 API
+  description: >-
+    The ResourceOwnerExpenseReportRowContentV2 API from Automileab — 2 operation(s) for resourceownerexpensereportrowcontentv2.
+  humanURL: https://automile.com/en/developers
+  baseURL: https://api.automile.com
+  tags:
+  - ResourceOwnerExpenseReportRowContentV2
+  properties:
+  - type: OpenAPI
+    url: openapi/automileab-resourceownerexpensereportrowcontentv2-api-openapi.yml
+- aid: automileab:automileab-resourceownerexpensereportrowv2-api
+  name: Automileab Resource Owner Expense Report Row V2 API
+  description: >-
+    The ResourceOwnerExpenseReportRowV2 API from Automileab — 2 operation(s) for resourceownerexpensereportrowv2.
+  humanURL: https://automile.com/en/developers
+  baseURL: https://api.automile.com
+  tags:
+  - ResourceOwnerExpenseReportRowV2
+  properties:
+  - type: OpenAPI
+    url: openapi/automileab-resourceownerexpensereportrowv2-api-openapi.yml
+- aid: automileab:automileab-resourceownerexpensereportv2-api
+  name: Automileab Resource Owner Expense Report V2 API
+  description: >-
+    The ResourceOwnerExpenseReportV2 API from Automileab — 5 operation(s) for resourceownerexpensereportv2.
+  humanURL: https://automile.com/en/developers
+  baseURL: https://api.automile.com
+  tags:
+  - ResourceOwnerExpenseReportV2
+  properties:
+  - type: OpenAPI
+    url: openapi/automileab-resourceownerexpensereportv2-api-openapi.yml
+- aid: automileab:automileab-resourceownergeofence-api
+  name: Automileab Resource Owner Geofence API
+  description: >-
+    The ResourceOwnerGeofence API from Automileab — 2 operation(s) for resourceownergeofence.
+  humanURL: https://automile.com/en/developers
+  baseURL: https://api.automile.com
+  tags:
+  - ResourceOwnerGeofence
+  properties:
+  - type: OpenAPI
+    url: openapi/automileab-resourceownergeofence-api-openapi.yml
+- aid: automileab:automileab-resourceownergeofence2-api
+  name: Automileab Resource Owner Geofence2 API
+  description: >-
+    The ResourceOwnerGeofence2 API from Automileab — 2 operation(s) for resourceownergeofence2.
+  humanURL: https://automile.com/en/developers
+  baseURL: https://api.automile.com
+  tags:
+  - ResourceOwnerGeofence2
+  properties:
+  - type: OpenAPI
+    url: openapi/automileab-resourceownergeofence2-api-openapi.yml
+- aid: automileab:automileab-resourceownergeofence3-api
+  name: Automileab Resource Owner Geofence3 API
+  description: >-
+    The ResourceOwnerGeofence3 API from Automileab — 2 operation(s) for resourceownergeofence3.
+  humanURL: https://automile.com/en/developers
+  baseURL: https://api.automile.com
+  tags:
+  - ResourceOwnerGeofence3
+  properties:
+  - type: OpenAPI
+    url: openapi/automileab-resourceownergeofence3-api-openapi.yml
+- aid: automileab:automileab-resourceownerhoursofservice-api
+  name: Automileab Resource Owner Hours Of Service API
+  description: >-
+    The ResourceOwnerHoursOfService API from Automileab — 8 operation(s) for resourceownerhoursofservice.
+  humanURL: https://automile.com/en/developers
+  baseURL: https://api.automile.com
+  tags:
+  - ResourceOwnerHoursOfService
+  properties:
+  - type: OpenAPI
+    url: openapi/automileab-resourceownerhoursofservice-api-openapi.yml
+- aid: automileab:automileab-resourceownerhoursofserviceviolations-api
+  name: Automileab Resource Owner Hours Of Service Violations API
+  description: >-
+    The ResourceOwnerHoursOfServiceViolations API from Automileab — 1 operation(s) for resourceownerhoursofserviceviolations.
+  humanURL: https://automile.com/en/developers
+  baseURL: https://api.automile.com
+  tags:
+  - ResourceOwnerHoursOfServiceViolations
+  properties:
+  - type: OpenAPI
+    url: openapi/automileab-resourceownerhoursofserviceviolations-api-openapi.yml
+- aid: automileab:automileab-resourceownerimeiconfig-api
+  name: Automileab Resource Owner IMEI Config API
+  description: >-
+    The ResourceOwnerIMEIConfig API from Automileab — 2 operation(s) for resourceownerimeiconfig.
+  humanURL: https://automile.com/en/developers
+  baseURL: https://api.automile.com
+  tags:
+  - ResourceOwnerIMEIConfig
+  properties:
+  - type: OpenAPI
+    url: openapi/automileab-resourceownerimeiconfig-api-openapi.yml
+- aid: automileab:automileab-resourceownerimeiconfig3-api
+  name: Automileab Resource Owner IMEI Config3 API
+  description: >-
+    The ResourceOwnerIMEIConfig3 API from Automileab — 2 operation(s) for resourceownerimeiconfig3.
+  humanURL: https://automile.com/en/developers
+  baseURL: https://api.automile.com
+  tags:
+  - ResourceOwnerIMEIConfig3
+  properties:
+  - type: OpenAPI
+    url: openapi/automileab-resourceownerimeiconfig3-api-openapi.yml
+- aid: automileab:automileab-resourceownerimeievent-api
+  name: Automileab Resource Owner IMEI Event API
+  description: >-
+    The ResourceOwnerIMEIEvent API from Automileab — 4 operation(s) for resourceownerimeievent.
+  humanURL: https://automile.com/en/developers
+  baseURL: https://api.automile.com
+  tags:
+  - ResourceOwnerIMEIEvent
+  properties:
+  - type: OpenAPI
+    url: openapi/automileab-resourceownerimeievent-api-openapi.yml
+- aid: automileab:automileab-resourceownerintegration-api
+  name: Automileab Resource Owner Integration API
+  description: >-
+    The ResourceOwnerIntegration API from Automileab — 11 operation(s) for resourceownerintegration.
+  humanURL: https://automile.com/en/developers
+  baseURL: https://api.automile.com
+  tags:
+  - ResourceOwnerIntegration
+  properties:
+  - type: OpenAPI
+    url: openapi/automileab-resourceownerintegration-api-openapi.yml
+- aid: automileab:automileab-resourceownerlead-api
+  name: Automileab Resource Owner Lead API
+  description: The ResourceOwnerLead API from Automileab — 1 operation(s) for resourceownerlead.
+  humanURL: https://automile.com/en/developers
+  baseURL: https://api.automile.com
+  tags:
+  - ResourceOwnerLead
+  properties:
+  - type: OpenAPI
+    url: openapi/automileab-resourceownerlead-api-openapi.yml
+- aid: automileab:automileab-resourceownerorganization-api
+  name: Automileab Resource Owner Organization API
+  description: >-
+    The ResourceOwnerOrganization API from Automileab — 2 operation(s) for resourceownerorganization.
+  humanURL: https://automile.com/en/developers
+  baseURL: https://api.automile.com
+  tags:
+  - ResourceOwnerOrganization
+  properties:
+  - type: OpenAPI
+    url: openapi/automileab-resourceownerorganization-api-openapi.yml
+- aid: automileab:automileab-resourceownerplace-api
+  name: Automileab Resource Owner Place API
+  description: The ResourceOwnerPlace API from Automileab — 2 operation(s) for resourceownerplace.
+  humanURL: https://automile.com/en/developers
+  baseURL: https://api.automile.com
+  tags:
+  - ResourceOwnerPlace
+  properties:
+  - type: OpenAPI
+    url: openapi/automileab-resourceownerplace-api-openapi.yml
+- aid: automileab:automileab-resourceownerplace2-api
+  name: Automileab Resource Owner Place2 API
+  description: The ResourceOwnerPlace2 API from Automileab — 2 operation(s) for resourceownerplace2.
+  humanURL: https://automile.com/en/developers
+  baseURL: https://api.automile.com
+  tags:
+  - ResourceOwnerPlace2
+  properties:
+  - type: OpenAPI
+    url: openapi/automileab-resourceownerplace2-api-openapi.yml
+- aid: automileab:automileab-resourceownerplace3-api
+  name: Automileab Resource Owner Place3 API
+  description: The ResourceOwnerPlace3 API from Automileab — 2 operation(s) for resourceownerplace3.
+  humanURL: https://automile.com/en/developers
+  baseURL: https://api.automile.com
+  tags:
+  - ResourceOwnerPlace3
+  properties:
+  - type: OpenAPI
+    url: openapi/automileab-resourceownerplace3-api-openapi.yml
+- aid: automileab:automileab-resourceownerpublishsubscribe-api
+  name: Automileab Resource Owner Publish Subscribe API
+  description: >-
+    The ResourceOwnerPublishSubscribe API from Automileab — 10 operation(s) for resourceownerpublishsubscribe.
+  humanURL: https://automile.com/en/developers
+  baseURL: https://api.automile.com
+  tags:
+  - ResourceOwnerPublishSubscribe
+  properties:
+  - type: OpenAPI
+    url: openapi/automileab-resourceownerpublishsubscribe-api-openapi.yml
+- aid: automileab:automileab-resourceownerquote-api
+  name: Automileab Resource Owner Quote API
+  description: The ResourceOwnerQuote API from Automileab — 4 operation(s) for resourceownerquote.
+  humanURL: https://automile.com/en/developers
+  baseURL: https://api.automile.com
+  tags:
+  - ResourceOwnerQuote
+  properties:
+  - type: OpenAPI
+    url: openapi/automileab-resourceownerquote-api-openapi.yml
+- aid: automileab:automileab-resourceownerregisteredtollv2-api
+  name: Automileab Resource Owner Registered Toll V2 API
+  description: >-
+    The ResourceOwnerRegisteredTollV2 API from Automileab — 4 operation(s) for resourceownerregisteredtollv2.
+  humanURL: https://automile.com/en/developers
+  baseURL: https://api.automile.com
+  tags:
+  - ResourceOwnerRegisteredTollV2
+  properties:
+  - type: OpenAPI
+    url: openapi/automileab-resourceownerregisteredtollv2-api-openapi.yml
+- aid: automileab:automileab-resourceownerreports-api
+  name: Automileab Resource Owner Reports API
+  description: The ResourceOwnerReports API from Automileab — 11 operation(s) for resourceownerreports.
+  humanURL: https://automile.com/en/developers
+  baseURL: https://api.automile.com
+  tags:
+  - ResourceOwnerReports
+  properties:
+  - type: OpenAPI
+    url: openapi/automileab-resourceownerreports-api-openapi.yml
+- aid: automileab:automileab-resourceownerreports3-api
+  name: Automileab Resource Owner Reports3 API
+  description: >-
+    The ResourceOwnerReports3 API from Automileab — 6 operation(s) for resourceownerreports3.
+  humanURL: https://automile.com/en/developers
+  baseURL: https://api.automile.com
+  tags:
+  - ResourceOwnerReports3
+  properties:
+  - type: OpenAPI
+    url: openapi/automileab-resourceownerreports3-api-openapi.yml
+- aid: automileab:automileab-resourceownerrouteplanner-api
+  name: Automileab Resource Owner Route Planner API
+  description: >-
+    The ResourceOwnerRoutePlanner API from Automileab — 8 operation(s) for resourceownerrouteplanner.
+  humanURL: https://automile.com/en/developers
+  baseURL: https://api.automile.com
+  tags:
+  - ResourceOwnerRoutePlanner
+  properties:
+  - type: OpenAPI
+    url: openapi/automileab-resourceownerrouteplanner-api-openapi.yml
+- aid: automileab:automileab-resourceownertask-api
+  name: Automileab Resource Owner Task API
+  description: The ResourceOwnerTask API from Automileab — 3 operation(s) for resourceownertask.
+  humanURL: https://automile.com/en/developers
+  baseURL: https://api.automile.com
+  tags:
+  - ResourceOwnerTask
+  properties:
+  - type: OpenAPI
+    url: openapi/automileab-resourceownertask-api-openapi.yml
+- aid: automileab:automileab-resourceownertask3-api
+  name: Automileab Resource Owner Task3 API
+  description: The ResourceOwnerTask3 API from Automileab — 3 operation(s) for resourceownertask3.
+  humanURL: https://automile.com/en/developers
+  baseURL: https://api.automile.com
+  tags:
+  - ResourceOwnerTask3
+  properties:
+  - type: OpenAPI
+    url: openapi/automileab-resourceownertask3-api-openapi.yml
+- aid: automileab:automileab-resourceownertaskmessage-api
+  name: Automileab Resource Owner Task Message API
+  description: >-
+    The ResourceOwnerTaskMessage API from Automileab — 2 operation(s) for resourceownertaskmessage.
+  humanURL: https://automile.com/en/developers
+  baseURL: https://api.automile.com
+  tags:
+  - ResourceOwnerTaskMessage
+  properties:
+  - type: OpenAPI
+    url: openapi/automileab-resourceownertaskmessage-api-openapi.yml
+- aid: automileab:automileab-resourceownertaskmessage3-api
+  name: Automileab Resource Owner Task Message3 API
+  description: >-
+    The ResourceOwnerTaskMessage3 API from Automileab — 2 operation(s) for resourceownertaskmessage3.
+  humanURL: https://automile.com/en/developers
+  baseURL: https://api.automile.com
+  tags:
+  - ResourceOwnerTaskMessage3
+  properties:
+  - type: OpenAPI
+    url: openapi/automileab-resourceownertaskmessage3-api-openapi.yml
+- aid: automileab:automileab-resourceownertrackedasset-api
+  name: Automileab Resource Owner Tracked Asset API
+  description: >-
+    The ResourceOwnerTrackedAsset API from Automileab — 14 operation(s) for resourceownertrackedasset.
+  humanURL: https://automile.com/en/developers
+  baseURL: https://api.automile.com
+  tags:
+  - ResourceOwnerTrackedAsset
+  properties:
+  - type: OpenAPI
+    url: openapi/automileab-resourceownertrackedasset-api-openapi.yml
+- aid: automileab:automileab-resourceownertriggermessages-api
+  name: Automileab Resource Owner Trigger Messages API
+  description: >-
+    The ResourceOwnerTriggerMessages API from Automileab — 2 operation(s) for resourceownertriggermessages.
+  humanURL: https://automile.com/en/developers
+  baseURL: https://api.automile.com
+  tags:
+  - ResourceOwnerTriggerMessages
+  properties:
+  - type: OpenAPI
+    url: openapi/automileab-resourceownertriggermessages-api-openapi.yml
+- aid: automileab:automileab-resourceownertriggers-api
+  name: Automileab Resource Owner Triggers API
+  description: >-
+    The ResourceOwnerTriggers API from Automileab — 6 operation(s) for resourceownertriggers.
+  humanURL: https://automile.com/en/developers
+  baseURL: https://api.automile.com
+  tags:
+  - ResourceOwnerTriggers
+  properties:
+  - type: OpenAPI
+    url: openapi/automileab-resourceownertriggers-api-openapi.yml
+- aid: automileab:automileab-resourceownertriggers3-api
+  name: Automileab Resource Owner Triggers3 API
+  description: >-
+    The ResourceOwnerTriggers3 API from Automileab — 5 operation(s) for resourceownertriggers3.
+  humanURL: https://automile.com/en/developers
+  baseURL: https://api.automile.com
+  tags:
+  - ResourceOwnerTriggers3
+  properties:
+  - type: OpenAPI
+    url: openapi/automileab-resourceownertriggers3-api-openapi.yml
+- aid: automileab:automileab-resourceownertrip3v2-api
+  name: Automileab Resource Owner Trip3 V2 API
+  description: The ResourceOwnerTrip3V2 API from Automileab — 15 operation(s) for resourceownertrip3v2.
+  humanURL: https://automile.com/en/developers
+  baseURL: https://api.automile.com
+  tags:
+  - ResourceOwnerTrip3V2
+  properties:
+  - type: OpenAPI
+    url: openapi/automileab-resourceownertrip3v2-api-openapi.yml
+- aid: automileab:automileab-resourceownertripapprovalv2-api
+  name: Automileab Resource Owner Trip Approval V2 API
+  description: >-
+    The ResourceOwnerTripApprovalV2 API from Automileab — 6 operation(s) for resourceownertripapprovalv2.
+  humanURL: https://automile.com/en/developers
+  baseURL: https://api.automile.com
+  tags:
+  - ResourceOwnerTripApprovalV2
+  properties:
+  - type: OpenAPI
+    url: openapi/automileab-resourceownertripapprovalv2-api-openapi.yml
+- aid: automileab:automileab-resourceownertripmergev2-api
+  name: Automileab Resource Owner Trip Merge V2 API
+  description: >-
+    The ResourceOwnerTripMergeV2 API from Automileab — 3 operation(s) for resourceownertripmergev2.
+  humanURL: https://automile.com/en/developers
+  baseURL: https://api.automile.com
+  tags:
+  - ResourceOwnerTripMergeV2
+  properties:
+  - type: OpenAPI
+    url: openapi/automileab-resourceownertripmergev2-api-openapi.yml
+- aid: automileab:automileab-resourceownertripscore-api
+  name: Automileab Resource Owner Trip Score API
+  description: >-
+    The ResourceOwnerTripScore API from Automileab — 4 operation(s) for resourceownertripscore.
+  humanURL: https://automile.com/en/developers
+  baseURL: https://api.automile.com
+  tags:
+  - ResourceOwnerTripScore
+  properties:
+  - type: OpenAPI
+    url: openapi/automileab-resourceownertripscore-api-openapi.yml
+- aid: automileab:automileab-resourceownertripv2-api
+  name: Automileab Resource Owner Trip V2 API
+  description: The ResourceOwnerTripV2 API from Automileab — 17 operation(s) for resourceownertripv2.
+  humanURL: https://automile.com/en/developers
+  baseURL: https://api.automile.com
+  tags:
+  - ResourceOwnerTripV2
+  properties:
+  - type: OpenAPI
+    url: openapi/automileab-resourceownertripv2-api-openapi.yml
+- aid: automileab:automileab-resourceowneruser-api
+  name: Automileab Resource Owner User API
+  description: The ResourceOwnerUser API from Automileab — 6 operation(s) for resourceowneruser.
+  humanURL: https://automile.com/en/developers
+  baseURL: https://api.automile.com
+  tags:
+  - ResourceOwnerUser
+  properties:
+  - type: OpenAPI
+    url: openapi/automileab-resourceowneruser-api-openapi.yml
+- aid: automileab:automileab-resourceowneruserdevice-api
+  name: Automileab Resource Owner User Device API
+  description: >-
+    The ResourceOwnerUserDevice API from Automileab — 4 operation(s) for resourceowneruserdevice.
+  humanURL: https://automile.com/en/developers
+  baseURL: https://api.automile.com
+  tags:
+  - ResourceOwnerUserDevice
+  properties:
+  - type: OpenAPI
+    url: openapi/automileab-resourceowneruserdevice-api-openapi.yml
+- aid: automileab:automileab-resourceownervehicle2v2-api
+  name: Automileab Resource Owner Vehicle2 V2 API
+  description: >-
+    The ResourceOwnerVehicle2V2 API from Automileab — 9 operation(s) for resourceownervehicle2v2.
+  humanURL: https://automile.com/en/developers
+  baseURL: https://api.automile.com
+  tags:
+  - ResourceOwnerVehicle2V2
+  properties:
+  - type: OpenAPI
+    url: openapi/automileab-resourceownervehicle2v2-api-openapi.yml
+- aid: automileab:automileab-resourceownervehicle3v2-api
+  name: Automileab Resource Owner Vehicle3 V2 API
+  description: >-
+    The ResourceOwnerVehicle3V2 API from Automileab — 8 operation(s) for resourceownervehicle3v2.
+  humanURL: https://automile.com/en/developers
+  baseURL: https://api.automile.com
+  tags:
+  - ResourceOwnerVehicle3V2
+  properties:
+  - type: OpenAPI
+    url: openapi/automileab-resourceownervehicle3v2-api-openapi.yml
+- aid: automileab:automileab-resourceownervehicledefectcomments-api
+  name: Automileab Resource Owner Vehicle Defect Comments API
+  description: >-
+    The ResourceOwnerVehicleDefectComments API from Automileab — 2 operation(s) for resourceownervehicledefectcomments.
+  humanURL: https://automile.com/en/developers
+  baseURL: https://api.automile.com
+  tags:
+  - ResourceOwnerVehicleDefectComments
+  properties:
+  - type: OpenAPI
+    url: openapi/automileab-resourceownervehicledefectcomments-api-openapi.yml
+- aid: automileab:automileab-resourceownervehicledefectcomments3-api
+  name: Automileab Resource Owner Vehicle Defect Comments3 API
+  description: >-
+    The ResourceOwnerVehicleDefectComments3 API from Automileab — 2 operation(s) for resourceownervehicledefectcomments3.
+  humanURL: https://automile.com/en/developers
+  baseURL: https://api.automile.com
+  tags:
+  - ResourceOwnerVehicleDefectComments3
+  properties:
+  - type: OpenAPI
+    url: openapi/automileab-resourceownervehicledefectcomments3-api-openapi.yml
+- aid: automileab:automileab-resourceownervehicledefecttypes-api
+  name: Automileab Resource Owner Vehicle Defect Types API
+  description: >-
+    The ResourceOwnerVehicleDefectTypes API from Automileab — 1 operation(s) for resourceownervehicledefecttypes.
+  humanURL: https://automile.com/en/developers
+  baseURL: https://api.automile.com
+  tags:
+  - ResourceOwnerVehicleDefectTypes
+  properties:
+  - type: OpenAPI
+    url: openapi/automileab-resourceownervehicledefecttypes-api-openapi.yml
+- aid: automileab:automileab-resourceownervehiclegeofence-api
+  name: Automileab Resource Owner Vehicle Geofence API
+  description: >-
+    The ResourceOwnerVehicleGeofence API from Automileab — 2 operation(s) for resourceownervehiclegeofence.
+  humanURL: https://automile.com/en/developers
+  baseURL: https://api.automile.com
+  tags:
+  - ResourceOwnerVehicleGeofence
+  properties:
+  - type: OpenAPI
+    url: openapi/automileab-resourceownervehiclegeofence-api-openapi.yml
+- aid: automileab:automileab-resourceownervehiclehealth-api
+  name: Automileab Resource Owner Vehicle Health API
+  description: >-
+    The ResourceOwnerVehicleHealth API from Automileab — 2 operation(s) for resourceownervehiclehealth.
+  humanURL: https://automile.com/en/developers
+  baseURL: https://api.automile.com
+  tags:
+  - ResourceOwnerVehicleHealth
+  properties:
+  - type: OpenAPI
+    url: openapi/automileab-resourceownervehiclehealth-api-openapi.yml
+- aid: automileab:automileab-resourceownervehiclehealth3-api
+  name: Automileab Resource Owner Vehicle Health3 API
+  description: >-
+    The ResourceOwnerVehicleHealth3 API from Automileab — 2 operation(s) for resourceownervehiclehealth3.
+  humanURL: https://automile.com/en/developers
+  baseURL: https://api.automile.com
+  tags:
+  - ResourceOwnerVehicleHealth3
+  properties:
+  - type: OpenAPI
+    url: openapi/automileab-resourceownervehiclehealth3-api-openapi.yml
+- aid: automileab:automileab-resourceownervehicleinspection-api
+  name: Automileab Resource Owner Vehicle Inspection API
+  description: >-
+    The ResourceOwnerVehicleInspection API from Automileab — 3 operation(s) for resourceownervehicleinspection.
+  humanURL: https://automile.com/en/developers
+  baseURL: https://api.automile.com
+  tags:
+  - ResourceOwnerVehicleInspection
+  properties:
+  - type: OpenAPI
+    url: openapi/automileab-resourceownervehicleinspection-api-openapi.yml
+- aid: automileab:automileab-resourceownervehicleinspection3-api
+  name: Automileab Resource Owner Vehicle Inspection3 API
+  description: >-
+    The ResourceOwnerVehicleInspection3 API from Automileab — 3 operation(s) for resourceownervehicleinspection3.
+  humanURL: https://automile.com/en/developers
+  baseURL: https://api.automile.com
+  tags:
+  - ResourceOwnerVehicleInspection3
+  properties:
+  - type: OpenAPI
+    url: openapi/automileab-resourceownervehicleinspection3-api-openapi.yml
+- aid: automileab:automileab-resourceownervehicleodometerv2-api
+  name: Automileab Resource Owner Vehicle Odometer V2 API
+  description: >-
+    The ResourceOwnerVehicleOdometerV2 API from Automileab — 3 operation(s) for resourceownervehicleodometerv2.
+  humanURL: https://automile.com/en/developers
+  baseURL: https://api.automile.com
+  tags:
+  - ResourceOwnerVehicleOdometerV2
+  properties:
+  - type: OpenAPI
+    url: openapi/automileab-resourceownervehicleodometerv2-api-openapi.yml
+- aid: automileab:automileab-resourceownervehicleplace-api
+  name: Automileab Resource Owner Vehicle Place API
+  description: >-
+    The ResourceOwnerVehiclePlace API from Automileab — 2 operation(s) for resourceownervehicleplace.
+  humanURL: https://automile.com/en/developers
+  baseURL: https://api.automile.com
+  tags:
+  - ResourceOwnerVehiclePlace
+  properties:
+  - type: OpenAPI
+    url: openapi/automileab-resourceownervehicleplace-api-openapi.yml
+- aid: automileab:automileab-resourceownervehiclev2-api
+  name: Automileab Resource Owner Vehicle V2 API
+  description: >-
+    The ResourceOwnerVehicleV2 API from Automileab — 3 operation(s) for resourceownervehiclev2.
+  humanURL: https://automile.com/en/developers
+  baseURL: https://api.automile.com
+  tags:
+  - ResourceOwnerVehicleV2
+  properties:
+  - type: OpenAPI
+    url: openapi/automileab-resourceownervehiclev2-api-openapi.yml
+- aid: automileab:automileab-resourceownerworkorder-api
+  name: Automileab Resource Owner Work Order API
+  description: >-
+    The ResourceOwnerWorkOrder API from Automileab — 12 operation(s) for resourceownerworkorder.
+  humanURL: https://automile.com/en/developers
+  baseURL: https://api.automile.com
+  tags:
+  - ResourceOwnerWorkOrder
+  properties:
+  - type: OpenAPI
+    url: openapi/automileab-resourceownerworkorder-api-openapi.yml
+- aid: automileab:automileab-client-users-api
+  name: Automileab Client Users API
+  description: The Client Users API from Automileab — 2 operation(s) for client users.
+  humanURL: https://automile.com/en/developers
+  baseURL: https://api.automile.com
+  tags:
+  - Client Users
+  properties:
+  - type: OpenAPI
+    url: openapi/automileab-client-users-api-openapi.yml
+x-enrichment:
+  date: '2026-09-26'
+  status: enriched
+  artifacts_added: 14
+  pass: modular-v1
+  engine: identity=local,contract=local,surfaces=local,docs=local,regulatory=local

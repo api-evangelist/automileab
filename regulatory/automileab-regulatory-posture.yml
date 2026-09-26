@@ -1,0 +1,14 @@
+generated: 2026-09-26
+method: searched
+source: ["https://automile.com/en/terms-and-conditions", "https://automile.com/en/privacy-policy"]
+signals:
+  data_subject_request:
+    evidence:
+      - source: https://automile.com/en/terms-and-conditions
+        http_status: 200
+        fetched: 2026-09-26
+        quote: "YOUR RIGHTS"
+      - source: https://automile.com/en/privacy-policy
+        http_status: 200
+        fetched: 2026-09-26
+        quote: "Your Choices"

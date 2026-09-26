@@ -1,0 +1,31 @@
+openapi: 3.2.0
+info:
+  title: Automile Echo API
+  version: v1
+tags:
+- name: Echo
+paths:
+  /v1/echo/validatetoken:
+    get:
+      tags:
+      - Echo
+      summary: Validates a given token
+      description: Simple operation to test that a valid OAuth2 Bearer token has been supplied
+      responses:
+        '200':
+          description: Success
+      security:
+      - oauth2: []
+      operationId: getV1EchoValidatetoken
+      x-operation-id-source: derived
+components:
+  securitySchemes:
+    oauth2:
+      type: oauth2
+      flows:
+        implicit:
+          scopes:
+            read: Read access to protected resources
+            write: Write access to protected resources
+          authorizationUrl: https://api.automile.com/login/
+      description: OAuth2 Implicit Grant

@@ -1,0 +1,5896 @@
+generated: '2026-09-26'
+method: generated
+source: openapi/automileab-openapi.json
+description: Recommended x-agentic-access execution contracts, classified heuristically from
+  the OpenAPI. A governance starting point for exposing this API to AI agents — review and bind
+  audience per deployment. See research/curity/agentic-governance/.
+summary:
+  operations: 455
+  by_action_class:
+    connected: 237
+    acting: 218
+  by_consequence:
+    read: 237
+    write: 172
+    safety-critical: 25
+    physical: 21
+  human_in_the_loop_required: 25
+operations:
+- path: /v1/client/api
+  method: get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/client/apiauthorizations
+  method: get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/client/apiauthorizations/{apiAuthorizationId}
+  method: get
+  operationId: GetByAPIAuthorizationId
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/client/contracts
+  method: get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/client/contracts/journeys
+  method: get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/client/contracts/confirmjourneys
+  method: post
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/client/custom/createuser
+  method: post
+  operationId: CreateClientCustomUser
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/client/custom/resetpassword
+  method: post
+  operationId: ResetPasswordClientCustom
+  x-agentic-access:
+    action-class: acting
+    consequence: safety-critical
+    subject: required
+    audience: null
+    token:
+      max-ttl: 120
+      exchange: true
+      purpose-required: true
+      proof-of-possession: true
+    escalation:
+      human-in-the-loop: required
+    audit: required
+- path: /v1/client/custom/createuserwithoutpassword
+  method: post
+  operationId: CreateClientCustomUserWithoutPassword
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/client/custom/usernametaken
+  method: get
+  operationId: UsernameTaken
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/client/custom/userphonenumber
+  method: get
+  operationId: UserPhoneNumber
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/client/custom/usersphonenumber
+  method: get
+  operationId: UsernamesPhoneNumber
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/client/custom/existingusers
+  method: get
+  operationId: ExistingUsersAccounts
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/client/custom/validatephonenumber
+  method: get
+  operationId: ValidatePhoneNumber
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/client/custom/deviceregistered
+  method: get
+  operationId: DeviceRegistered
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/client/custom/reversegeocoding
+  method: get
+  operationId: ReverseGeocoding
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/client/onboarding/vehiclemakes
+  method: get
+  operationId: VehicleMakes
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/client/onboarding/vehiclemodels
+  method: get
+  operationId: VehicleModels
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/client/order/pro
+  method: post
+  operationId: CreateClientOrder
+  x-agentic-access:
+    action-class: acting
+    consequence: physical
+    subject: required
+    audience: null
+    token:
+      max-ttl: 300
+      exchange: true
+      purpose-required: true
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/client/order/propricing
+  method: get
+  operationId: GetProPricingClientCustom
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/client/textmessages/createpin
+  method: post
+  operationId: CreatePinCode
+  x-agentic-access:
+    action-class: acting
+    consequence: physical
+    subject: required
+    audience: null
+    token:
+      max-ttl: 300
+      exchange: true
+      purpose-required: true
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/client/textmessages/validatepin
+  method: post
+  operationId: ValidatePinCode
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/client/users
+  method: get
+  operationId: GetClientUsers
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/client/users
+  method: post
+  operationId: CreateClientUser
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/client/users/{userId}
+  method: get
+  operationId: GetClientUserByUserId
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/echo/validatetoken
+  method: get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /
+  method: get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /o2c
+  method: get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /login
+  method: get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /login
+  method: post
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /OAuth2/Token
+  method: post
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/integration/order
+  method: post
+  operationId: CreateOrder
+  x-agentic-access:
+    action-class: acting
+    consequence: physical
+    subject: required
+    audience: null
+    token:
+      max-ttl: 300
+      exchange: true
+      purpose-required: true
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /maskedphonenumber/inboundvoice
+  method: get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /maskedphonenumber/inboundtext
+  method: get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/resourceowner/companies
+  method: get
+  operationId: GetResourceOwnerCompanies
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/resourceowner/companies
+  method: post
+  operationId: CreateResourceOwnerCompany
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/resourceowner/companies/{companyId}
+  method: get
+  operationId: GetByCompanyId
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/resourceowner/companies/{companyId}
+  method: put
+  operationId: EditResourceOwnerCompany
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/resourceowner/companies/{companyId}
+  method: delete
+  operationId: DeleteResourceOwnerCompany
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/resourceowner/companycontact
+  method: get
+  operationId: GetResourceOwnerCompanyContacts
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/resourceowner/companycontact
+  method: post
+  operationId: CreateResourceOwnerCompanyContact
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/resourceowner/companycontact/{companyContactId}
+  method: get
+  operationId: GetResourceOwnerCompanyContact
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/resourceowner/companycontact/{companyContactIdToEdit}
+  method: put
+  operationId: EditResourceOwnerCompanyContact
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/resourceowner/companycontact/{companyContactIdToDelete}
+  method: delete
+  operationId: DeleteResourceOwnerCompanyContact
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/resourceowner/companyvehicle
+  method: get
+  operationId: GetResourceOwnerCompanyVehicles
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/resourceowner/companyvehicle
+  method: post
+  operationId: CreateResourceOwnerCompanyVehicle
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/resourceowner/companyvehicle/{companyVehicleId}
+  method: get
+  operationId: GetResourceOwnerCompanyVehicle
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/resourceowner/companyvehicle/{companyVehicleIdToEdit}
+  method: put
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/resourceowner/companyvehicle/{companyVehicleIdToDelete}
+  method: delete
+  operationId: DeleteResourceOwnerCompanyVehicle
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/resourceowner/contacts
+  method: get
+  operationId: GetResourceOwnerContacts
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/resourceowner/contacts
+  method: post
+  operationId: CreateResourceOwnerContact
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/resourceowner/contacts/{contactId}
+  method: get
+  operationId: GetResourceOwnerContact
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/resourceowner/contacts/{contactId}
+  method: put
+  operationId: EditResourceOwnerContact
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/resourceowner/contacts/{contactId}
+  method: delete
+  operationId: DeleteResourceOwnerContact
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/resourceowner/contacts/me
+  method: get
+  operationId: GetResourceOwnerContactMe
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/resourceowner/contacts/me/updatedefaultvehicle/{vehicleId}
+  method: put
+  operationId: MeUpdateDefaultVehicle
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/resourceowner/contacts/updatedefaultvehicle/{vehicleId}
+  method: put
+  operationId: UpdateResourceOwnerContactDefaultVehicle
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/resourceowner/contacts2
+  method: get
+  operationId: GetResourceOwnerContacts2
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/resourceowner/contacts2
+  method: post
+  operationId: CreateResourceOwnerContact2
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/resourceowner/contacts2/{contactId}
+  method: get
+  operationId: GetResourceOwnerContact2
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/resourceowner/contacts2/{contactId}
+  method: put
+  operationId: EditResourceOwnerContact2
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/resourceowner/contacts2/{contactId}
+  method: delete
+  operationId: DeleteResourceOwnerContact2
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/resourceowner/contacts2/me
+  method: get
+  operationId: GetResourceOwnerContactMe2
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/resourceowner/contacts2/me/image
+  method: get
+  operationId: GetImage
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/resourceowner/contacts2/me/uploadimage
+  method: post
+  operationId: MeUploadImage
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/resourceowner/contacts2/me/removeimage
+  method: put
+  operationId: MeRemoveImage
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/resourceowner/contacts2/update-rfid
+  method: post
+  operationId: UpdateRfidResourceOwnerContact2
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/resourceowner/contacts2/me/updatedefaultvehicle/{vehicleId}
+  method: put
+  operationId: MeUpdateDefaultVehicle2
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/resourceowner/contacts2/updatedefaultvehicle/{vehicleId}
+  method: put
+  operationId: UpdateResourceOwnerContactDefaultVehicle2
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/resourceowner/contacts2/customcategory
+  method: post
+  operationId: ResourceOwnerContact2CustomCategory
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/resourceowner/contacts2/{contactId}/customcategories/{customCategoryId}
+  method: get
+  operationId: GetCustomCategoryResourceOwnerContacts2
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/resourceowner/contacts2/{contactId}/customcategories
+  method: get
+  operationId: GetCustomCategoriesResourceOwnerContacts2
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/resourceowner/contacts3
+  method: get
+  operationId: GetResourceOwnerContacts3
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/resourceowner/contacts3
+  method: post
+  operationId: CreateResourceOwnerContact3
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/resourceowner/contacts3/{contactId}
+  method: get
+  operationId: GetResourceOwnerContact3
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/resourceowner/contacts3/{contactId}
+  method: put
+  operationId: EditResourceOwnerContact3
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/resourceowner/contacts3/{contactId}
+  method: delete
+  operationId: DeleteResourceOwnerContact3
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/resourceowner/contacts3/me
+  method: get
+  operationId: GetResourceOwnerContactMe3
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/resourceowner/contacts3/me/image
+  method: get
+  operationId: GetImage3
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/resourceowner/contacts3/me/uploadimage
+  method: post
+  operationId: MeUploadImage3
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/resourceowner/contacts3/me/removeimage
+  method: put
+  operationId: MeRemoveImage3
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/resourceowner/contacts3/me/updatedefaultvehicle/{vehicleId}
+  method: put
+  operationId: MeUpdateDefaultVehicle3
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/resourceowner/contacts3/updatedefaultvehicle/{vehicleId}
+  method: put
+  operationId: UpdateResourceOwnerContactDefaultVehicle3
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/resourceowner/contacts3/customcategory
+  method: post
+  operationId: ResourceOwnerContact3CustomCategory
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/resourceowner/contacts3/{contactId}/customcategories/{customCategoryId}
+  method: get
+  operationId: GetCustomCategoryResourceOwnerContacts3
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/resourceowner/contacts3/{contactId}/customcategories
+  method: get
+  operationId: GetCustomCategoriesResourceOwnerContacts3
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/resourceowner/contacts3/getwebsocketauthenticationtoken
+  method: get
+  operationId: GetWebSocketAuthenticationToken
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/resourceowner/contactsetting/{contactId}
+  method: get
+  operationId: contactsetting_GetSettingList
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/resourceowner/contactsetting/{contactId}
+  method: put
+  operationId: contactsetting_EditSetting
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/resourceowner/contactsetting/settingkeylist
+  method: get
+  operationId: contactsetting_GetSettingKeyList
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/resourceowner/contactvehicle
+  method: get
+  operationId: GetResourceOwnerContactVehicles
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/resourceowner/contactvehicle
+  method: post
+  operationId: CreateResourceOwnerContactVehicle
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/resourceowner/contactvehicle/{vehicleId}
+  method: get
+  operationId: GetResourceOwnerContactVehicleContactsBasedOnVehicleId
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/resourceowner/contactvehicle/{contactVehicleIdToEdit}
+  method: put
+  operationId: EditResourceOwnerContactVehicle
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/resourceowner/contactvehicle/{contactVehicleIdToDelete}
+  method: delete
+  operationId: DeleteResourceOwnerContactVehicle
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/resourceowner/content/upload
+  method: post
+  operationId: ResourceOwnerContentController_Upload
+  x-agentic-access:
+    action-class: acting
+    consequence: safety-critical
+    subject: required
+    audience: null
+    token:
+      max-ttl: 120
+      exchange: true
+      purpose-required: true
+      proof-of-possession: true
+    escalation:
+      human-in-the-loop: required
+    audit: required
+- path: /v1/resourceowner/content/download/{guid}
+  method: get
+  operationId: ResourceOwnerContentController_Get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/resourceowner/expensereport3
+  method: get
+  operationId: GetResourceExpenseReport3
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/resourceowner/expensereport3
+  method: post
+  operationId: CreateExpenseReport3
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/resourceowner/expensereport3/{expenseReportId}
+  method: get
+  operationId: GetResourceOwnerExpenseReportId3
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/resourceowner/expensereport3/{expenseReportId}
+  method: put
+  operationId: EditResourceOwnerExpenseReport3
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/resourceowner/expensereport3/{expenseReportId}
+  method: delete
+  operationId: DeleteResourceOwnerExpenseReport3
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/resourceowner/expensereport3/export/{expenseReportId}
+  method: post
+  operationId: CreateExpenseReportEmailExport3
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/resourceowner/expensereport3/export
+  method: post
+  operationId: CreateExpenseReportsEmailExport35
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/resourceowner/expensereport3/{expenseReportId}/expenseReportItems
+  method: delete
+  operationId: DeleteResourceOwnerExpenseReportRows3
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/resourceowner/expensereportrow3/{expenseReportRowId}
+  method: get
+  operationId: GetResourceExpenseReportRow3
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/resourceowner/expensereportrow3/{expenseReportRowId}
+  method: put
+  operationId: EditResourceOwnerExpenseReportRow3
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/resourceowner/expensereportrow3/{expenseReportRowId}
+  method: delete
+  operationId: DeleteResourceOwnerExpenseReportRow3
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/resourceowner/expensereportrow3
+  method: post
+  operationId: CreateExpenseReportRow3
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/resourceowner/expensereportrowcontent3/{expenseReportRowContentId}
+  method: get
+  operationId: GetResourceExpenseReportRowContent3
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/resourceowner/expensereportrowcontent3/{expenseReportRowContentId}
+  method: put
+  operationId: EditResourceOwnerExpenseReportRowContent3
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/resourceowner/expensereportrowcontent3/{expenseReportRowContentId}
+  method: delete
+  operationId: DeleteResourceOwnerExpenseReportRowContent3
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/resourceowner/expensereportrowcontent3
+  method: get
+  operationId: GetResourceExpenseReportRowContentById3
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/resourceowner/expensereportrowcontent3
+  method: post
+  operationId: CreateExpenseReportRowContent3
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/resourceowner/expensereportrowcontent/{expenseReportRowContentId}
+  method: get
+  operationId: GetResourceExpenseReportRowContent
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/resourceowner/expensereportrowcontent/{expenseReportRowContentId}
+  method: put
+  operationId: EditResourceOwnerExpenseReportRowContent
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/resourceowner/expensereportrowcontent/{expenseReportRowContentId}
+  method: delete
+  operationId: DeleteResourceOwnerExpenseReportRowContent
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/resourceowner/expensereportrowcontent
+  method: get
+  operationId: GetResourceExpenseReportRowContentById
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/resourceowner/expensereportrowcontent
+  method: post
+  operationId: CreateExpenseReportRowContent
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/resourceowner/expensereportrow/{expenseReportRowId}
+  method: get
+  operationId: GetResourceExpenseReportRow
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/resourceowner/expensereportrow/{expenseReportRowId}
+  method: put
+  operationId: EditResourceOwnerExpenseReportRow
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/resourceowner/expensereportrow/{expenseReportRowId}
+  method: delete
+  operationId: DeleteResourceOwnerExpenseReportRow
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/resourceowner/expensereportrow
+  method: post
+  operationId: CreateExpenseReportRow
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/resourceowner/expensereport
+  method: get
+  operationId: GetResourceExpenseReport
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/resourceowner/expensereport
+  method: post
+  operationId: CreateExpenseReport
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/resourceowner/expensereport/{expenseReportId}
+  method: get
+  operationId: GetResourceOwnerExpenseReportId
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/resourceowner/expensereport/{expenseReportId}
+  method: put
+  operationId: EditResourceOwnerExpenseReport
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/resourceowner/expensereport/{expenseReportId}
+  method: delete
+  operationId: DeleteResourceOwnerExpenseReport
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/resourceowner/expensereport/export/{expenseReportId}
+  method: post
+  operationId: CreateExpenseReportEmailExport
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/resourceowner/expensereport/export
+  method: post
+  operationId: CreateExpenseReportsEmailExport
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/resourceowner/expensereport/{expenseReportId}/expenseReportItems
+  method: delete
+  operationId: DeleteResourceOwnerExpenseReportRows
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/resourceowner/geofence
+  method: get
+  operationId: GetResourceOwnerGeofences
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/resourceowner/geofence
+  method: post
+  operationId: CreateResourceOwnerGeofence
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/resourceowner/geofence/{geofenceId}
+  method: get
+  operationId: GetResourceOwnerGeofence
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/resourceowner/geofence/{geofenceId}
+  method: put
+  operationId: EditResourceOwnerGeofence
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/resourceowner/geofence/{geofenceId}
+  method: delete
+  operationId: DeleteResourceOwnerGeofence
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/resourceowner/geofence2
+  method: get
+  operationId: GetResourceOwnerGeofences2
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/resourceowner/geofence2
+  method: post
+  operationId: CreateResourceOwnerGeofence2
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/resourceowner/geofence2/{geofenceId}
+  method: get
+  operationId: GetResourceOwnerGeofence2
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/resourceowner/geofence2/{geofenceId}
+  method: put
+  operationId: EditResourceOwnerGeofence2
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/resourceowner/geofence3
+  method: get
+  operationId: GetResourceOwnerGeofences3
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/resourceowner/geofence3
+  method: post
+  operationId: CreateResourceOwnerGeofence3
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/resourceowner/geofence3/{geofenceId}
+  method: get
+  operationId: GetResourceOwnerGeofence3
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/resourceowner/geofence3/{geofenceId}
+  method: put
+  operationId: EditResourceOwnerGeofence3
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/resourceowner/geofence3/{geofenceId}
+  method: delete
+  operationId: DeleteResourceOwnerGeofence3
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/resourceowner/hoursofservice
+  method: delete
+  operationId: HoursOfServiceDeleteCycles
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/resourceowner/hoursofservice/cycles
+  method: get
+  operationId: HoursOfServiceGetCycles
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/resourceowner/hoursofservice/statuses
+  method: get
+  operationId: HoursOfServiceGetStatuses
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/resourceowner/hoursofservice/synch
+  method: get
+  operationId: HoursOfServiceGetSynch
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/resourceowner/hoursofservice/status
+  method: post
+  operationId: HoursOfSerivceCreateStatus
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/resourceowner/hoursofservice/settings
+  method: get
+  operationId: HoursOfServiceGetSettings
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/resourceowner/hoursofservice/settings
+  method: post
+  operationId: HoursOfSerivceCreateSettings
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/resourceowner/hoursofservice/export
+  method: post
+  operationId: HoursOfSerivceExport
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/resourceowner/hoursofservice/exportpdf
+  method: post
+  operationId: HoursOfSerivceExportExportPDF
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/resourceowner/hoursofserviceviolations
+  method: get
+  operationId: HoursOfServiceGetViolations
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/resourceowner/hoursofserviceviolations
+  method: post
+  operationId: HoursOfSerivceCreateViolation
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/resourceowner/imeiconfigs
+  method: get
+  operationId: GetResourceOwnerImeiConfigs
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/resourceowner/imeiconfigs
+  method: post
+  operationId: CreateResourceOwnerIMEIConfig
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/resourceowner/imeiconfigs/{imeiConfigId}
+  method: get
+  operationId: GetResourceOwnerIMEIConfigsBasedOnVehicleId
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/resourceowner/imeiconfigs/{imeiConfigId}
+  method: put
+  operationId: EditResourceOwnerIMEIConfig
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/resourceowner/imeiconfigs/{imeiConfigId}
+  method: delete
+  operationId: DeleteResourceOwnerIMEIConfig
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/resourceowner/imeiconfigs3
+  method: get
+  operationId: GetResourceOwnerImeiConfigs3
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/resourceowner/imeiconfigs3
+  method: post
+  operationId: CreateResourceOwnerIMEIConfig3
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/resourceowner/imeiconfigs3/{imeiConfigId}
+  method: get
+  operationId: GetResourceOwnerIMEIConfigsBasedOnVehicleId3
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/resourceowner/imeiconfigs3/{imeiConfigId}
+  method: put
+  operationId: EditResourceOwnerIMEIConfig3
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/resourceowner/imeievents
+  method: get
+  operationId: GetResourceOwnerImeiEvents
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/resourceowner/imeievents/mil/{imeiEventId}
+  method: get
+  operationId: GetResourceOwnerMilEvent
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/resourceowner/imeievents/dtc/{imeiEventId}
+  method: get
+  operationId: GetResourceOwnerDTCEvent
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/resourceowner/imeievents/status/{imeiEventId}
+  method: get
+  operationId: GetResourceOwnerStatusEvent
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/resourceowner/integration
+  method: get
+  operationId: ResourceOwnerIntegrationController_GetIntegrationConfiguration
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/resourceowner/integration
+  method: put
+  operationId: ResourceOwnerIntegrationController_UpdateIntegrationSettings
+  x-agentic-access:
+    action-class: acting
+    consequence: safety-critical
+    subject: required
+    audience: null
+    token:
+      max-ttl: 120
+      exchange: true
+      purpose-required: true
+      proof-of-possession: true
+    escalation:
+      human-in-the-loop: required
+    audit: required
+- path: /v1/resourceowner/integration/alphabet
+  method: get
+  operationId: ResourceOwnerIntegrationController_GetAlphabetInformation
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/resourceowner/integration/alphabet/login
+  method: post
+  operationId: ResourceOwnerIntegrationController_AlphabetLogin
+  x-agentic-access:
+    action-class: acting
+    consequence: safety-critical
+    subject: required
+    audience: null
+    token:
+      max-ttl: 120
+      exchange: true
+      purpose-required: true
+      proof-of-possession: true
+    escalation:
+      human-in-the-loop: required
+    audit: required
+- path: /v1/resourceowner/integration/alphabet/mileagelog/{vehicleId}/{year}/{month}
+  method: get
+  operationId: ResourceOwnerIntegrationController_GetAlphabetMileageLog
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/resourceowner/integration/alphabet/mileagelog/{vehicleId}/{year}/{month}
+  method: post
+  operationId: ResourceOwnerIntegrationController_SendAlphabetMileageLog
+  x-agentic-access:
+    action-class: acting
+    consequence: safety-critical
+    subject: required
+    audience: null
+    token:
+      max-ttl: 120
+      exchange: true
+      purpose-required: true
+      proof-of-possession: true
+    escalation:
+      human-in-the-loop: required
+    audit: required
+- path: /v1/resourceowner/integration/autoplan
+  method: get
+  operationId: ResourceOwnerIntegrationController_GetAutoplanInformation
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/resourceowner/integration/autoplan/v2/information
+  method: post
+  operationId: ResourceOwnerIntegrationController_GetAutoPlanV2Information
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/resourceowner/integration/autoplan/login
+  method: post
+  operationId: ResourceOwnerIntegrationController_AutoplanLogin
+  x-agentic-access:
+    action-class: acting
+    consequence: safety-critical
+    subject: required
+    audience: null
+    token:
+      max-ttl: 120
+      exchange: true
+      purpose-required: true
+      proof-of-possession: true
+    escalation:
+      human-in-the-loop: required
+    audit: required
+- path: /v1/resourceowner/integration/autoplan/mileagelog/{vehicleId}/{year}/{month}
+  method: get
+  operationId: ResourceOwnerIntegrationController_GetAutoplanMileageLog
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/resourceowner/integration/autoplan/mileagelog/{vehicleId}/{year}/{month}
+  method: post
+  operationId: ResourceOwnerIntegrationController_SendAutoplanMileageLog
+  x-agentic-access:
+    action-class: acting
+    consequence: safety-critical
+    subject: required
+    audience: null
+    token:
+      max-ttl: 120
+      exchange: true
+      purpose-required: true
+      proof-of-possession: true
+    escalation:
+      human-in-the-loop: required
+    audit: required
+- path: /v1/resourceowner/integration/autoplan/v2/drivingjournal/{vehicleId}/{year}/{month}
+  method: get
+  operationId: ResourceOwnerIntegrationController_GetAutoPlanV2DrivingJournal
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/resourceowner/integration/autoplan/v2/drivingjournal/{vehicleId}/{year}/{month}
+  method: post
+  operationId: ResourceOwnerIntegrationController_SendAutoPlanV2DrivingJournal
+  x-agentic-access:
+    action-class: acting
+    consequence: safety-critical
+    subject: required
+    audience: null
+    token:
+      max-ttl: 120
+      exchange: true
+      purpose-required: true
+      proof-of-possession: true
+    escalation:
+      human-in-the-loop: required
+    audit: required
+- path: /v1/resourceowner/integration/bilreda
+  method: get
+  operationId: ResourceOwnerIntegrationController_GetBilredaInformation
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/resourceowner/integration/bilreda/mileagelog/{vehicleId}/{year}/{month}
+  method: get
+  operationId: ResourceOwnerIntegrationController_GetBilredaMileageLog
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/resourceowner/integration/bilreda/mileagelog/{vehicleId}/{year}/{month}
+  method: post
+  operationId: ResourceOwnerIntegrationController_SendBilredaMileageLog
+  x-agentic-access:
+    action-class: acting
+    consequence: safety-critical
+    subject: required
+    audience: null
+    token:
+      max-ttl: 120
+      exchange: true
+      purpose-required: true
+      proof-of-possession: true
+    escalation:
+      human-in-the-loop: required
+    audit: required
+- path: /v1/resourceowner/lead
+  method: post
+  operationId: ResourceOwnerLeadController_CreateLead
+  x-agentic-access:
+    action-class: acting
+    consequence: safety-critical
+    subject: required
+    audience: null
+    token:
+      max-ttl: 120
+      exchange: true
+      purpose-required: true
+      proof-of-possession: true
+    escalation:
+      human-in-the-loop: required
+    audit: required
+- path: /v1/resourceowner/organization
+  method: get
+  operationId: GetResourceOwnerOrganization
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/resourceowner/organization
+  method: put
+  operationId: EditResourceOwnerOrganization
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/resourceowner/organization/hierarchy
+  method: get
+  operationId: GetResourceOrganizationHierarchy
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/resourceowner/place
+  method: get
+  operationId: GetResourceOwnerPlaces
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/resourceowner/place
+  method: post
+  operationId: CreateResourceOwnerPlace
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/resourceowner/place/{placeId}
+  method: get
+  operationId: GetResourceOwnerPlace
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/resourceowner/place/{placeId}
+  method: put
+  operationId: EditResourceOwnerPlace
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/resourceowner/place/{placeId}
+  method: delete
+  operationId: DeleteResourceOwnerPlace
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/resourceowner/place2
+  method: post
+  operationId: CreateResourceOwnerPlace2
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/resourceowner/place2/{placeId}
+  method: put
+  operationId: EditResourceOwnerPlace2
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/resourceowner/place3
+  method: get
+  operationId: GetResourceOwnerPlaces3
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/resourceowner/place3
+  method: post
+  operationId: CreateResourceOwnerPlace3
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/resourceowner/place3/{placeId}
+  method: get
+  operationId: GetResourceOwnerPlace3
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/resourceowner/place3/{placeId}
+  method: put
+  operationId: EditResourceOwnerPlace3
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/resourceowner/place3/{placeId}
+  method: delete
+  operationId: DeleteResourceOwnerPlace3
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/resourceowner/publishsubscribe
+  method: get
+  operationId: GetPublishSubscribe
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/resourceowner/publishsubscribe
+  method: post
+  operationId: CreatePublishSubscribe
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/resourceowner/publishsubscribe/{publishSubscribeId}
+  method: get
+  operationId: GetPublishSubscribeById
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/resourceowner/publishsubscribe/{publishSubscribeId}
+  method: put
+  operationId: EditPublishSubscribe
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/resourceowner/publishsubscribe/{publishSubscribeId}
+  method: delete
+  operationId: DeletePublishSubscribeRecord
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/resourceowner/publishsubscribe/{publishSubscribeId}/testtripstart
+  method: get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/resourceowner/publishsubscribe/{publishSubscribeId}/testtripend
+  method: get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/resourceowner/publishsubscribe/{publishSubscribeId}/testvehiclecreated
+  method: get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/resourceowner/publishsubscribe/{publishSubscribeId}/testvehiclemodified
+  method: get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/resourceowner/publishsubscribe/{publishSubscribeId}/testcontactcreated
+  method: get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/resourceowner/publishsubscribe/{publishSubscribeId}/testcontactmodified
+  method: get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/resourceowner/publishsubscribe/{publishSubscribeId}/testdeviceconnected
+  method: get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/resourceowner/publishsubscribe/{publishSubscribeId}/testdevicedisconnected
+  method: get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/resourceowner/quotes
+  method: get
+  operationId: ResourceOwnerQuote_ListQuotes
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/resourceowner/quotes
+  method: post
+  operationId: ResourceOwnerQuote_CreateQuote
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/resourceowner/quotes
+  method: put
+  operationId: ResourceOwnerWorkOrder_SaveQuoteList
+  x-agentic-access:
+    action-class: acting
+    consequence: physical
+    subject: required
+    audience: null
+    token:
+      max-ttl: 300
+      exchange: true
+      purpose-required: true
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/resourceowner/quotes/{quoteId}
+  method: get
+  operationId: ResourceOwnerQuote_GetQuote
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/resourceowner/quotes/{quoteId}
+  method: put
+  operationId: ResourceOwnerQuote_UpdateQuote
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/resourceowner/quotes/{quoteId}
+  method: delete
+  operationId: ResourceOwnerQuote_DeleteQuote
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/resourceowner/quotes/{quoteId}/status
+  method: put
+  operationId: ResourceOwnerQuote_UpdateStatus
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/resourceowner/quotes/referenceId
+  method: get
+  operationId: ResourceOwnerQuote_GetNextQuoteId
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/resourceowner/registeredtoll
+  method: get
+  operationId: ResourceOwnerRegisteredTollController_GetRegisteredTollList
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/resourceowner/registeredtoll
+  method: post
+  operationId: ResourceOwnerRegisteredTollController_SaveRegisteredToll
+  x-agentic-access:
+    action-class: acting
+    consequence: safety-critical
+    subject: required
+    audience: null
+    token:
+      max-ttl: 120
+      exchange: true
+      purpose-required: true
+      proof-of-possession: true
+    escalation:
+      human-in-the-loop: required
+    audit: required
+- path: /v1/resourceowner/registeredtoll/multi-update
+  method: put
+  operationId: ResourceOwnerRegisteredTollController_UpdateRegisteredTollList
+  x-agentic-access:
+    action-class: acting
+    consequence: safety-critical
+    subject: required
+    audience: null
+    token:
+      max-ttl: 120
+      exchange: true
+      purpose-required: true
+      proof-of-possession: true
+    escalation:
+      human-in-the-loop: required
+    audit: required
+- path: /v1/resourceowner/registeredtoll/{registeredTollId}
+  method: put
+  operationId: ResourceOwnerRegisteredTollController_UpdateRegisteredToll
+  x-agentic-access:
+    action-class: acting
+    consequence: safety-critical
+    subject: required
+    audience: null
+    token:
+      max-ttl: 120
+      exchange: true
+      purpose-required: true
+      proof-of-possession: true
+    escalation:
+      human-in-the-loop: required
+    audit: required
+- path: /v1/resourceowner/registeredtoll/{registeredTollId}
+  method: get
+  operationId: ResourceOwnerRegisteredTollController_GetRegisteredToll
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/resourceowner/registeredtoll/{registeredTollId}
+  method: delete
+  operationId: ResourceOwnerRegisteredTollController_DeleteRegisteredToll
+  x-agentic-access:
+    action-class: acting
+    consequence: safety-critical
+    subject: required
+    audience: null
+    token:
+      max-ttl: 120
+      exchange: true
+      purpose-required: true
+      proof-of-possession: true
+    escalation:
+      human-in-the-loop: required
+    audit: required
+- path: /v1/resourceowner/registeredtoll/tollzone
+  method: get
+  operationId: ResourceOwnerRegisteredTollController_GetTollZoneList
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/resourceowner/reports/approved-trips-summary
+  method: get
+  operationId: GetApprovedTripsSummary
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/resourceowner/reports/trips-report
+  method: post
+  operationId: GetTripReport
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/resourceowner/reports/vehicle-summary
+  method: get
+  operationId: GetVehicleSummary
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/resourceowner/reports/tripsummary/{dateperiod}
+  method: get
+  operationId: GetTripSummaryReport
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/resourceowner/reports/tripsummary/{dateperiod}/{vehicleId}
+  method: get
+  operationId: GetTripSummaryReporByVehicleId
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/resourceowner/reports/vehiclesummary/{dateperiod}/{vehicleId}
+  method: get
+  operationId: GetVehicleSummaryReportByVehicleId
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/resourceowner/reports/vehiclessummary/{dateperiod}
+  method: get
+  operationId: GetVehiclesSummaryReport
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/resourceowner/reports/emailtripreport
+  method: post
+  operationId: EmailTripReport
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/resourceowner/reports/emailtripreport/periods
+  method: get
+  operationId: EmailTripReportPeriods
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/resourceowner/reports/geofencelog
+  method: get
+  operationId: GetGeofenceLog
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/resourceowner/reports/exporttrips
+  method: get
+  operationId: ExportTrips
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/resourceowner/reports3/tripsummary/{dateperiod}
+  method: get
+  operationId: GetTripSummaryReport3
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/resourceowner/reports3/tripsummary/{dateperiod}/{vehicleId}
+  method: get
+  operationId: GetTripSummaryReporByVehicleId3
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/resourceowner/reports3/vehiclesummary/{dateperiod}/{vehicleId}
+  method: get
+  operationId: GetVehicleSummaryReportByVehicleId3
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/resourceowner/reports3/vehiclessummary/{dateperiod}
+  method: get
+  operationId: GetVehiclesSummaryReport3
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/resourceowner/reports3/emailtripreport
+  method: post
+  operationId: EmailTripReport3
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/resourceowner/reports3/geofencelog
+  method: get
+  operationId: GetGeofenceLog3
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/resourceowner/routeplanner/routes
+  method: get
+  operationId: ResourceOwnerRoutePlanner_GetRouteMissionsByDriverId
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/resourceowner/routeplanner/route/shorturlid/{shortUrlId}
+  method: get
+  operationId: ResourceOwnerRoutePlanner_GetMissionByShortUrlId
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/resourceowner/routeplanner/route/{routeId}
+  method: get
+  operationId: ResourceOwnerRoutePlanner_GetMissionByRouteAndDriverId
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/resourceowner/routeplanner/route/{routeId}
+  method: put
+  operationId: ResourceOwnerRoutePlanner_UpdateMission
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/resourceowner/routeplanner/routes/routeandsave
+  method: post
+  operationId: ResourceOwnerRoutePlanner_routeandsave
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/resourceowner/routeplanner/route/{routeId}/cancel
+  method: put
+  operationId: ResourceOwnerRoutePlanner_CancelMission
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/resourceowner/routeplanner/route/{routeId}/start
+  method: put
+  operationId: ResourceOwnerRoutePlanner_StartMission
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/resourceowner/routeplanner
+  method: get
+  operationId: ResourceOwnerRoutePlanner_GetRouteMissions
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/resourceowner/routeplanner/{routeId}
+  method: get
+  operationId: ResourceOwnerRoutePlanner_GetRouteMission
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/resourceowner/task/contacts
+  method: get
+  operationId: GetResourceOwnerTaskContact
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/resourceowner/task
+  method: get
+  operationId: GetResourceOwnerTask
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/resourceowner/task
+  method: post
+  operationId: CreateResourceOwnerTaskDetails
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/resourceowner/task
+  method: put
+  operationId: EditResourceOwnerTaskOld
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/resourceowner/task/{taskId}
+  method: get
+  operationId: GetResourceOwnerTaskDetails
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/resourceowner/task/{taskId}
+  method: put
+  operationId: EditResourceOwnerTask
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/resourceowner/task3/contacts
+  method: get
+  operationId: GetResourceOwnerTaskContact3
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/resourceowner/task3
+  method: get
+  operationId: GetResourceOwnerTask3
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/resourceowner/task3
+  method: post
+  operationId: CreateResourceOwnerTaskDetails3
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/resourceowner/task3/{taskId}
+  method: get
+  operationId: GetResourceOwnerTaskDetails3
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/resourceowner/task3/{taskId}
+  method: put
+  operationId: EditResourceOwnerTask3
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/resourceowner/taskmessage/{taskMessageId}
+  method: get
+  operationId: GetResourceOwnerTaskMessage
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/resourceowner/taskmessage/{taskMessageId}
+  method: put
+  operationId: UpdateResourceOwnerTaskMessage
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/resourceowner/taskmessage
+  method: post
+  operationId: CreateResourceOwnerTaskMessage
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/resourceowner/taskmessage3/{taskMessageId}
+  method: get
+  operationId: GetResourceOwnerTaskMessage3
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/resourceowner/taskmessage3/{taskMessageId}
+  method: put
+  operationId: UpdateResourceOwnerTaskMessage3
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/resourceowner/taskmessage3
+  method: post
+  operationId: CreateResourceOwnerTaskMessage3
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/resourceowner/trackedasset
+  method: get
+  operationId: TrackedAsset_GetTrackedAssetList
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/resourceowner/trackedasset/{trackedAssetId}
+  method: get
+  operationId: TrackedAsset_GetTrackedAsset
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/resourceowner/trackedasset/{trackedAssetId}
+  method: put
+  operationId: TrackedAsset_UpdateTrackedAsset
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/resourceowner/trackedasset/{trackedAssetId}/sleep
+  method: put
+  operationId: TrackedAsset_SleepAsset
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/resourceowner/trackedasset/{trackedAssetId}/track
+  method: put
+  operationId: TrackedAsset_TrackAsset
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/resourceowner/trackedasset/{trackedAssetId}/shutdown
+  method: put
+  operationId: TrackedAsset_Shutdown
+  x-agentic-access:
+    action-class: acting
+    consequence: safety-critical
+    subject: required
+    audience: null
+    token:
+      max-ttl: 120
+      exchange: true
+      purpose-required: true
+      proof-of-possession: true
+    escalation:
+      human-in-the-loop: required
+    audit: required
+- path: /v1/resourceowner/trackedasset/{trackedAssetId}/history
+  method: get
+  operationId: TrackedAsset_ListHistory
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/resourceowner/trackedasset/{trackedAssetId}/externaldevices
+  method: get
+  operationId: GetExternalDeviceListByAsset
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/resourceowner/trackedasset/externaldevices
+  method: get
+  operationId: GetExternalDeviceList
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/resourceowner/trackedasset/externaldevice/{externalDeviceId}
+  method: get
+  operationId: GetExternalDevice
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/resourceowner/trackedasset/externaldevice/{externalDeviceId}
+  method: put
+  operationId: UpdateExternalDevice
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/resourceowner/trackedasset/externaldevice/{externalDeviceId}/history
+  method: get
+  operationId: GetExternalDeviceHistoryList
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/resourceowner/trackedasset/externaldevices/updateintervals
+  method: get
+  operationId: GetAvailableUpdateIntervalList
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/resourceowner/trackedasset/sleepinterval
+  method: get
+  operationId: TrackedAsset_GetAvailableSleepIntervalList
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/resourceowner/trackedasset/updateinterval
+  method: get
+  operationId: TrackedAsset_GetAvailableAssetUpdateIntervalList
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/resourceowner/trackedasset/enum
+  method: get
+  operationId: TrackedAsset_GetEnumList
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/resourceowner/triggermessageshistory
+  method: get
+  operationId: GetResourceOwnerTriggerMessagesHistory
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/resourceowner/triggermessageshistory/{triggerId}
+  method: get
+  operationId: GetResourceOwnerTriggerMessageHistory
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/resourceowner/triggers
+  method: get
+  operationId: GetResourceOwnerTriggers
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/resourceowner/triggers
+  method: post
+  operationId: CreateResourceOwnerTrigger
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/resourceowner/triggers/{triggerId}
+  method: get
+  operationId: GetResourceOwnerTrigger
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/resourceowner/triggers/{triggerId}
+  method: put
+  operationId: EditResourceOwnerTrigger
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/resourceowner/triggers/{triggerId}
+  method: delete
+  operationId: DeleteResourceOwnerTrigger
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/resourceowner/triggers/batch
+  method: post
+  operationId: CreateResourceOwnerTriggerBatch
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/resourceowner/triggers/mute/{triggerId}
+  method: put
+  operationId: EditResourceOwnerTriggerMute
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/resourceowner/triggers/unmute/{triggerId}
+  method: put
+  operationId: EditResourceOwnerTriggerUnMute
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/resourceowner/triggers/movepush
+  method: post
+  operationId: ResourceOwnerTriggerMovePush
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/resourceowner/triggers3
+  method: get
+  operationId: GetResourceOwnerTriggers3
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/resourceowner/triggers3
+  method: post
+  operationId: CreateResourceOwnerTrigger3
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/resourceowner/triggers3/{triggerId}
+  method: get
+  operationId: GetResourceOwnerTrigger3
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/resourceowner/triggers3/{triggerId}
+  method: put
+  operationId: EditResourceOwnerTrigger3
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/resourceowner/triggers3/{triggerId}
+  method: delete
+  operationId: DeleteResourceOwnerTrigger3
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/resourceowner/triggers3/mute/{triggerId}
+  method: put
+  operationId: EditResourceOwnerTriggerMute3
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/resourceowner/triggers3/unmute/{triggerId}
+  method: put
+  operationId: EditResourceOwnerTriggerUnMute3
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/resourceowner/triggers3/movepush
+  method: post
+  operationId: ResourceOwnerTriggerMovePush3
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/resourceowner/trips3
+  method: get
+  operationId: GetResourceOwnerTrips2
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/resourceowner/trips3/{tripId}
+  method: get
+  operationId: GetResourceOwnerTripDetail2
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/resourceowner/trips3/{tripId}
+  method: put
+  operationId: EditResourceOwnerTrip2
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/resourceowner/trips3/{tripId}/geostartend
+  method: get
+  operationId: GetResourceOwnerGeoStartStop2
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/resourceowner/trips3/{tripId}/speed
+  method: get
+  operationId: GetResourceOwnerTripSpeed2
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/resourceowner/trips3/{tripId}/rpm
+  method: get
+  operationId: GetResourceOwnerTripRPM2
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/resourceowner/trips3/{tripId}/ambienttemperature
+  method: get
+  operationId: GetResourceOwnerTripAmbientTemperature2
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/resourceowner/trips3/{tripId}/fuellevelinput
+  method: get
+  operationId: GetResourceOwnerTripFuelLevelInput2
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/resourceowner/trips3/{tripId}/enginecoolanttemperature
+  method: get
+  operationId: GetResourceOwnerTripEngineCoolantTemperature2
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/resourceowner/trips3/{tripId}/pid/{pidId}
+  method: get
+  operationId: GetResourceOwnerTripPid2
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/resourceowner/trips3/{tripId}/geo
+  method: get
+  operationId: GetResourceOwnerTripGeo2
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/resourceowner/trips3/{tripId}/googleurltostaticmapencodedpolyline
+  method: get
+  operationId: GetGoogleurlToStaticMapEncodedPolyline2
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/resourceowner/trips3/setdriverontrip
+  method: put
+  operationId: SetDriverOnTrip2
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/resourceowner/trips3/{tripId}/details
+  method: get
+  operationId: GetResourceOwnerTripDetailConcat2
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/resourceowner/trips3/{tripId}/advanced
+  method: get
+  operationId: GetResourceOwnerTripAdvanced2
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/resourceowner/trips3/batch/triptype
+  method: put
+  operationId: ResourceOwnerTrip3Controller_TripTypeBatchUpdate
+  x-agentic-access:
+    action-class: acting
+    consequence: safety-critical
+    subject: required
+    audience: null
+    token:
+      max-ttl: 120
+      exchange: true
+      purpose-required: true
+      proof-of-possession: true
+    escalation:
+      human-in-the-loop: required
+    audit: required
+- path: /v1/resourceowner/tripapproval/unsubmitted/{vehicleId}
+  method: get
+  operationId: ResourceOwnerTripApprovalController_GetUnsubmittedTripList
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/resourceowner/tripapproval/submit
+  method: post
+  operationId: ResourceOwnerTripApprovalController_SubmitTripList
+  x-agentic-access:
+    action-class: acting
+    consequence: safety-critical
+    subject: required
+    audience: null
+    token:
+      max-ttl: 120
+      exchange: true
+      purpose-required: true
+      proof-of-possession: true
+    escalation:
+      human-in-the-loop: required
+    audit: required
+- path: /v1/resourceowner/tripapproval/request/{tripApprovalRequestId}
+  method: get
+  operationId: ResourceOwnerTripApprovalController_GetTripApprovalRequest
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/resourceowner/tripapproval/request
+  method: get
+  operationId: ResourceOwnerTripApprovalController_GetSubmittedTripApprovalRequestList
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/resourceowner/tripapproval/{tripApprovalRequestId}/response
+  method: put
+  operationId: ResourceOwnerTripApprovalController_Response
+  x-agentic-access:
+    action-class: acting
+    consequence: safety-critical
+    subject: required
+    audience: null
+    token:
+      max-ttl: 120
+      exchange: true
+      purpose-required: true
+      proof-of-possession: true
+    escalation:
+      human-in-the-loop: required
+    audit: required
+- path: /v1/resourceowner/tripapproval/{tripApprovalRequestId}/revoke
+  method: put
+  operationId: ResourceOwnerTripApprovalController_RevokeRequest
+  x-agentic-access:
+    action-class: acting
+    consequence: safety-critical
+    subject: required
+    audience: null
+    token:
+      max-ttl: 120
+      exchange: true
+      purpose-required: true
+      proof-of-possession: true
+    escalation:
+      human-in-the-loop: required
+    audit: required
+- path: /v1/resourceowner/tripmerge
+  method: post
+  operationId: ResourceOwnerTripMergeController_MergeTrips
+  x-agentic-access:
+    action-class: acting
+    consequence: safety-critical
+    subject: required
+    audience: null
+    token:
+      max-ttl: 120
+      exchange: true
+      purpose-required: true
+      proof-of-possession: true
+    escalation:
+      human-in-the-loop: required
+    audit: required
+- path: /v1/resourceowner/tripmerge/{tripId}/unmerge
+  method: put
+  operationId: ResourceOwnerTripMergeController_UnmergeTrips
+  x-agentic-access:
+    action-class: acting
+    consequence: safety-critical
+    subject: required
+    audience: null
+    token:
+      max-ttl: 120
+      exchange: true
+      purpose-required: true
+      proof-of-possession: true
+    escalation:
+      human-in-the-loop: required
+    audit: required
+- path: /v1/resourceowner/tripmerge/{tripId}
+  method: get
+  operationId: ResourceOwnerTripMergeController_GetTripList
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/resourceowner/tripscore/drivingscore/{driverContactId}
+  method: get
+  operationId: GetResourceOwnerLatestDrivingScore
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/resourceowner/tripscore/summary/{driverContactId}
+  method: get
+  operationId: GetResourceOwnerTripScoreSummary
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/resourceowner/tripscore/chartdata/{driverContactId}
+  method: get
+  operationId: GetResourceOwnerTripScoreChartData
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/resourceowner/tripscore/triplist/{driverContactId}
+  method: get
+  operationId: GetResourceOwnerTripScoreTripList
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/resourceowner/trips
+  method: get
+  operationId: GetResourceOwnerTrips
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/resourceowner/trips/{tripId}
+  method: get
+  operationId: GetResourceOwnerTrip
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/resourceowner/trips/{tripId}
+  method: put
+  operationId: EditResourceOwnerTrip
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/resourceowner/trips/{tripId}/geostartend
+  method: get
+  operationId: GetResourceOwnerGeoStartStop
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/resourceowner/trips/{tripId}/speed
+  method: get
+  operationId: GetResourceOwnerTripSpeed
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/resourceowner/trips/{tripId}/rpm
+  method: get
+  operationId: GetResourceOwnerTripRPM
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/resourceowner/trips/{tripId}/ambienttemperature
+  method: get
+  operationId: GetResourceOwnerTripAmbientTemperature
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/resourceowner/trips/{tripId}/fuellevelinput
+  method: get
+  operationId: GetResourceOwnerTripFuelLevelInput
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/resourceowner/trips/{tripId}/enginecoolanttemperature
+  method: get
+  operationId: GetResourceOwnerTripEngineCoolantTemperature
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/resourceowner/trips/{tripId}/pid/{pidId}
+  method: get
+  operationId: GetResourceOwnerTripPid
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/resourceowner/trips/{tripId}/geo
+  method: get
+  operationId: GetResourceOwnerTripGeo
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/resourceowner/trips/{tripId}/googleurltostaticmapencodedpolyline
+  method: get
+  operationId: GetGoogleurlToStaticMapEncodedPolyline
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/resourceowner/trips/addnotestolasttrip
+  method: put
+  operationId: EditResourceOwnerTripAddNoteToLastTrip
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/resourceowner/trips/batch/triptype
+  method: put
+  operationId: ResourceOwnerTripController_TripTypeBatchUpdate
+  x-agentic-access:
+    action-class: acting
+    consequence: safety-critical
+    subject: required
+    audience: null
+    token:
+      max-ttl: 120
+      exchange: true
+      purpose-required: true
+      proof-of-possession: true
+    escalation:
+      human-in-the-loop: required
+    audit: required
+- path: /v1/resourceowner/trips/setdriverontrip
+  method: put
+  operationId: SetDriverOnTrip
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/resourceowner/trips/synchronized
+  method: post
+  operationId: Synchronized
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/resourceowner/trips/{tripId}/details
+  method: get
+  operationId: GetResourceOwnerTrip2
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/resourceowner/trips/{tripId}/advanced
+  method: get
+  operationId: GetResourceOwnerTripAdvanced
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/resourceowner/user
+  method: get
+  operationId: GetResourceOwnerUser
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/resourceowner/user/changepassword
+  method: put
+  operationId: ChangePasswordResourceOwnerUser
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/resourceowner/user/userexistingpassword
+  method: get
+  operationId: UserExistingPassword
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/resourceowner/user/changeusername
+  method: put
+  operationId: ChangeUserNameResourceOwnerUser
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/resourceowner/user/resetpassword
+  method: post
+  operationId: ResetPasswordResourceOwnerUser
+  x-agentic-access:
+    action-class: acting
+    consequence: safety-critical
+    subject: required
+    audience: null
+    token:
+      max-ttl: 120
+      exchange: true
+      purpose-required: true
+      proof-of-possession: true
+    escalation:
+      human-in-the-loop: required
+    audit: required
+- path: /v1/resourceowner/user/logout
+  method: post
+  operationId: ResourceOwnerUserController_Logout
+  x-agentic-access:
+    action-class: acting
+    consequence: safety-critical
+    subject: required
+    audience: null
+    token:
+      max-ttl: 120
+      exchange: true
+      purpose-required: true
+      proof-of-possession: true
+    escalation:
+      human-in-the-loop: required
+    audit: required
+- path: /v1/resourceowner/userdevice
+  method: get
+  operationId: GetResourceOwnerUserDevices
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/resourceowner/userdevice
+  method: post
+  operationId: CreateResourceOwnerUserDevice
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/resourceowner/userdevice/{userDeviceId}
+  method: get
+  operationId: GetResourceOwnerUserDevice
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/resourceowner/userdevice/{userDeviceId}
+  method: put
+  operationId: EditResourceOwnerUserDevice
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/resourceowner/userdevice/{userDeviceId}
+  method: delete
+  operationId: DeleteResourceOwnerUserDevice
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/resourceowner/userdevice/adduserdeviceifnewanddefaulttriggers
+  method: put
+  operationId: AddUserDeviceIfNewAndDefaultTriggers
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/resourceowner/userdevice/adduserdeviceifnew
+  method: put
+  operationId: AddUserDeviceIfNew
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/resourceowner/vehicles2
+  method: get
+  operationId: GetResourceOwnerVehicles2
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/resourceowner/vehicles2
+  method: post
+  operationId: CreateResourceOwnerVehicle2
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/resourceowner/vehicles2/{vehicleId}
+  method: get
+  operationId: GetResourceOwnerVehicle2
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/resourceowner/vehicles2/{vehicleId}
+  method: put
+  operationId: EditResourceOwnerVehicle2
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/resourceowner/vehicles2/{vehicleId}
+  method: delete
+  operationId: DeleteResourceOwnerVehicle2
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/resourceowner/vehicles2/VehicleInformation
+  method: get
+  operationId: GetVehicleInformation
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/resourceowner/vehicles2/status
+  method: get
+  operationId: GetResourceOwnerVehiclesStatus2
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/resourceowner/vehicles2/status/{vehicleId}
+  method: get
+  operationId: ResourceOwnerVehicle2Controller_GetVehicleStatus
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/resourceowner/vehicles2/checkin
+  method: post
+  operationId: CheckInResourceOwnerVehicle2
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/resourceowner/vehicles2/checkout
+  method: post
+  operationId: CheckOutResourceOwnerVehicle2
+  x-agentic-access:
+    action-class: acting
+    consequence: physical
+    subject: required
+    audience: null
+    token:
+      max-ttl: 300
+      exchange: true
+      purpose-required: true
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/resourceowner/vehicles2/{vehicleId}/lasttrip
+  method: get
+  operationId: GetResourceOwnerVehicleLastTrip2
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/resourceowner/vehicles2/move-device
+  method: post
+  operationId: MoveDevice
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/resourceowner/vehicles3
+  method: get
+  operationId: GetResourceOwnerVehicles3
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/resourceowner/vehicles3
+  method: post
+  operationId: CreateResourceOwnerVehicle3
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/resourceowner/vehicles3/{vehicleId}
+  method: get
+  operationId: GetResourceOwnerVehicle3
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/resourceowner/vehicles3/{vehicleId}
+  method: put
+  operationId: EditResourceOwnerVehicle3
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/resourceowner/vehicles3/VehicleInformation
+  method: get
+  operationId: GetVehicleInformation3
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/resourceowner/vehicles3/status
+  method: get
+  operationId: GetResourceOwnerVehiclesStatus3
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/resourceowner/vehicles3/status/{vehicleId}
+  method: get
+  operationId: ResourceOwnerVehicle3Controller_GetVehicleStatus
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/resourceowner/vehicles3/checkin
+  method: post
+  operationId: CheckInResourceOwnerVehicle3
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/resourceowner/vehicles3/checkout
+  method: post
+  operationId: CheckOutResourceOwnerVehicle3
+  x-agentic-access:
+    action-class: acting
+    consequence: physical
+    subject: required
+    audience: null
+    token:
+      max-ttl: 300
+      exchange: true
+      purpose-required: true
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/resourceowner/vehicles3/{vehicleId}/lasttrip
+  method: get
+  operationId: GetResourceOwnerVehicleLastTrip3
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/resourceowner/vehicledefectcomments/{vehicleDefectCommentId}
+  method: get
+  operationId: GetResourceOwnerVehicleDefectComment
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/resourceowner/vehicledefectcomments/{vehicleDefectCommentId}
+  method: put
+  operationId: EditResourceOwnerVehicleDefectComment
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/resourceowner/vehicledefectcomments
+  method: get
+  operationId: GetResourceOwnerVehicleDefectComments
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/resourceowner/vehicledefectcomments
+  method: post
+  operationId: CreateResourceOwnerVehicleDefectComment
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/resourceowner/vehicledefectcomments3/{vehicleDefectCommentId}
+  method: get
+  operationId: GetResourceOwnerVehicleDefectComment3
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/resourceowner/vehicledefectcomments3/{vehicleDefectCommentId}
+  method: put
+  operationId: EditResourceOwnerVehicleDefectComment3
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/resourceowner/vehicledefectcomments3
+  method: get
+  operationId: GetResourceOwnerVehicleDefectComments3
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/resourceowner/vehicledefectcomments3
+  method: post
+  operationId: CreateResourceOwnerVehicleDefectComment3
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/resourceowner/vehicledefecttypes
+  method: get
+  operationId: GetResourceOwnerVehicleDefectTypes
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/resourceowner/vehiclegeofence/{vehicleGeofenceId}
+  method: get
+  operationId: GetResourceOwnerVehicleGeofence
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/resourceowner/vehiclegeofence/{vehicleGeofenceId}
+  method: delete
+  operationId: DeleteResourceOwnerVehicleGeofence
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/resourceowner/vehiclegeofence/{vehicleGeofenceId}
+  method: put
+  operationId: EditResourceOwnerVehicleGeofence
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/resourceowner/vehiclegeofence
+  method: get
+  operationId: GetResourceOwnerVehicleGeofenceGeofenceId
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/resourceowner/vehiclegeofence
+  method: post
+  operationId: CreateResourceOwnerVehicleGeofence
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/resourceowner/vehiclehealth/{vehicleId}
+  method: get
+  operationId: GetResourceOwnerVehicleHealth
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/resourceowner/vehiclehealth/{dateperiod}/{vehicleId}
+  method: get
+  operationId: GetResourceOwnerVehicleHealthPeriod
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/resourceowner/vehiclehealth3/{vehicleId}
+  method: get
+  operationId: GetResourceOwnerVehicleHealth3
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/resourceowner/vehiclehealth3/{dateperiod}/{vehicleId}
+  method: get
+  operationId: GetResourceOwnerVehicleHealthPeriod3
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/resourceowner/vehicleinspection/{vehicleInspectionId}
+  method: get
+  operationId: GetResourceOwnerVehicleInspection
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/resourceowner/vehicleinspection/{vehicleInspectionId}
+  method: put
+  operationId: EditResourceOwnerVehicleInspection
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/resourceowner/vehicleinspection
+  method: get
+  operationId: GetResourceOwnerVehicleInspections
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/resourceowner/vehicleinspection
+  method: post
+  operationId: CreateResourceOwnerVehicleInspection
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/resourceowner/vehicleinspection/export/{vehicleInspectionId}
+  method: post
+  operationId: ExportResourceOwnerVehicleInspection
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/resourceowner/vehicleinspection3/{vehicleInspectionId}
+  method: get
+  operationId: GetResourceOwnerVehicleInspection3
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/resourceowner/vehicleinspection3/{vehicleInspectionId}
+  method: put
+  operationId: EditResourceOwnerVehicleInspection3
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/resourceowner/vehicleinspection3
+  method: get
+  operationId: GetResourceOwnerVehicleInspections3
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/resourceowner/vehicleinspection3
+  method: post
+  operationId: CreateResourceOwnerVehicleInspection3
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/resourceowner/vehicleinspection3/export/{vehicleInspectionId}
+  method: post
+  operationId: ExportResourceOwnerVehicleInspection3
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/resourceowner/vehicles/odometer/{vehicleId}
+  method: get
+  operationId: ResourceOwnerVehicleOdometerController_GetVehicleOdometer
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/resourceowner/vehicles/odometer/{vehicleId}/calculate
+  method: get
+  operationId: ResourceOwnerVehicleOdometerController_CalculateVehicleOdometer
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/resourceowner/vehicles/odometer/updateodometer
+  method: put
+  operationId: ResourceOwnerVehicleOdometerController_SaveVehicleOdometer
+  x-agentic-access:
+    action-class: acting
+    consequence: safety-critical
+    subject: required
+    audience: null
+    token:
+      max-ttl: 120
+      exchange: true
+      purpose-required: true
+      proof-of-possession: true
+    escalation:
+      human-in-the-loop: required
+    audit: required
+- path: /v1/resourceowner/vehicleplace/{vehiclePlaceId}
+  method: get
+  operationId: GetResourceOwnerVehiclePlace
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/resourceowner/vehicleplace/{vehiclePlaceId}
+  method: put
+  operationId: EditResourceOwnerVehiclePlace
+  x-agentic-access:
+    action-class: acting
+    consequence: physical
+    subject: required
+    audience: null
+    token:
+      max-ttl: 300
+      exchange: true
+      purpose-required: true
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/resourceowner/vehicleplace/{vehiclePlaceId}
+  method: delete
+  operationId: DeleteResourceOwnerVehiclePlace
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/resourceowner/vehicleplace
+  method: get
+  operationId: GetResourceOwnerVehiclePlaceId
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/resourceowner/vehicleplace
+  method: post
+  operationId: CreateResourceOwnerVehiclePlace
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/resourceowner/vehicles
+  method: get
+  operationId: GetResourceOwnerVehicles
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/resourceowner/vehicles
+  method: post
+  operationId: CreateResourceOwnerVehicle
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/resourceowner/vehicles/{vehicleId}
+  method: get
+  operationId: GetResourceOwnerVehicle
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/resourceowner/vehicles/{vehicleId}
+  method: put
+  operationId: EditResourceOwnerVehicle
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/resourceowner/vehicles/{vehicleId}
+  method: delete
+  operationId: DeleteResourceOwnerVehicle
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/resourceowner/vehicles/status
+  method: get
+  operationId: GetResourceOwnerVehiclesStatus
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/resourceowner/workorders
+  method: get
+  operationId: ResourceOwnerWorkOrder_GetWorkOrderList
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/resourceowner/workorders
+  method: post
+  operationId: ResourceOwnerWorkOrder_CreateWorkOrder
+  x-agentic-access:
+    action-class: acting
+    consequence: physical
+    subject: required
+    audience: null
+    token:
+      max-ttl: 300
+      exchange: true
+      purpose-required: true
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/resourceowner/workorders
+  method: put
+  operationId: ResourceOwnerWorkOrder_SaveWorkOrderList
+  x-agentic-access:
+    action-class: acting
+    consequence: physical
+    subject: required
+    audience: null
+    token:
+      max-ttl: 300
+      exchange: true
+      purpose-required: true
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/resourceowner/workorders/{workOrderId}
+  method: get
+  operationId: ResourceOwnerWorkOrder_GetWorkOrder
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/resourceowner/workorders/{workOrderId}
+  method: put
+  operationId: ResourceOwnerWorkOrder_UpdateWorkOrder
+  x-agentic-access:
+    action-class: acting
+    consequence: physical
+    subject: required
+    audience: null
+    token:
+      max-ttl: 300
+      exchange: true
+      purpose-required: true
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/resourceowner/workorders/{workOrderId}
+  method: delete
+  operationId: ResourceOwnerWorkOrder_DeleteWorkOrder
+  x-agentic-access:
+    action-class: acting
+    consequence: physical
+    subject: required
+    audience: null
+    token:
+      max-ttl: 300
+      exchange: true
+      purpose-required: true
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/resourceowner/workorders/getwithquoteid/{quoteId}
+  method: get
+  operationId: ResourceOwnerWorkOrder_GetWorkOrderByQuoteId
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/resourceowner/workorders/{workOrderId}/attachments
+  method: post
+  operationId: ResourceOwnerWorkOrder_CreateAttachment
+  x-agentic-access:
+    action-class: acting
+    consequence: physical
+    subject: required
+    audience: null
+    token:
+      max-ttl: 300
+      exchange: true
+      purpose-required: true
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/resourceowner/workorders/{workOrderId}/status
+  method: put
+  operationId: ResourceOwnerWorkOrder_UpdateWorkOrderStatus
+  x-agentic-access:
+    action-class: acting
+    consequence: physical
+    subject: required
+    audience: null
+    token:
+      max-ttl: 300
+      exchange: true
+      purpose-required: true
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/resourceowner/workorders/articles
+  method: get
+  operationId: ResourceOwnerWorkOrder_GetArticleList
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/resourceowner/workorders/articles
+  method: post
+  operationId: ResourceOwnerWorkOrder_CreateArticle
+  x-agentic-access:
+    action-class: acting
+    consequence: physical
+    subject: required
+    audience: null
+    token:
+      max-ttl: 300
+      exchange: true
+      purpose-required: true
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/resourceowner/workorders/articles/{workOrderArticleId}
+  method: get
+  operationId: ResourceOwnerWorkOrder_GetArticle
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/resourceowner/workorders/articles/{workOrderArticleId}
+  method: put
+  operationId: ResourceOwnerWorkOrder_UpdateArticle
+  x-agentic-access:
+    action-class: acting
+    consequence: physical
+    subject: required
+    audience: null
+    token:
+      max-ttl: 300
+      exchange: true
+      purpose-required: true
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/resourceowner/workorders/articles/{workOrderArticleId}
+  method: delete
+  operationId: ResourceOwnerWorkOrder_DeleteArticle
+  x-agentic-access:
+    action-class: acting
+    consequence: physical
+    subject: required
+    audience: null
+    token:
+      max-ttl: 300
+      exchange: true
+      purpose-required: true
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/resourceowner/workorders/categories
+  method: get
+  operationId: ResourceOwnerWorkOrder_GetCategoryList
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/resourceowner/workorders/categories
+  method: post
+  operationId: ResourceOwnerWorkOrder_CreateCategory
+  x-agentic-access:
+    action-class: acting
+    consequence: physical
+    subject: required
+    audience: null
+    token:
+      max-ttl: 300
+      exchange: true
+      purpose-required: true
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/resourceowner/workorders/categories/{workOrderCategoryId}
+  method: get
+  operationId: ResourceOwnerWorkOrder_GetCategory
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/resourceowner/workorders/categories/{workOrderCategoryId}
+  method: delete
+  operationId: ResourceOwnerWorkOrder_DeleteCategory
+  x-agentic-access:
+    action-class: acting
+    consequence: physical
+    subject: required
+    audience: null
+    token:
+      max-ttl: 300
+      exchange: true
+      purpose-required: true
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/resourceowner/workorders/customers
+  method: get
+  operationId: ResourceOwnerWorkOrder_GetCustomerList
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/resourceowner/workorders/customers
+  method: post
+  operationId: ResourceOwnerWorkOrder_CreateCustomer
+  x-agentic-access:
+    action-class: acting
+    consequence: physical
+    subject: required
+    audience: null
+    token:
+      max-ttl: 300
+      exchange: true
+      purpose-required: true
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/resourceowner/workorders/customers/{workOrderCustomerId}
+  method: get
+  operationId: ResourceOwnerWorkOrder_GetCustomer
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/resourceowner/workorders/customers/{workOrderCustomerId}
+  method: put
+  operationId: ResourceOwnerWorkOrder_UpdateCustomer
+  x-agentic-access:
+    action-class: acting
+    consequence: physical
+    subject: required
+    audience: null
+    token:
+      max-ttl: 300
+      exchange: true
+      purpose-required: true
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/resourceowner/workorders/customers/{workOrderCustomerId}
+  method: delete
+  operationId: ResourceOwnerWorkOrder_DeleteCustomer
+  x-agentic-access:
+    action-class: acting
+    consequence: physical
+    subject: required
+    audience: null
+    token:
+      max-ttl: 300
+      exchange: true
+      purpose-required: true
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/resourceowner/workorders/referenceId
+  method: get
+  operationId: ResourceOwnerWorkOrder_GetNextWorkOrderId
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none

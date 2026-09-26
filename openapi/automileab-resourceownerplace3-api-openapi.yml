@@ -1,0 +1,308 @@
+openapi: 3.2.0
+info:
+  title: Automile Resource Owner Place3 API
+  version: v1
+tags:
+- name: ResourceOwnerPlace3
+paths:
+  /v1/resourceowner/place3:
+    get:
+      tags:
+      - ResourceOwnerPlace3
+      summary: Gets all places for organization
+      operationId: GetResourceOwnerPlaces3
+      responses:
+        '200':
+          description: Success
+          content:
+            text/plain:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/PlaceModel3'
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/PlaceModel3'
+            text/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/PlaceModel3'
+      security:
+      - oauth2: []
+    post:
+      tags:
+      - ResourceOwnerPlace3
+      summary: Creates a new place for organization
+      description: 'This will create a new place and associate it with a number of vehicles.
+
+        Only vehicles authorized for edit will be added to the place.'
+      operationId: CreateResourceOwnerPlace3
+      responses:
+        '200':
+          description: A link in the header is returned to the newly created place
+        '500':
+          description: Internal server error
+        '400':
+          description: Bad request, could occur for a number of cases, see returned message
+        '403':
+          description: Request is forbidden, could occur for a number of reasons, see returned message
+      security:
+      - oauth2: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Place3CreateModel'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/Place3CreateModel'
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/Place3CreateModel'
+        description: The place model
+  /v1/resourceowner/place3/{placeId}:
+    get:
+      tags:
+      - ResourceOwnerPlace3
+      summary: Gets place by placeid
+      operationId: GetResourceOwnerPlace3
+      parameters:
+      - in: path
+        name: placeId
+        description: The Id of the place
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: The place details are returned
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/PlaceModel3'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PlaceModel3'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/PlaceModel3'
+        '500':
+          description: Internal server error
+        '403':
+          description: Request is forbidden, meaning you dont' have access to this place
+      security:
+      - oauth2: []
+    put:
+      tags:
+      - ResourceOwnerPlace3
+      summary: Updates the given place with new model
+      description: 'This will update information on an already existing place, as well as its vehicle connections.
+
+        Vehicle connections to the place will be updated/added from the VehicleIds list if user has edit authorization to the vehicles.
+
+        Already existing vehicle connections be removed if excluded in the VehicleIds list (if authorized to be edited).
+
+        This will update the given place id with a new model.'
+      operationId: EditResourceOwnerPlace3
+      parameters:
+      - in: path
+        name: placeId
+        description: The place id
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: The given place was saved
+        '500':
+          description: Internal server error
+        '400':
+          description: Bad request, could occur for a number of cases, see returned message
+        '403':
+          description: Request is forbidden, could occur for a number of reasons, see returned message
+      security:
+      - oauth2: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Place3EditModel'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/Place3EditModel'
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/Place3EditModel'
+        description: The place model
+    delete:
+      tags:
+      - ResourceOwnerPlace3
+      summary: Removes the given place
+      description: This will remove the given trigger including all historic message belonging to this trigger.
+      operationId: DeleteResourceOwnerPlace3
+      parameters:
+      - in: path
+        name: placeId
+        description: The company id
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: The place has been deleted
+        '403':
+          description: Request is forbidden, this could occur if the user is not associated with the place
+        '404':
+          description: The place that you tried to remove doesn't exist
+        '500':
+          description: Internal server error
+      security:
+      - oauth2: []
+components:
+  schemas:
+    Place3EditModel:
+      required:
+      - Name
+      - PositionPoint
+      - Radius
+      type: object
+      properties:
+        Name:
+          minLength: 1
+          type: string
+        Radius:
+          format: int32
+          type: integer
+        PositionPoint:
+          $ref: '#/components/schemas/PositionPointModel'
+        Description:
+          type: string
+        TripType:
+          format: int32
+          enum:
+          - 0
+          - 1
+          - 2
+          - 3
+          type: integer
+        TripTypeTrigger:
+          format: int32
+          enum:
+          - 0
+          - 1
+          - 2
+          - 3
+          type: integer
+        OrganizationNodeId:
+          format: int32
+          type: integer
+        DrivesBetweenAnotherPlaceId:
+          format: int32
+          type: integer
+      additionalProperties: false
+    PositionPointModel:
+      type: object
+      properties:
+        Longitude:
+          format: double
+          type: number
+        Latitude:
+          format: double
+          type: number
+      additionalProperties: false
+    PlaceModel3:
+      type: object
+      properties:
+        PlaceId:
+          format: int32
+          type: integer
+        Name:
+          type: string
+        Description:
+          type: string
+        PositionPoint:
+          $ref: '#/components/schemas/PositionPointModel'
+        TripType:
+          format: int32
+          enum:
+          - 0
+          - 1
+          - 2
+          - 3
+          type: integer
+        TripTypeTrigger:
+          format: int32
+          enum:
+          - 0
+          - 1
+          - 2
+          - 3
+          type: integer
+        Radius:
+          format: int32
+          type: integer
+        IsEditable:
+          type: boolean
+        OrganizationNodeId:
+          format: int32
+          type: integer
+        DrivesBetweenAnotherPlaceId:
+          format: int32
+          type: integer
+      additionalProperties: false
+    Place3CreateModel:
+      required:
+      - Name
+      - PositionPoint
+      - Radius
+      type: object
+      properties:
+        Name:
+          minLength: 1
+          type: string
+        Radius:
+          format: int32
+          type: integer
+        PositionPoint:
+          $ref: '#/components/schemas/PositionPointModel'
+        Description:
+          type: string
+        TripType:
+          format: int32
+          enum:
+          - 0
+          - 1
+          - 2
+          - 3
+          type: integer
+        TripTypeTrigger:
+          format: int32
+          enum:
+          - 0
+          - 1
+          - 2
+          - 3
+          type: integer
+        OrganizationNodeId:
+          format: int32
+          type: integer
+        DrivesBetweenAnotherPlaceId:
+          format: int32
+          type: integer
+      additionalProperties: false
+  securitySchemes:
+    oauth2:
+      type: oauth2
+      flows:
+        implicit:
+          scopes:
+            read: Read access to protected resources
+            write: Write access to protected resources
+          authorizationUrl: https://api.automile.com/login/
+      description: OAuth2 Implicit Grant

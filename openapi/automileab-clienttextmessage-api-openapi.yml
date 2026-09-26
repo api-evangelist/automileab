@@ -1,0 +1,180 @@
+openapi: 3.2.0
+info:
+  title: Automile Client Text Message API
+  version: v1
+tags:
+- name: ClientTextMessage
+paths:
+  /v1/client/textmessages/createpin:
+    post:
+      tags:
+      - ClientTextMessage
+      summary: Create and send pin code to login with
+      operationId: CreatePinCode
+      responses:
+        '200':
+          description: The Pin code have been sent
+        '400':
+          description: Format error on phonenumber, To many SMS or no match on phonenumber
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+      security:
+      - oauth2: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreatePinModel'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/CreatePinModel'
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/CreatePinModel'
+  /v1/client/textmessages/validatepin:
+    post:
+      tags:
+      - ClientTextMessage
+      summary: Validate Pin Code
+      operationId: ValidatePinCode
+      responses:
+        '200':
+          description: User logged in/User created and a user token returned in response
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/TokenResponse'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TokenResponse'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/TokenResponse'
+        '400':
+          description: Can't assoicate given username to a user
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        '401':
+          description: Unauthorized
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        '403':
+          description: Too many password attempts
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+      security:
+      - oauth2: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ValidatePinModel'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/ValidatePinModel'
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/ValidatePinModel'
+components:
+  schemas:
+    ProblemDetails:
+      type: object
+      properties:
+        type:
+          type: string
+        title:
+          type: string
+        status:
+          format: int32
+          type: integer
+        detail:
+          type: string
+        instance:
+          type: string
+      additionalProperties: {}
+    CreatePinModel:
+      type: object
+      properties:
+        UserName:
+          type: string
+        MobilePhoneNumber:
+          type: string
+        UserGuid:
+          format: uuid
+          type: string
+        Culture:
+          type: string
+      additionalProperties: false
+    ValidatePinModel:
+      type: object
+      properties:
+        UserName:
+          type: string
+        Pin:
+          type: string
+        UserGuid:
+          format: uuid
+          type: string
+      additionalProperties: false
+    TokenResponse:
+      description: The token response
+      type: object
+      properties:
+        UserName:
+          type: string
+        AccessToken:
+          type: string
+        ExpiresInSeconds:
+          format: double
+          type: number
+        IssuedUtc:
+          format: date-time
+          type: string
+        ExpiresUtc:
+          format: date-time
+          type: string
+        RefreshToken:
+          type: string
+      additionalProperties: false
+  securitySchemes:
+    oauth2:
+      type: oauth2
+      flows:
+        implicit:
+          scopes:
+            read: Read access to protected resources
+            write: Write access to protected resources
+          authorizationUrl: https://api.automile.com/login/
+      description: OAuth2 Implicit Grant

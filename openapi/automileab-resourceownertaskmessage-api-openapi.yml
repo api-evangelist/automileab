@@ -1,0 +1,167 @@
+openapi: 3.2.0
+info:
+  title: Automile Resource Owner Task Message API
+  version: v1
+tags:
+- name: ResourceOwnerTaskMessage
+paths:
+  /v1/resourceowner/taskmessage/{taskMessageId}:
+    get:
+      tags:
+      - ResourceOwnerTaskMessage
+      summary: Get a task message
+      operationId: GetResourceOwnerTaskMessage
+      parameters:
+      - in: path
+        name: taskMessageId
+        description: The Id of the task message
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: The task message details are returned
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/TaskMessageModel'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TaskMessageModel'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/TaskMessageModel'
+        '500':
+          description: Internal server error
+        '403':
+          description: Not authorized to task message
+      security:
+      - oauth2: []
+    put:
+      tags:
+      - ResourceOwnerTaskMessage
+      summary: Update a task message
+      description: Only tasks that belongs to the user has access can be updated.
+      operationId: UpdateResourceOwnerTaskMessage
+      parameters:
+      - in: path
+        name: taskMessageId
+        description: The task id
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: The task was saved
+        '500':
+          description: Internal server error
+        '403':
+          description: Not authorized to task message
+      security:
+      - oauth2: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TaskMessageEditModel'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/TaskMessageEditModel'
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/TaskMessageEditModel'
+        description: The task model
+  /v1/resourceowner/taskmessage:
+    post:
+      tags:
+      - ResourceOwnerTaskMessage
+      summary: Create a task message
+      operationId: CreateResourceOwnerTaskMessage
+      responses:
+        '200':
+          description: A link in the header is returned to the newly created task message
+        '500':
+          description: Internal server error
+        '403':
+          description: Not authorized to task message
+      security:
+      - oauth2: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TaskMessageCreateModel'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/TaskMessageCreateModel'
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/TaskMessageCreateModel'
+        description: The TaskMessageCreateModel
+components:
+  schemas:
+    TaskMessageCreateModel:
+      type: object
+      properties:
+        TaskId:
+          format: int32
+          type: integer
+        MessageText:
+          type: string
+        Position:
+          $ref: '#/components/schemas/PositionModel'
+      additionalProperties: false
+    PositionModel:
+      type: object
+      properties:
+        Longitude:
+          format: double
+          type: number
+        Latitude:
+          format: double
+          type: number
+      additionalProperties: false
+    TaskMessageEditModel:
+      type: object
+      properties:
+        IsRead:
+          type: boolean
+      additionalProperties: false
+    TaskMessageModel:
+      type: object
+      properties:
+        TaskMessageId:
+          format: int32
+          type: integer
+        SentByContactId:
+          format: int32
+          type: integer
+        ToContactId:
+          format: int32
+          type: integer
+        MessageText:
+          type: string
+        MessageSentAtUtc:
+          format: date-time
+          type: string
+        SentByContactName:
+          type: string
+        ToContactName:
+          type: string
+        MessageIsRead:
+          type: boolean
+        Position:
+          $ref: '#/components/schemas/PositionModel'
+      additionalProperties: false
+  securitySchemes:
+    oauth2:
+      type: oauth2
+      flows:
+        implicit:
+          scopes:
+            read: Read access to protected resources
+            write: Write access to protected resources
+          authorizationUrl: https://api.automile.com/login/
+      description: OAuth2 Implicit Grant

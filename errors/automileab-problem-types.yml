@@ -1,0 +1,61 @@
+generated: '2026-09-26'
+method: derived
+generator: derive-problem-types.py
+source:
+- openapi/automileab-openapi.json
+format: custom
+envelope:
+  media_type: null
+  schema: ProblemDetails
+coverage:
+  operations: 455
+  statuses_declared: 8
+problems:
+- status: 400
+  title: Bad Request
+  description: Bad request, could occur for a number of cases, see returned message
+  operations: 102
+  media_types: []
+  schema: ProblemDetails
+- status: 401
+  title: Unauthorized
+  description: Unauthorized
+  operations: 3
+  media_types: []
+  schema: ProblemDetails
+- status: 403
+  title: Forbidden
+  description: Request is forbidden, could occur for a number of reasons, see returned message
+  operations: 232
+  media_types: []
+  schema: ProblemDetails
+- status: 404
+  title: Not Found
+  description: Not found, the vehicle you tried to update can't be found
+  operations: 95
+  media_types: []
+  schema: ProblemDetails
+- status: 406
+  title: Not Acceptable
+  description: Request is not properly formatted
+  operations: 3
+  media_types: []
+  schema: ProblemDetails
+- status: 409
+  title: Conflict
+  description: Multiple users assoicated to the account
+  operations: 1
+  media_types: []
+  schema: ProblemDetails
+- status: 500
+  title: Internal Server Error
+  description: Internal server error
+  operations: 401
+  media_types: []
+  schema: UsernameTakenModel
+- status: 501
+  title: Not Implemented
+  description: Not implemented, meaning the PID is not supported or is not recorded by the vehicle
+  operations: 16
+  media_types: []
+  schema: null

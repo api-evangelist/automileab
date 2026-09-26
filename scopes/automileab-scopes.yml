@@ -1,0 +1,23 @@
+generated: '2026-09-26'
+method: derived
+source: openapi/automileab-openapi.json
+schemes:
+- name: oauth2
+  source: openapi/automileab-openapi.json
+  flows:
+  - flow: implicit
+    authorizationUrl: https://api.automile.com/login/
+  description: OAuth2 Implicit Grant
+scopes:
+- scope: read
+  description: Read access to protected resources
+  flows:
+  - implicit
+  sources:
+  - openapi/automileab-openapi.json
+- scope: write
+  description: Write access to protected resources
+  flows:
+  - implicit
+  sources:
+  - openapi/automileab-openapi.json

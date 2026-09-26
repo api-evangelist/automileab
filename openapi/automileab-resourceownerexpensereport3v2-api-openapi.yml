@@ -1,0 +1,585 @@
+openapi: 3.2.0
+info:
+  title: Automile Resource Owner Expense Report3 V2 API
+  version: v1
+tags:
+- name: ResourceOwnerExpenseReport3V2
+paths:
+  /v1/resourceowner/expensereport3:
+    get:
+      tags:
+      - ResourceOwnerExpenseReport3V2
+      summary: Get a list of expense reports
+      description: Only expense reports that the user has access to are accessible.
+      operationId: GetResourceExpenseReport3
+      parameters:
+      - in: query
+        name: tripId
+        schema:
+          type: integer
+          format: int32
+      - in: query
+        name: vehicleId
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: The expense reports are returned
+          content:
+            text/plain:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ExpenseReportModel'
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ExpenseReportModel'
+            text/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ExpenseReportModel'
+        '500':
+          description: Internal server error
+      security:
+      - oauth2: []
+    post:
+      tags:
+      - ResourceOwnerExpenseReport3V2
+      summary: Create an expense reports
+      description: This will create expense report
+      operationId: CreateExpenseReport3
+      responses:
+        '200':
+          description: A header link containing the URL to the newly created resource
+        '500':
+          description: Internal server error
+      security:
+      - oauth2: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ExpenseReportCreateModel'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/ExpenseReportCreateModel'
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/ExpenseReportCreateModel'
+  /v1/resourceowner/expensereport3/{expenseReportId}:
+    get:
+      tags:
+      - ResourceOwnerExpenseReport3V2
+      summary: Get an expense reports
+      description: Only expense reports that the user has access to are accessible.
+      operationId: GetResourceOwnerExpenseReportId3
+      parameters:
+      - in: path
+        name: expenseReportId
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: The expense report is returned
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/ExpenseReportModel'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ExpenseReportModel'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ExpenseReportModel'
+        '500':
+          description: Internal server error
+      security:
+      - oauth2: []
+    put:
+      tags:
+      - ResourceOwnerExpenseReport3V2
+      summary: Updates the given expense report
+      description: This will update the given expense report id with a new model.
+      operationId: EditResourceOwnerExpenseReport3
+      parameters:
+      - in: path
+        name: expenseReportId
+        description: The expense report id
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: The expense report was saved
+        '400':
+          description: Bad request, could occur for a number of cases, see returned message
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        '403':
+          description: Request is forbidden, could occur for a number of reasons, see returned message
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        '404':
+          description: Not found, the expense report you tried to update can't be found
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        '500':
+          description: Internal server error
+      security:
+      - oauth2: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ExpenseReportEditModel'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/ExpenseReportEditModel'
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/ExpenseReportEditModel'
+        description: The new expense report model
+    delete:
+      tags:
+      - ResourceOwnerExpenseReport3V2
+      summary: Removes the given expense report
+      operationId: DeleteResourceOwnerExpenseReport3
+      parameters:
+      - in: path
+        name: expenseReportId
+        description: The expense report id
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: The expense report has been deleted
+        '400':
+          description: Bad Request
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        '403':
+          description: Request is forbidden, could occur for a number of reasons, see returned message
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        '500':
+          description: Internal server error
+        '404':
+          description: Not found, the expense report you tried to remove can't be found
+      security:
+      - oauth2: []
+  /v1/resourceowner/expensereport3/export/{expenseReportId}:
+    post:
+      tags:
+      - ResourceOwnerExpenseReport3V2
+      summary: Export an expense report in pdf format
+      description: Only expense reports that the user has access to are accessible.
+      operationId: CreateExpenseReportEmailExport3
+      parameters:
+      - in: path
+        name: expenseReportId
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: The expense report is created and sent to the email address
+        '500':
+          description: Internal server error
+      security:
+      - oauth2: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EmailExpenseReportModel'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/EmailExpenseReportModel'
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/EmailExpenseReportModel'
+  /v1/resourceowner/expensereport3/export:
+    post:
+      tags:
+      - ResourceOwnerExpenseReport3V2
+      summary: Export an expense report in pdf format
+      description: Only expense reports that the user has access to are accessible.
+      operationId: CreateExpenseReportsEmailExport35
+      responses:
+        '200':
+          description: The expense report is created and sent to the email address
+        '404':
+          description: No expense reports could be found with the given parameter values and access rights
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        '500':
+          description: Internal server error
+      security:
+      - oauth2: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EmailExpenseReportsModel'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/EmailExpenseReportsModel'
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/EmailExpenseReportsModel'
+  /v1/resourceowner/expensereport3/{expenseReportId}/expenseReportItems:
+    delete:
+      tags:
+      - ResourceOwnerExpenseReport3V2
+      summary: Removes the given expense report rows
+      operationId: DeleteResourceOwnerExpenseReportRows3
+      parameters:
+      - in: path
+        name: expenseReportId
+        description: The expense report id
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: All expense report rows have been deleted
+        '400':
+          description: Bad Request
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        '403':
+          description: Request is forbidden, could occur for a number of reasons, see returned message
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        '500':
+          description: Internal server error
+        '404':
+          description: Not found, the expense report you tried to remove can't be found
+      security:
+      - oauth2: []
+components:
+  schemas:
+    ExpenseReportRowContentModel:
+      type: object
+      properties:
+        ExpenseReportRowContentId:
+          format: int32
+          type: integer
+        ExpenseReportRowId:
+          format: int32
+          type: integer
+        ContentType:
+          format: int32
+          enum:
+          - 0
+          - 1
+          - 2
+          - 3
+          - 4
+          type: integer
+        ContentFileName:
+          type: string
+      additionalProperties: false
+    EmailExpenseReportModel:
+      type: object
+      properties:
+        ToEmail:
+          type: string
+        ISO639LanguageCode:
+          type: string
+      additionalProperties: false
+    ExpenseReportEditModel:
+      type: object
+      properties:
+        VehicleId:
+          format: int32
+          type: integer
+        ContactId:
+          format: int32
+          type: integer
+        TripId:
+          format: int32
+          type: integer
+        ExpenseReportDateUtc:
+          format: date-time
+          type: string
+      additionalProperties: false
+    ExpenseReportRowModel:
+      type: object
+      properties:
+        ExpenseReportRowId:
+          format: int32
+          type: integer
+        ExpenseReportId:
+          format: int32
+          type: integer
+        AmountInCurrency:
+          format: double
+          type: number
+        VATInCurrency:
+          format: double
+          type: number
+        ISO4217CurrencyCode:
+          type: string
+        Notes:
+          type: string
+        ExpenseReportRowDateUtc:
+          format: date-time
+          type: string
+        ExpenseReportRowContent:
+          type: array
+          items:
+            $ref: '#/components/schemas/ExpenseReportRowContentModel'
+        Category:
+          format: int32
+          enum:
+          - 0
+          - 1
+          - 2
+          - 3
+          - 4
+          - 5
+          - 6
+          - 7
+          - 8
+          - 9
+          - 10
+          type: integer
+        CustomCategory:
+          type: string
+        CategoryValue:
+          format: double
+          type: number
+        Merchant:
+          type: string
+      additionalProperties: false
+    EmailExpenseReportsModel:
+      type: object
+      properties:
+        VehicleId:
+          format: int32
+          type: integer
+        FromDate:
+          format: date-time
+          type: string
+        ToDate:
+          format: date-time
+          type: string
+        ToEmail:
+          type: string
+        ISO639LanguageCode:
+          type: string
+      additionalProperties: false
+    ExpenseReportCreateModel:
+      type: object
+      properties:
+        VehicleId:
+          format: int32
+          type: integer
+        ContactId:
+          format: int32
+          type: integer
+        TripId:
+          format: int32
+          type: integer
+        ExpenseReportDateUtc:
+          format: date-time
+          type: string
+        ExpenseReportRows:
+          type: array
+          items:
+            $ref: '#/components/schemas/ExpenseReportRowCreateModel'
+      additionalProperties: false
+    ProblemDetails:
+      type: object
+      properties:
+        type:
+          type: string
+        title:
+          type: string
+        status:
+          format: int32
+          type: integer
+        detail:
+          type: string
+        instance:
+          type: string
+      additionalProperties: {}
+    ExpenseReportModel:
+      type: object
+      properties:
+        ExpenseReportId:
+          format: int32
+          type: integer
+        ContactId:
+          format: int32
+          type: integer
+        ContactName:
+          type: string
+        ContactImageUrl:
+          type: string
+        VehicleId:
+          format: int32
+          type: integer
+        TripId:
+          format: int32
+          type: integer
+        ExpenseReportDateUtc:
+          format: date-time
+          type: string
+        ExpenseReportRows:
+          type: array
+          items:
+            $ref: '#/components/schemas/ExpenseReportRowModel'
+        IsEditable:
+          type: boolean
+      additionalProperties: false
+    ExpenseReportRowCreateModel:
+      type: object
+      properties:
+        ExpenseReportId:
+          format: int32
+          type: integer
+        AmountInCurrency:
+          format: double
+          type: number
+        VATInCurrency:
+          format: double
+          type: number
+        ISO4217CurrencyCode:
+          type: string
+        Notes:
+          type: string
+        Category:
+          format: int32
+          enum:
+          - 0
+          - 1
+          - 2
+          - 3
+          - 4
+          - 5
+          - 6
+          - 7
+          - 8
+          - 9
+          - 10
+          type: integer
+        ExpenseReportRowDateUtc:
+          format: date-time
+          type: string
+        ExpenseReportRowContent:
+          type: array
+          items:
+            $ref: '#/components/schemas/ExpenseReportRowContentCreateModel'
+        CustomCategory:
+          type: string
+        CategoryValue:
+          format: double
+          type: number
+        Merchant:
+          type: string
+      additionalProperties: false
+    ExpenseReportRowContentCreateModel:
+      type: object
+      properties:
+        ExpenseReportRowId:
+          format: int32
+          type: integer
+        Data:
+          type: string
+        ContentType:
+          format: int32
+          enum:
+          - 0
+          - 1
+          - 2
+          - 3
+          - 4
+          type: integer
+      additionalProperties: false
+  securitySchemes:
+    oauth2:
+      type: oauth2
+      flows:
+        implicit:
+          scopes:
+            read: Read access to protected resources
+            write: Write access to protected resources
+          authorizationUrl: https://api.automile.com/login/
+      description: OAuth2 Implicit Grant

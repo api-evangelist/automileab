@@ -1,0 +1,59 @@
+openapi: 3.2.0
+info:
+  title: Automile Client API
+  version: v1
+tags:
+- name: ClientApi
+paths:
+  /v1/client/api:
+    get:
+      tags:
+      - ClientApi
+      summary: Get the current API client that access the API
+      description: Returns the given API Client that the token is valid for
+      responses:
+        '200':
+          description: The APIClient is returned
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/APIClientModel'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIClientModel'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/APIClientModel'
+        '500':
+          description: Internal server error
+      security:
+      - oauth2: []
+      operationId: getV1ClientApi
+      x-operation-id-source: derived
+components:
+  schemas:
+    APIClientModel:
+      type: object
+      properties:
+        APIClientId:
+          format: int32
+          type: integer
+        APIClientIdentifier:
+          type: string
+        Name:
+          type: string
+        ScopesDelimitedBySpaces:
+          type: string
+        ClientType:
+          type: string
+      additionalProperties: false
+  securitySchemes:
+    oauth2:
+      type: oauth2
+      flows:
+        implicit:
+          scopes:
+            read: Read access to protected resources
+            write: Write access to protected resources
+          authorizationUrl: https://api.automile.com/login/
+      description: OAuth2 Implicit Grant

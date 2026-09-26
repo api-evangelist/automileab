@@ -1,0 +1,401 @@
+openapi: 3.2.0
+info:
+  title: Automile Resource Owner Expense Report Row V2 API
+  version: v1
+tags:
+- name: ResourceOwnerExpenseReportRowV2
+paths:
+  /v1/resourceowner/expensereportrow/{expenseReportRowId}:
+    get:
+      tags:
+      - ResourceOwnerExpenseReportRowV2
+      summary: Get expense report row
+      description: Only expense report row that the user has access to are accessible.
+      operationId: GetResourceExpenseReportRow
+      parameters:
+      - in: path
+        name: expenseReportRowId
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: The expense report row is returned
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/ExpenseReportRowModel'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ExpenseReportRowModel'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ExpenseReportRowModel'
+        '500':
+          description: Internal server error
+      security:
+      - oauth2: []
+    put:
+      tags:
+      - ResourceOwnerExpenseReportRowV2
+      summary: Updates the given expense report row
+      description: This will update the given expense report row id with a new model.
+      operationId: EditResourceOwnerExpenseReportRow
+      parameters:
+      - in: path
+        name: expenseReportRowId
+        description: The expense report row id
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: The expense report row was saved
+        '400':
+          description: Bad request, could occur for a number of cases, see returned message
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        '403':
+          description: Request is forbidden, could occur for a number of reasons, see returned message
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        '404':
+          description: Not found, the expense report row you tried to update can't be found
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        '500':
+          description: Internal server error
+      security:
+      - oauth2: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ExpenseReportRowEditModel'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/ExpenseReportRowEditModel'
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/ExpenseReportRowEditModel'
+        description: The new expense report row model
+    delete:
+      tags:
+      - ResourceOwnerExpenseReportRowV2
+      summary: Removes the given expense report row
+      operationId: DeleteResourceOwnerExpenseReportRow
+      parameters:
+      - in: path
+        name: expenseReportRowId
+        description: The expense report row id
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: The expense report row has been deleted
+        '403':
+          description: Request is forbidden, could occur for a number of reasons, see returned message
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        '404':
+          description: Not found, the expense report row you tried to remove can't be found
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        '500':
+          description: Internal server error
+      security:
+      - oauth2: []
+  /v1/resourceowner/expensereportrow:
+    post:
+      tags:
+      - ResourceOwnerExpenseReportRowV2
+      summary: Create an expense report row
+      description: ''
+      operationId: CreateExpenseReportRow
+      responses:
+        '200':
+          description: A header link containing the URL to the newly created resource
+        '500':
+          description: Internal server error
+      security:
+      - oauth2: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ExpenseReportRowCreateModel'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/ExpenseReportRowCreateModel'
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/ExpenseReportRowCreateModel'
+components:
+  schemas:
+    ExpenseReportRowContentModel:
+      type: object
+      properties:
+        ExpenseReportRowContentId:
+          format: int32
+          type: integer
+        ExpenseReportRowId:
+          format: int32
+          type: integer
+        ContentType:
+          format: int32
+          enum:
+          - 0
+          - 1
+          - 2
+          - 3
+          - 4
+          type: integer
+        ContentFileName:
+          type: string
+      additionalProperties: false
+    ExpenseReportRowModel:
+      type: object
+      properties:
+        ExpenseReportRowId:
+          format: int32
+          type: integer
+        ExpenseReportId:
+          format: int32
+          type: integer
+        AmountInCurrency:
+          format: double
+          type: number
+        VATInCurrency:
+          format: double
+          type: number
+        ISO4217CurrencyCode:
+          type: string
+        Notes:
+          type: string
+        ExpenseReportRowDateUtc:
+          format: date-time
+          type: string
+        ExpenseReportRowContent:
+          type: array
+          items:
+            $ref: '#/components/schemas/ExpenseReportRowContentModel'
+        Category:
+          format: int32
+          enum:
+          - 0
+          - 1
+          - 2
+          - 3
+          - 4
+          - 5
+          - 6
+          - 7
+          - 8
+          - 9
+          - 10
+          type: integer
+        CustomCategory:
+          type: string
+        CategoryValue:
+          format: double
+          type: number
+        Merchant:
+          type: string
+      additionalProperties: false
+    ExpenseReportRowContentUpdateEditModel:
+      type: object
+      properties:
+        ExpenseReportRowContentId:
+          format: int32
+          type: integer
+        ExpenseReportRowId:
+          format: int32
+          type: integer
+        Data:
+          type: string
+        ContentType:
+          format: int32
+          enum:
+          - 0
+          - 1
+          - 2
+          - 3
+          - 4
+          type: integer
+      additionalProperties: false
+    ProblemDetails:
+      type: object
+      properties:
+        type:
+          type: string
+        title:
+          type: string
+        status:
+          format: int32
+          type: integer
+        detail:
+          type: string
+        instance:
+          type: string
+      additionalProperties: {}
+    ExpenseReportRowEditModel:
+      type: object
+      properties:
+        AmountInCurrency:
+          format: double
+          type: number
+        VATInCurrency:
+          format: double
+          type: number
+        ISO4217CurrencyCode:
+          type: string
+        Notes:
+          type: string
+        ExpenseReportRowDateUtc:
+          format: date-time
+          type: string
+        Category:
+          format: int32
+          enum:
+          - 0
+          - 1
+          - 2
+          - 3
+          - 4
+          - 5
+          - 6
+          - 7
+          - 8
+          - 9
+          - 10
+          type: integer
+        CustomCategory:
+          type: string
+        ExpenseReportRowContent:
+          type: array
+          items:
+            $ref: '#/components/schemas/ExpenseReportRowContentUpdateEditModel'
+        CategoryValue:
+          format: double
+          type: number
+        Merchant:
+          type: string
+      additionalProperties: false
+    ExpenseReportRowCreateModel:
+      type: object
+      properties:
+        ExpenseReportId:
+          format: int32
+          type: integer
+        AmountInCurrency:
+          format: double
+          type: number
+        VATInCurrency:
+          format: double
+          type: number
+        ISO4217CurrencyCode:
+          type: string
+        Notes:
+          type: string
+        Category:
+          format: int32
+          enum:
+          - 0
+          - 1
+          - 2
+          - 3
+          - 4
+          - 5
+          - 6
+          - 7
+          - 8
+          - 9
+          - 10
+          type: integer
+        ExpenseReportRowDateUtc:
+          format: date-time
+          type: string
+        ExpenseReportRowContent:
+          type: array
+          items:
+            $ref: '#/components/schemas/ExpenseReportRowContentCreateModel'
+        CustomCategory:
+          type: string
+        CategoryValue:
+          format: double
+          type: number
+        Merchant:
+          type: string
+      additionalProperties: false
+    ExpenseReportRowContentCreateModel:
+      type: object
+      properties:
+        ExpenseReportRowId:
+          format: int32
+          type: integer
+        Data:
+          type: string
+        ContentType:
+          format: int32
+          enum:
+          - 0
+          - 1
+          - 2
+          - 3
+          - 4
+          type: integer
+      additionalProperties: false
+  securitySchemes:
+    oauth2:
+      type: oauth2
+      flows:
+        implicit:
+          scopes:
+            read: Read access to protected resources
+            write: Write access to protected resources
+          authorizationUrl: https://api.automile.com/login/
+      description: OAuth2 Implicit Grant

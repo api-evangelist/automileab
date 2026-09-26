@@ -1,0 +1,91 @@
+openapi: 3.2.0
+info:
+  title: Automile Resource Owner Vehicle Defect Types API
+  version: v1
+tags:
+- name: ResourceOwnerVehicleDefectTypes
+paths:
+  /v1/resourceowner/vehicledefecttypes:
+    get:
+      tags:
+      - ResourceOwnerVehicleDefectTypes
+      summary: Get all vehicle defect types
+      description: ''
+      operationId: GetResourceOwnerVehicleDefectTypes
+      responses:
+        '200':
+          description: The vehicle inspections are returned
+          content:
+            text/plain:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/VehicleDefectTypeModel'
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/VehicleDefectTypeModel'
+            text/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/VehicleDefectTypeModel'
+      security:
+      - oauth2: []
+components:
+  schemas:
+    VehicleDefectTypeModel:
+      type: object
+      properties:
+        DefectType:
+          format: int32
+          enum:
+          - 0
+          - 1
+          - 2
+          - 3
+          - 4
+          - 5
+          - 6
+          - 7
+          - 8
+          - 9
+          - 10
+          - 11
+          - 12
+          - 13
+          - 14
+          - 15
+          - 16
+          - 17
+          - 18
+          - 19
+          - 20
+          - 21
+          - 22
+          - 23
+          - 24
+          - 25
+          - 26
+          - 27
+          - 28
+          - 29
+          - 30
+          - 31
+          type: integer
+        LocalizedName:
+          type: object
+          additionalProperties:
+            type: string
+      additionalProperties: false
+  securitySchemes:
+    oauth2:
+      type: oauth2
+      flows:
+        implicit:
+          scopes:
+            read: Read access to protected resources
+            write: Write access to protected resources
+          authorizationUrl: https://api.automile.com/login/
+      description: OAuth2 Implicit Grant

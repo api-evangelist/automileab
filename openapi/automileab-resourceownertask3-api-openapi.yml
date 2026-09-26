@@ -1,0 +1,326 @@
+openapi: 3.2.0
+info:
+  title: Automile Resource Owner Task3 API
+  version: v1
+tags:
+- name: ResourceOwnerTask3
+paths:
+  /v1/resourceowner/task3/contacts:
+    get:
+      tags:
+      - ResourceOwnerTask3
+      summary: Get all contacts to message with
+      operationId: GetResourceOwnerTaskContact3
+      responses:
+        '200':
+          description: The contacts are returned
+          content:
+            text/plain:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/TaskContactModel'
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/TaskContactModel'
+            text/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/TaskContactModel'
+      security:
+      - oauth2: []
+  /v1/resourceowner/task3:
+    get:
+      tags:
+      - ResourceOwnerTask3
+      summary: Get all tasks open and closed
+      description: Only tasks that belongs to the user has access to will be returned.
+      operationId: GetResourceOwnerTask3
+      responses:
+        '200':
+          description: The tasks are returned
+          content:
+            text/plain:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/TaskModel'
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/TaskModel'
+            text/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/TaskModel'
+        '500':
+          description: Internal server error
+      security:
+      - oauth2: []
+    post:
+      tags:
+      - ResourceOwnerTask3
+      summary: Create a task
+      description: Creates a task
+      operationId: CreateResourceOwnerTaskDetails3
+      responses:
+        '200':
+          description: A link in the header is returned to the newly created task
+        '500':
+          description: Internal server error
+        '403':
+          description: Not authorized to task
+      security:
+      - oauth2: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TaskCreateModel'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/TaskCreateModel'
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/TaskCreateModel'
+        description: The company model
+  /v1/resourceowner/task3/{taskId}:
+    get:
+      tags:
+      - ResourceOwnerTask3
+      summary: Get task details
+      operationId: GetResourceOwnerTaskDetails3
+      parameters:
+      - in: path
+        name: taskId
+        description: The Id of the company
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: The tasks are returned
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/TaskDetailModel'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TaskDetailModel'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/TaskDetailModel'
+        '500':
+          description: Internal server error
+        '403':
+          description: Not authorized to task
+      security:
+      - oauth2: []
+    put:
+      tags:
+      - ResourceOwnerTask3
+      summary: Update a task
+      description: Only tasks that belongs to the user has access to will be returned.
+      operationId: EditResourceOwnerTask3
+      parameters:
+      - in: path
+        name: taskId
+        description: The task id
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: The task was saved
+        '500':
+          description: Internal server error
+        '403':
+          description: '>Not authorized to task'
+      security:
+      - oauth2: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TaskEditModel'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/TaskEditModel'
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/TaskEditModel'
+        description: The task model
+components:
+  schemas:
+    PositionModel:
+      type: object
+      properties:
+        Longitude:
+          format: double
+          type: number
+        Latitude:
+          format: double
+          type: number
+      additionalProperties: false
+    TaskMessageModel:
+      type: object
+      properties:
+        TaskMessageId:
+          format: int32
+          type: integer
+        SentByContactId:
+          format: int32
+          type: integer
+        ToContactId:
+          format: int32
+          type: integer
+        MessageText:
+          type: string
+        MessageSentAtUtc:
+          format: date-time
+          type: string
+        SentByContactName:
+          type: string
+        ToContactName:
+          type: string
+        MessageIsRead:
+          type: boolean
+        Position:
+          $ref: '#/components/schemas/PositionModel'
+      additionalProperties: false
+    TaskCreateModel:
+      type: object
+      properties:
+        TaskType:
+          format: int32
+          enum:
+          - 0
+          - 1
+          type: integer
+        ToContactId:
+          format: int32
+          type: integer
+        TaskMessageText:
+          type: string
+        Position:
+          $ref: '#/components/schemas/PositionModel'
+        Title:
+          type: string
+      additionalProperties: false
+    TaskModel:
+      type: object
+      properties:
+        TaskId:
+          format: int32
+          type: integer
+        CreatedByContactId:
+          format: int32
+          type: integer
+        CreatedByContactName:
+          type: string
+        TaskAcquiredByContactId:
+          format: int32
+          type: integer
+        TaskAcquiredByContactName:
+          type: string
+        LastMessageSentByContactId:
+          format: int32
+          type: integer
+        LastMessageSentByContactName:
+          type: string
+        LastMessageShortText:
+          type: string
+        LastMessageDateUtc:
+          format: date-time
+          type: string
+        LastMessageIsRead:
+          type: boolean
+        CreatedByContactImageUrl:
+          type: string
+        TaskAcquiredByContactImageUrl:
+          type: string
+        TaskStatusType:
+          format: int32
+          enum:
+          - 0
+          - 1
+          type: integer
+        TaskType:
+          format: int32
+          enum:
+          - 0
+          - 1
+          type: integer
+        UnreadTaskMessages:
+          format: int32
+          type: integer
+        Title:
+          type: string
+      additionalProperties: false
+    TaskContactModel:
+      type: object
+      properties:
+        ContactId:
+          format: int32
+          type: integer
+        FirstName:
+          type: string
+        LastName:
+          type: string
+        ProfileImageUrl:
+          type: string
+        IsCheckedIn:
+          type: boolean
+      additionalProperties: false
+    TaskEditModel:
+      type: object
+      properties:
+        TaskStatusType:
+          format: int32
+          enum:
+          - 0
+          - 1
+          type: integer
+        Title:
+          type: string
+      additionalProperties: false
+    TaskDetailModel:
+      type: object
+      properties:
+        TaskId:
+          format: int32
+          type: integer
+        CreatedByContactId:
+          format: int32
+          type: integer
+        CreatedByContactName:
+          type: string
+        TaskAcquiredByContactId:
+          format: int32
+          type: integer
+        TaskAcquiredByContactName:
+          type: string
+        TaskMessages:
+          type: array
+          items:
+            $ref: '#/components/schemas/TaskMessageModel'
+        Title:
+          type: string
+      additionalProperties: false
+  securitySchemes:
+    oauth2:
+      type: oauth2
+      flows:
+        implicit:
+          scopes:
+            read: Read access to protected resources
+            write: Write access to protected resources
+          authorizationUrl: https://api.automile.com/login/
+      description: OAuth2 Implicit Grant

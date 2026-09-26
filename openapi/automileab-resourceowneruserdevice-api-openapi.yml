@@ -1,0 +1,319 @@
+openapi: 3.2.0
+info:
+  title: Automile Resource Owner User Device API
+  version: v1
+tags:
+- name: ResourceOwnerUserDevice
+paths:
+  /v1/resourceowner/userdevice:
+    get:
+      tags:
+      - ResourceOwnerUserDevice
+      summary: Get a list of all user devices that the user is associated with
+      description: This will return the details of the user devices.
+      operationId: GetResourceOwnerUserDevices
+      responses:
+        '200':
+          description: The devices are returned
+          content:
+            text/plain:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/UserDeviceModel'
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/UserDeviceModel'
+            text/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/UserDeviceModel'
+        '500':
+          description: Internal server error
+      security:
+      - oauth2: []
+    post:
+      tags:
+      - ResourceOwnerUserDevice
+      summary: Creates a new user device
+      operationId: CreateResourceOwnerUserDevice
+      responses:
+        '200':
+          description: A link in the header is returned to the newly created company
+        '400':
+          description: Bad request, could occur for a number of cases, see returned message
+        '403':
+          description: Request is forbidden, could occur for a number of reasons, see returned message
+        '500':
+          description: Internal server error
+      security:
+      - oauth2: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserDeviceCreateModel'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/UserDeviceCreateModel'
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/UserDeviceCreateModel'
+        description: The User Device Model
+  /v1/resourceowner/userdevice/{userDeviceId}:
+    get:
+      tags:
+      - ResourceOwnerUserDevice
+      summary: Get a list of all user devices that the user is associated with
+      description: Only user devices that are associated with the user are allowed.
+      operationId: GetResourceOwnerUserDevice
+      parameters:
+      - in: path
+        name: userDeviceId
+        description: The user device id
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: The devices are returned
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/UserDeviceModel'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserDeviceModel'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/UserDeviceModel'
+        '403':
+          description: Request is forbidden, meaning you don't have access to this user device
+        '500':
+          description: Internal server error
+      security:
+      - oauth2: []
+    put:
+      tags:
+      - ResourceOwnerUserDevice
+      summary: Updates the given user device with the new model
+      operationId: EditResourceOwnerUserDevice
+      parameters:
+      - in: path
+        name: userDeviceId
+        description: The user device id
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: The device was saved
+        '400':
+          description: Bad request, could occur for a number of cases, see returned message
+        '403':
+          description: Request is forbidden, could occur for a number of reasons, see returned message
+        '404':
+          description: Not found, the vehicle you tried to update can't be found
+        '500':
+          description: Internal server error
+      security:
+      - oauth2: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserDeviceEditModel'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/UserDeviceEditModel'
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/UserDeviceEditModel'
+        description: The new user device model
+    delete:
+      tags:
+      - ResourceOwnerUserDevice
+      summary: Removes the given user device
+      operationId: DeleteResourceOwnerUserDevice
+      parameters:
+      - in: path
+        name: userDeviceId
+        description: The user device id
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: The device has been deleted
+        '403':
+          description: Request is forbidden, could occur for a number of reasons, see returned message
+        '404':
+          description: Not found, the vehicle you tried to remove can't be found
+        '500':
+          description: Internal server error
+      security:
+      - oauth2: []
+  /v1/resourceowner/userdevice/adduserdeviceifnewanddefaulttriggers:
+    put:
+      tags:
+      - ResourceOwnerUserDevice
+      summary: Add the user deivce if it isn't already exist, also adds default mobile push…
+      operationId: AddUserDeviceIfNewAndDefaultTriggers
+      responses:
+        '200':
+          description: The device was added
+        '400':
+          description: Bad request, could occur for a number of cases, see returned message
+        '403':
+          description: Request is forbidden, could occur for a number of reasons, see returned message
+        '500':
+          description: Internal server error
+      security:
+      - oauth2: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserDeviceCreateModel'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/UserDeviceCreateModel'
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/UserDeviceCreateModel'
+        description: The user device model
+  /v1/resourceowner/userdevice/adduserdeviceifnew:
+    put:
+      tags:
+      - ResourceOwnerUserDevice
+      summary: Add the user deivce if it isn't already exist
+      operationId: AddUserDeviceIfNew
+      responses:
+        '200':
+          description: The device was added
+        '400':
+          description: Bad request, could occur for a number of cases, see returned message
+        '403':
+          description: Request is forbidden, could occur for a number of reasons, see returned message
+        '500':
+          description: Internal server error
+      security:
+      - oauth2: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserDeviceCreateModel2'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/UserDeviceCreateModel2'
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/UserDeviceCreateModel2'
+        description: The user device model
+components:
+  schemas:
+    UserDeviceCreateModel2:
+      type: object
+      properties:
+        DeviceIdentifier:
+          type: string
+        DeviceToken:
+          type: string
+        DeviceType:
+          format: int32
+          enum:
+          - 0
+          - 1
+          - 2
+          type: integer
+        UserDeviceCertType:
+          format: int32
+          enum:
+          - 0
+          - 1
+          - 3
+          - 4
+          type: integer
+        Description:
+          type: string
+        DeviceName:
+          type: string
+      additionalProperties: false
+    UserDeviceModel:
+      description: User Device Model
+      type: object
+      properties:
+        UserDeviceId:
+          format: int32
+          type: integer
+        DeviceIdentifier:
+          type: string
+        DeviceToken:
+          type: string
+        DeviceType:
+          format: int32
+          enum:
+          - 0
+          - 1
+          - 2
+          type: integer
+        Description:
+          type: string
+        DeviceName:
+          type: string
+      additionalProperties: false
+    UserDeviceEditModel:
+      type: object
+      properties:
+        DeviceIdentifier:
+          type: string
+        DeviceToken:
+          type: string
+        DeviceType:
+          format: int32
+          enum:
+          - 0
+          - 1
+          - 2
+          type: integer
+        Description:
+          type: string
+        DeviceName:
+          type: string
+      additionalProperties: false
+    UserDeviceCreateModel:
+      type: object
+      properties:
+        DeviceIdentifier:
+          type: string
+        DeviceToken:
+          type: string
+        DeviceType:
+          format: int32
+          enum:
+          - 0
+          - 1
+          - 2
+          type: integer
+        Description:
+          type: string
+        DeviceName:
+          type: string
+      additionalProperties: false
+  securitySchemes:
+    oauth2:
+      type: oauth2
+      flows:
+        implicit:
+          scopes:
+            read: Read access to protected resources
+            write: Write access to protected resources
+          authorizationUrl: https://api.automile.com/login/
+      description: OAuth2 Implicit Grant

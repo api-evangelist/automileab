@@ -1,0 +1,214 @@
+generated: '2026-09-26'
+method: derived
+generator: derive-mcp-candidate.py
+source:
+- openapi/automileab-openapi.json
+status: candidate
+deployment:
+  mode: none
+  auth: unknown
+  verified: probed
+note: No MCP server was found. The pre-flight posted tools/list to /mcp on automile.com, api.automile.com, app.automile.com; verdict absent. Candidate
+  tools below are derived from the 453 operation(s) in the provider's own OpenAPI (40 listed); they describe what a server WOULD expose, not one
+  that exists.
+tools:
+- name: get_client_api
+  operationId: GET /v1/client/api
+  method: GET
+  path: /v1/client/api
+  description: Get the current API client that access the API
+- name: get_client_apiauthorizations
+  operationId: GET /v1/client/apiauthorizations
+  method: GET
+  path: /v1/client/apiauthorizations
+  description: Get a list of user that has authorized the logged in API client for access
+- name: get_by_apiauthorization_id
+  operationId: GetByAPIAuthorizationId
+  method: GET
+  path: /v1/client/apiauthorizations/{apiAuthorizationId}
+  description: Get the details about a specific user authorization
+- name: get_client_contracts
+  operationId: GET /v1/client/contracts
+  method: GET
+  path: /v1/client/contracts
+  description: GET /v1/client/contracts
+- name: get_contracts_journeys
+  operationId: GET /v1/client/contracts/journeys
+  method: GET
+  path: /v1/client/contracts/journeys
+  description: GET /v1/client/contracts/journeys
+- name: create_contracts_confirmjourneys
+  operationId: POST /v1/client/contracts/confirmjourneys
+  method: POST
+  path: /v1/client/contracts/confirmjourneys
+  description: POST /v1/client/contracts/confirmjourneys
+- name: create_client_custom_user
+  operationId: CreateClientCustomUser
+  method: POST
+  path: /v1/client/custom/createuser
+  description: Creates Client Custom User
+- name: reset_password_client_custom
+  operationId: ResetPasswordClientCustom
+  method: POST
+  path: /v1/client/custom/resetpassword
+  description: Reset User password
+- name: create_client_custom_user_without_password
+  operationId: CreateClientCustomUserWithoutPassword
+  method: POST
+  path: /v1/client/custom/createuserwithoutpassword
+  description: Create User without password
+- name: username_taken
+  operationId: UsernameTaken
+  method: GET
+  path: /v1/client/custom/usernametaken
+  description: Get UserName takenmodel
+- name: user_phone_number
+  operationId: UserPhoneNumber
+  method: GET
+  path: /v1/client/custom/userphonenumber
+  description: Get User assoicated to phonenumber or username
+- name: usernames_phone_number
+  operationId: UsernamesPhoneNumber
+  method: GET
+  path: /v1/client/custom/usersphonenumber
+  description: Get user guids from phonenumber
+- name: existing_users_accounts
+  operationId: ExistingUsersAccounts
+  method: GET
+  path: /v1/client/custom/existingusers
+  description: Get user guids from identifier
+- name: validate_phone_number
+  operationId: ValidatePhoneNumber
+  method: GET
+  path: /v1/client/custom/validatephonenumber
+  description: Check if user has the phonenumber
+- name: device_registered
+  operationId: DeviceRegistered
+  method: GET
+  path: /v1/client/custom/deviceregistered
+  description: Get DeviceRegistered
+- name: reverse_geocoding
+  operationId: ReverseGeocoding
+  method: GET
+  path: /v1/client/custom/reversegeocoding
+  description: Get DeviceRegistered
+- name: vehicle_makes
+  operationId: VehicleMakes
+  method: GET
+  path: /v1/client/onboarding/vehiclemakes
+  description: Get vehicle makes
+- name: vehicle_models
+  operationId: VehicleModels
+  method: GET
+  path: /v1/client/onboarding/vehiclemodels
+  description: Get vehicle models
+- name: create_client_order
+  operationId: CreateClientOrder
+  method: POST
+  path: /v1/client/order/pro
+  description: Creates a pro order
+- name: get_pro_pricing_client_custom
+  operationId: GetProPricingClientCustom
+  method: GET
+  path: /v1/client/order/propricing
+  description: Get Pro PriceModel
+- name: create_pin_code
+  operationId: CreatePinCode
+  method: POST
+  path: /v1/client/textmessages/createpin
+  description: Create and send pin code to login with
+- name: validate_pin_code
+  operationId: ValidatePinCode
+  method: POST
+  path: /v1/client/textmessages/validatepin
+  description: Validate Pin Code
+- name: get_client_users
+  operationId: GetClientUsers
+  method: GET
+  path: /v1/client/users
+  description: Get the users that belongs to contacts that the current user is associated with
+- name: create_client_user
+  operationId: CreateClientUser
+  method: POST
+  path: /v1/client/users
+  description: Creates a new user including a contact with basic information
+- name: get_client_user_by_user_id
+  operationId: GetClientUserByUserId
+  method: GET
+  path: /v1/client/users/{userId}
+  description: Get the specific user
+- name: get_echo_validatetoken
+  operationId: GET /v1/echo/validatetoken
+  method: GET
+  path: /v1/echo/validatetoken
+  description: Validates a given token
+- name: get_root
+  operationId: GET /
+  method: GET
+  path: /
+  description: GET /
+- name: get_o2c
+  operationId: GET /o2c
+  method: GET
+  path: /o2c
+  description: GET /o2c
+- name: get_login
+  operationId: GET /login
+  method: GET
+  path: /login
+  description: GET /login
+- name: create_login
+  operationId: POST /login
+  method: POST
+  path: /login
+  description: POST /login
+- name: create_oauth2_token
+  operationId: POST /OAuth2/Token
+  method: POST
+  path: /OAuth2/Token
+  description: POST /OAuth2/Token
+- name: create_order
+  operationId: CreateOrder
+  method: POST
+  path: /v1/integration/order
+  description: Creates a new order
+- name: get_maskedphonenumber_inboundvoice
+  operationId: GET /maskedphonenumber/inboundvoice
+  method: GET
+  path: /maskedphonenumber/inboundvoice
+  description: GET /maskedphonenumber/inboundvoice
+- name: get_maskedphonenumber_inboundtext
+  operationId: GET /maskedphonenumber/inboundtext
+  method: GET
+  path: /maskedphonenumber/inboundtext
+  description: GET /maskedphonenumber/inboundtext
+- name: get_resource_owner_companies
+  operationId: GetResourceOwnerCompanies
+  method: GET
+  path: /v1/resourceowner/companies
+  description: Get a list of all companies that user is associated with
+- name: create_resource_owner_company
+  operationId: CreateResourceOwnerCompany
+  method: POST
+  path: /v1/resourceowner/companies
+  description: Creates a new company and associates it with the user
+- name: get_by_company_id
+  operationId: GetByCompanyId
+  method: GET
+  path: /v1/resourceowner/companies/{companyId}
+  description: Get a company by id
+- name: edit_resource_owner_company
+  operationId: EditResourceOwnerCompany
+  method: PUT
+  path: /v1/resourceowner/companies/{companyId}
+  description: Updates the given company id
+- name: delete_resource_owner_company
+  operationId: DeleteResourceOwnerCompany
+  method: DELETE
+  path: /v1/resourceowner/companies/{companyId}
+  description: Removes the given company
+- name: get_resource_owner_company_contacts
+  operationId: GetResourceOwnerCompanyContacts
+  method: GET
+  path: /v1/resourceowner/companycontact
+  description: Get a list of all company contacts that user is associated with

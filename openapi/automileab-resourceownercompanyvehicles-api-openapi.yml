@@ -1,0 +1,308 @@
+openapi: 3.2.0
+info:
+  title: Automile Resource Owner Company Vehicles API
+  version: v1
+tags:
+- name: ResourceOwnerCompanyVehicles
+paths:
+  /v1/resourceowner/companyvehicle:
+    get:
+      tags:
+      - ResourceOwnerCompanyVehicles
+      summary: Get a list of all company vehicles that user is associated with
+      description: Only company vehicles that the user is associated with will be returned by this operation.
+      operationId: GetResourceOwnerCompanyVehicles
+      parameters:
+      - in: query
+        name: companyId
+        description: Filter on company id
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: The company vehicles are returned
+          content:
+            text/plain:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/CompanyVehicleModel'
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/CompanyVehicleModel'
+            text/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/CompanyVehicleModel'
+        '500':
+          description: Internal server error
+      security:
+      - oauth2: []
+    post:
+      tags:
+      - ResourceOwnerCompanyVehicles
+      summary: Creates a new company vehicle and associates it with user through the company
+      description: The user only has access to contacts that it is associated with through the company
+      operationId: CreateResourceOwnerCompanyVehicle
+      responses:
+        '200':
+          description: A link in the header is returned to the newly created company vehicle
+        '403':
+          description: Request is forbidden, this could occur if you try to associate to companies you are not associated with
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        '404':
+          description: The company that you tried to use doesn't exist
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        '500':
+          description: Internal server error
+      security:
+      - oauth2: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CompanyVehicleCreateModel'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/CompanyVehicleCreateModel'
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/CompanyVehicleCreateModel'
+        description: The company contact model
+  /v1/resourceowner/companyvehicle/{companyVehicleId}:
+    get:
+      tags:
+      - ResourceOwnerCompanyVehicles
+      summary: Get the company vehicle relationship
+      description: Only company vehicle that the user has access to are accessible.
+      operationId: GetResourceOwnerCompanyVehicle
+      parameters:
+      - in: path
+        name: companyVehicleId
+        description: The company vehicle id
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: The company vehicle model is returned
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/CompanyVehicleModel'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CompanyVehicleModel'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/CompanyVehicleModel'
+        '403':
+          description: Request is forbidden, meaning you don't have access to this company vehicle relationship
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        '500':
+          description: Internal server error
+      security:
+      - oauth2: []
+  /v1/resourceowner/companyvehicle/{companyVehicleIdToEdit}:
+    put:
+      tags:
+      - ResourceOwnerCompanyVehicles
+      summary: Updates the given company vehicle id
+      description: This will update the company vehicle with the new model.
+      parameters:
+      - in: path
+        name: companyVehicleIdToEdit
+        description: The vehicle contact that should be updated
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: The company vehicle was saved
+        '403':
+          description: Request is forbidden, this could occur if you try to associate to companies you are not associated with
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        '404':
+          description: The company, the vehicle or the company vehicle that you tried to update doesn't exist
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        '500':
+          description: Internal server error
+      security:
+      - oauth2: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CompanyVehicleEditModel'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/CompanyVehicleEditModel'
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/CompanyVehicleEditModel'
+        description: The new company vehicle model
+      operationId: putV1ResourceownerCompanyvehicleByCompanyVehicleIdToEdit
+      x-operation-id-source: derived
+  /v1/resourceowner/companyvehicle/{companyVehicleIdToDelete}:
+    delete:
+      tags:
+      - ResourceOwnerCompanyVehicles
+      summary: Removes the given company vehicle
+      description: This will delete the given company contact.
+      operationId: DeleteResourceOwnerCompanyVehicle
+      parameters:
+      - in: path
+        name: companyVehicleIdToDelete
+        description: The company vehicle id to remove
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: The company vehicle was saved
+        '403':
+          description: Request is forbidden, this could occur if you are not associated with the company vehicle
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        '404':
+          description: The company vehicle that you tried to remove doesn't exist
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        '500':
+          description: Internal server error
+      security:
+      - oauth2: []
+components:
+  schemas:
+    ProblemDetails:
+      type: object
+      properties:
+        type:
+          type: string
+        title:
+          type: string
+        status:
+          format: int32
+          type: integer
+        detail:
+          type: string
+        instance:
+          type: string
+      additionalProperties: {}
+    CompanyVehicleEditModel:
+      required:
+      - CompanyId
+      - VehicleId
+      type: object
+      properties:
+        CompanyId:
+          format: int32
+          type: integer
+        VehicleId:
+          format: int32
+          type: integer
+      additionalProperties: false
+    CompanyVehicleModel:
+      type: object
+      properties:
+        CompanyVehicleId:
+          format: int32
+          type: integer
+        CompanyId:
+          format: int32
+          type: integer
+        VehicleId:
+          format: int32
+          type: integer
+      additionalProperties: false
+    CompanyVehicleCreateModel:
+      required:
+      - CompanyId
+      - VehicleId
+      type: object
+      properties:
+        CompanyId:
+          format: int32
+          type: integer
+        VehicleId:
+          format: int32
+          type: integer
+      additionalProperties: false
+  securitySchemes:
+    oauth2:
+      type: oauth2
+      flows:
+        implicit:
+          scopes:
+            read: Read access to protected resources
+            write: Write access to protected resources
+          authorizationUrl: https://api.automile.com/login/
+      description: OAuth2 Implicit Grant

@@ -1,0 +1,457 @@
+openapi: 3.2.0
+info:
+  title: Automile Resource Owner Contact API
+  version: v1
+tags:
+- name: ResourceOwnerContact
+paths:
+  /v1/resourceowner/contacts:
+    get:
+      tags:
+      - ResourceOwnerContact
+      summary: Get a list of all contacts that user is associated with
+      description: Only contacts that the user is associated with will be returned by this operation.
+      operationId: GetResourceOwnerContacts
+      responses:
+        '200':
+          description: The contacts are returned
+          content:
+            text/plain:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ContactModel'
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ContactModel'
+            text/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ContactModel'
+        '500':
+          description: Internal server error
+      security:
+      - oauth2: []
+    post:
+      tags:
+      - ResourceOwnerContact
+      summary: Creates a new contact
+      operationId: CreateResourceOwnerContact
+      responses:
+        '200':
+          description: A link in the header is returned to the newly created company
+        '403':
+          description: Request is forbidden, this could occur if you try to associate the contact you are not associated with
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        '500':
+          description: Internal server error
+      security:
+      - oauth2: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ContactCreateModel'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/ContactCreateModel'
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/ContactCreateModel'
+        description: The contact model
+  /v1/resourceowner/contacts/{contactId}:
+    get:
+      tags:
+      - ResourceOwnerContact
+      summary: Get a contact by id
+      operationId: GetResourceOwnerContact
+      parameters:
+      - in: path
+        name: contactId
+        description: The contact id
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: The contact are returned
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/ContactDetailModel'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ContactDetailModel'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ContactDetailModel'
+        '403':
+          description: Request is forbidden, meaning you dont' have access to this contact
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/ContactDetailModel'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ContactDetailModel'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ContactDetailModel'
+        '404':
+          description: Contact does not exist
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/ContactDetailModel'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ContactDetailModel'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ContactDetailModel'
+        '500':
+          description: Internal server error
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/ContactDetailModel'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ContactDetailModel'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ContactDetailModel'
+      security:
+      - oauth2: []
+    put:
+      tags:
+      - ResourceOwnerContact
+      summary: Updates the given contact id
+      operationId: EditResourceOwnerContact
+      parameters:
+      - in: path
+        name: contactId
+        description: The contact id
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: The contact was saved
+        '403':
+          description: Request is forbidden, this could occur if you are not associated with the contact
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        '500':
+          description: Internal server error
+        '404':
+          description: The contact that you tried to update doesn't exist
+      security:
+      - oauth2: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ContactEditModel'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/ContactEditModel'
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/ContactEditModel'
+        description: The contact model
+    delete:
+      tags:
+      - ResourceOwnerContact
+      summary: Removes the given contact
+      operationId: DeleteResourceOwnerContact
+      parameters:
+      - in: path
+        name: contactId
+        description: The contact id to remove
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: The contact has been deleted
+        '403':
+          description: Forbidden
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        '404':
+          description: The contact that you tried to remove doesn't exist
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        '500':
+          description: Internal server error
+        '400':
+          description: Request is bad, You can't delete a contact that is bound to a user
+      security:
+      - oauth2: []
+  /v1/resourceowner/contacts/me:
+    get:
+      tags:
+      - ResourceOwnerContact
+      summary: Get the contact representing myself
+      operationId: GetResourceOwnerContactMe
+      responses:
+        '200':
+          description: The contact are returned
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/ContactDetailModel'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ContactDetailModel'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ContactDetailModel'
+        '403':
+          description: Request is forbidden, meaning you dont' have access to this contact
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        '404':
+          description: Contact does not exist
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        '500':
+          description: Internal server error
+      security:
+      - oauth2: []
+  /v1/resourceowner/contacts/me/updatedefaultvehicle/{vehicleId}:
+    put:
+      tags:
+      - ResourceOwnerContact
+      summary: Updates the default vehicle
+      description: This will update the default vehicle
+      operationId: MeUpdateDefaultVehicle
+      parameters:
+      - in: path
+        name: vehicleId
+        description: The vehicle id
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: the default vehicle on contact saved
+        '403':
+          description: Request is forbidden, meaning you don't have access to this vehicle
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        '500':
+          description: Internal server error
+      security:
+      - oauth2: []
+  /v1/resourceowner/contacts/updatedefaultvehicle/{vehicleId}:
+    put:
+      tags:
+      - ResourceOwnerContact
+      summary: Updates the default vehicle
+      description: This will update the default vehicle
+      operationId: UpdateResourceOwnerContactDefaultVehicle
+      parameters:
+      - in: path
+        name: vehicleId
+        description: The vehicle id
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: Tthe default vehicle on contact saved
+        '403':
+          description: Request is forbidden, meaning you don't have access to this vehicle
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        '500':
+          description: Internal server error
+      security:
+      - oauth2: []
+components:
+  schemas:
+    ContactModel:
+      type: object
+      properties:
+        ContactId:
+          format: int32
+          type: integer
+        FirstName:
+          type: string
+        LastName:
+          type: string
+        EmailAddress:
+          type: string
+      additionalProperties: false
+    ProblemDetails:
+      type: object
+      properties:
+        type:
+          type: string
+        title:
+          type: string
+        status:
+          format: int32
+          type: integer
+        detail:
+          type: string
+        instance:
+          type: string
+      additionalProperties: {}
+    ContactDetailModel:
+      type: object
+      properties:
+        ContactId:
+          format: int32
+          type: integer
+        FirstName:
+          type: string
+        LastName:
+          type: string
+        EmailAddress:
+          type: string
+        Description:
+          type: string
+        CultureName:
+          type: string
+        DefaultVehicleId:
+          format: int32
+          type: integer
+        FieldServiceEnabled:
+          type: boolean
+        FieldServiceEnabledWithinOrganization:
+          type: boolean
+      additionalProperties: false
+    ContactEditModel:
+      required:
+      - FirstName
+      - LastName
+      type: object
+      properties:
+        FirstName:
+          minLength: 1
+          type: string
+        LastName:
+          minLength: 1
+          type: string
+        EmailAddress:
+          type: string
+        Description:
+          type: string
+        CultureName:
+          type: string
+        DefaultVehicleId:
+          format: int32
+          type: integer
+      additionalProperties: false
+    ContactCreateModel:
+      required:
+      - CreateRelationshipToCompanyId
+      - FirstName
+      - LastName
+      type: object
+      properties:
+        FirstName:
+          minLength: 1
+          type: string
+        LastName:
+          minLength: 1
+          type: string
+        EmailAddress:
+          type: string
+        Description:
+          type: string
+        CreateRelationshipToCompanyId:
+          format: int32
+          type: integer
+        CultureName:
+          type: string
+        DefaultVehicleId:
+          format: int32
+          type: integer
+      additionalProperties: false
+  securitySchemes:
+    oauth2:
+      type: oauth2
+      flows:
+        implicit:
+          scopes:
+            read: Read access to protected resources
+            write: Write access to protected resources
+          authorizationUrl: https://api.automile.com/login/
+      description: OAuth2 Implicit Grant

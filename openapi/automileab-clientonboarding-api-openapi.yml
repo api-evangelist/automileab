@@ -1,0 +1,107 @@
+openapi: 3.2.0
+info:
+  title: Automile Client Onboarding API
+  version: v1
+tags:
+- name: ClientOnboarding
+paths:
+  /v1/client/onboarding/vehiclemakes:
+    get:
+      tags:
+      - ClientOnboarding
+      summary: Get vehicle makes
+      operationId: VehicleMakes
+      parameters:
+      - in: query
+        name: region
+        schema:
+          type: integer
+          format: int32
+          enum:
+          - 0
+          - 1
+      responses:
+        '200':
+          description: List of makes returned
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/VehickeMakesModel'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VehickeMakesModel'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/VehickeMakesModel'
+      security:
+      - oauth2: []
+  /v1/client/onboarding/vehiclemodels:
+    get:
+      tags:
+      - ClientOnboarding
+      summary: Get vehicle models
+      operationId: VehicleModels
+      parameters:
+      - in: query
+        name: make
+        schema:
+          type: string
+      responses:
+        '200':
+          description: List of models returned
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/VehicleModelsModel'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VehicleModelsModel'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/VehicleModelsModel'
+      security:
+      - oauth2: []
+components:
+  schemas:
+    VehickeMakesModel:
+      type: object
+      properties:
+        VehicleMakes:
+          type: array
+          items:
+            $ref: '#/components/schemas/VehicleMakeModel'
+      additionalProperties: false
+    VehicleMakeModel:
+      type: object
+      properties:
+        Make:
+          type: string
+        MakeUrl:
+          type: string
+      additionalProperties: false
+    VehicleModelModel:
+      type: object
+      properties:
+        Make:
+          type: string
+        Model:
+          type: string
+      additionalProperties: false
+    VehicleModelsModel:
+      type: object
+      properties:
+        VehicleModels:
+          type: array
+          items:
+            $ref: '#/components/schemas/VehicleModelModel'
+      additionalProperties: false
+  securitySchemes:
+    oauth2:
+      type: oauth2
+      flows:
+        implicit:
+          scopes:
+            read: Read access to protected resources
+            write: Write access to protected resources
+          authorizationUrl: https://api.automile.com/login/
+      description: OAuth2 Implicit Grant

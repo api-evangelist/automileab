@@ -1,0 +1,50 @@
+openapi: 3.2.0
+info:
+  title: Automile Home API
+  version: v1
+tags:
+- name: Home
+paths:
+  /:
+    get:
+      tags:
+      - Home
+      parameters:
+      - in: query
+        name: token
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+      summary: Get
+      x-summary-source: derived
+      operationId: getRoot
+      x-operation-id-source: derived
+  /o2c:
+    get:
+      tags:
+      - Home
+      parameters:
+      - in: query
+        name: token
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+      summary: Get o2c
+      x-summary-source: derived
+      operationId: getO2c
+      x-operation-id-source: derived
+components:
+  securitySchemes:
+    oauth2:
+      type: oauth2
+      flows:
+        implicit:
+          scopes:
+            read: Read access to protected resources
+            write: Write access to protected resources
+          authorizationUrl: https://api.automile.com/login/
+      description: OAuth2 Implicit Grant

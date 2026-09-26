@@ -1,0 +1,286 @@
+openapi: 3.2.0
+info:
+  title: Automile Resource Owner Expense Report Row Content V2 API
+  version: v1
+tags:
+- name: ResourceOwnerExpenseReportRowContentV2
+paths:
+  /v1/resourceowner/expensereportrowcontent/{expenseReportRowContentId}:
+    get:
+      tags:
+      - ResourceOwnerExpenseReportRowContentV2
+      summary: Get expense report row content
+      description: Only expense report row content that the user has access to are accessible.
+      operationId: GetResourceExpenseReportRowContent
+      parameters:
+      - in: path
+        name: expenseReportRowContentId
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: The expense report row content is returned
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/ExpenseReportRowContentModel'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ExpenseReportRowContentModel'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ExpenseReportRowContentModel'
+        '500':
+          description: Internal server error
+      security:
+      - oauth2: []
+    put:
+      tags:
+      - ResourceOwnerExpenseReportRowContentV2
+      summary: Updates the given expense report row content
+      description: This will update the given expense report row content id with a new model.
+      operationId: EditResourceOwnerExpenseReportRowContent
+      parameters:
+      - in: path
+        name: expenseReportRowContentId
+        description: The expense report row id
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: The expense report row content was saved
+        '500':
+          description: Internal server error
+        '400':
+          description: Bad request, could occur for a number of cases, see returned message
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        '403':
+          description: Request is forbidden, could occur for a number of reasons, see returned message
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        '404':
+          description: Not found, the expense report row you tried to update can't be found
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+      security:
+      - oauth2: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ExpenseReportRowContentEditModel'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/ExpenseReportRowContentEditModel'
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/ExpenseReportRowContentEditModel'
+        description: The new expense report row model
+    delete:
+      tags:
+      - ResourceOwnerExpenseReportRowContentV2
+      summary: Removes the given expense report row content
+      operationId: DeleteResourceOwnerExpenseReportRowContent
+      parameters:
+      - in: path
+        name: expenseReportRowContentId
+        description: The expense report row id
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: The expense report row has been deleted
+        '500':
+          description: Internal server error
+        '403':
+          description: Request is forbidden, could occur for a number of reasons, see returned message
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        '404':
+          description: Not found, the expense report row you tried to remove can't be found
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+      security:
+      - oauth2: []
+  /v1/resourceowner/expensereportrowcontent:
+    get:
+      tags:
+      - ResourceOwnerExpenseReportRowContentV2
+      summary: Get all expense report row content belonging to a expense report row
+      description: Only expense report row content that the user has access to are accessible.
+      operationId: GetResourceExpenseReportRowContentById
+      parameters:
+      - in: query
+        name: expenseReportRowId
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: A list of expense report row content is returned
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/ExpenseReportRowContentModel'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ExpenseReportRowContentModel'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ExpenseReportRowContentModel'
+        '500':
+          description: Internal server error
+      security:
+      - oauth2: []
+    post:
+      tags:
+      - ResourceOwnerExpenseReportRowContentV2
+      summary: Create an expense report row
+      description: ''
+      operationId: CreateExpenseReportRowContent
+      responses:
+        '200':
+          description: A header link containing the URL to the newly created resource
+        '500':
+          description: Internal server error
+      security:
+      - oauth2: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ExpenseReportRowContentCreateModel'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/ExpenseReportRowContentCreateModel'
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/ExpenseReportRowContentCreateModel'
+components:
+  schemas:
+    ProblemDetails:
+      type: object
+      properties:
+        type:
+          type: string
+        title:
+          type: string
+        status:
+          format: int32
+          type: integer
+        detail:
+          type: string
+        instance:
+          type: string
+      additionalProperties: {}
+    ExpenseReportRowContentModel:
+      type: object
+      properties:
+        ExpenseReportRowContentId:
+          format: int32
+          type: integer
+        ExpenseReportRowId:
+          format: int32
+          type: integer
+        ContentType:
+          format: int32
+          enum:
+          - 0
+          - 1
+          - 2
+          - 3
+          - 4
+          type: integer
+        ContentFileName:
+          type: string
+      additionalProperties: false
+    ExpenseReportRowContentCreateModel:
+      type: object
+      properties:
+        ExpenseReportRowId:
+          format: int32
+          type: integer
+        Data:
+          type: string
+        ContentType:
+          format: int32
+          enum:
+          - 0
+          - 1
+          - 2
+          - 3
+          - 4
+          type: integer
+      additionalProperties: false
+    ExpenseReportRowContentEditModel:
+      type: object
+      properties:
+        Data:
+          type: string
+        ContentType:
+          format: int32
+          enum:
+          - 0
+          - 1
+          - 2
+          - 3
+          - 4
+          type: integer
+      additionalProperties: false
+  securitySchemes:
+    oauth2:
+      type: oauth2
+      flows:
+        implicit:
+          scopes:
+            read: Read access to protected resources
+            write: Write access to protected resources
+          authorizationUrl: https://api.automile.com/login/
+      description: OAuth2 Implicit Grant

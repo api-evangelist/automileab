@@ -1,0 +1,55 @@
+openapi: 3.2.0
+info:
+  title: Automile OAuth API
+  version: v1
+tags:
+- name: OAuth
+paths:
+  /OAuth2/Token:
+    post:
+      tags:
+      - OAuth
+      responses:
+        '200':
+          description: Success
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                grant_type:
+                  type: string
+                client_id:
+                  type: string
+                client_secret:
+                  type: string
+                username:
+                  type: string
+                password:
+                  type: string
+                scope:
+                  type: string
+                refresh_token:
+                  type: string
+                azure_access_token:
+                  type: string
+                azure_tenant_id:
+                  type: string
+              required:
+              - grant_type
+      summary: Create oauth2 token
+      x-summary-source: derived
+      operationId: postOAuth2Token
+      x-operation-id-source: derived
+components:
+  securitySchemes:
+    oauth2:
+      type: oauth2
+      flows:
+        implicit:
+          scopes:
+            read: Read access to protected resources
+            write: Write access to protected resources
+          authorizationUrl: https://api.automile.com/login/
+      description: OAuth2 Implicit Grant
