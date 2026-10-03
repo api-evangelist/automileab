@@ -210,6 +210,19 @@ paths:
       - oauth2: []
 components:
   schemas:
+    CompanyContactEditModel:
+      required:
+      - CompanyId
+      - ContactId
+      type: object
+      properties:
+        CompanyId:
+          format: int32
+          type: integer
+        ContactId:
+          format: int32
+          type: integer
+      additionalProperties: false
     ProblemDetails:
       type: object
       properties:
@@ -258,19 +271,6 @@ components:
           type: array
           items:
             type: string
-      additionalProperties: false
-    CompanyContactEditModel:
-      required:
-      - CompanyId
-      - ContactId
-      type: object
-      properties:
-        CompanyId:
-          format: int32
-          type: integer
-        ContactId:
-          format: int32
-          type: integer
       additionalProperties: false
   securitySchemes:
     oauth2:

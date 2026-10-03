@@ -162,57 +162,6 @@ paths:
       - oauth2: []
 components:
   schemas:
-    PlaceCreateModel:
-      required:
-      - Name
-      - PositionPoint
-      - Radius
-      - VehicleId
-      type: object
-      properties:
-        Name:
-          minLength: 1
-          type: string
-        VehicleId:
-          format: int32
-          type: integer
-        Radius:
-          format: int32
-          type: integer
-        PositionPoint:
-          $ref: '#/components/schemas/PositionPointModel'
-        Description:
-          type: string
-        TripType:
-          format: int32
-          enum:
-          - 0
-          - 1
-          - 2
-          - 3
-          type: integer
-        TripTypeTrigger:
-          format: int32
-          enum:
-          - 0
-          - 1
-          - 2
-          - 3
-          type: integer
-        DrivesBetweenAnotherPlaceId:
-          format: int32
-          type: integer
-      additionalProperties: false
-    PositionPointModel:
-      type: object
-      properties:
-        Longitude:
-          format: double
-          type: number
-        Latitude:
-          format: double
-          type: number
-      additionalProperties: false
     PlaceModel:
       type: object
       properties:
@@ -255,6 +204,47 @@ components:
           format: int32
           type: integer
       additionalProperties: false
+    PlaceCreateModel:
+      required:
+      - Name
+      - PositionPoint
+      - Radius
+      - VehicleId
+      type: object
+      properties:
+        Name:
+          minLength: 1
+          type: string
+        VehicleId:
+          format: int32
+          type: integer
+        Radius:
+          format: int32
+          type: integer
+        PositionPoint:
+          $ref: '#/components/schemas/PositionPointModel'
+        Description:
+          type: string
+        TripType:
+          format: int32
+          enum:
+          - 0
+          - 1
+          - 2
+          - 3
+          type: integer
+        TripTypeTrigger:
+          format: int32
+          enum:
+          - 0
+          - 1
+          - 2
+          - 3
+          type: integer
+        DrivesBetweenAnotherPlaceId:
+          format: int32
+          type: integer
+      additionalProperties: false
     PlaceEditModel:
       required:
       - Name
@@ -266,6 +256,16 @@ components:
           type: string
         PositionPoint:
           $ref: '#/components/schemas/PositionPointModel'
+      additionalProperties: false
+    PositionPointModel:
+      type: object
+      properties:
+        Longitude:
+          format: double
+          type: number
+        Latitude:
+          format: double
+          type: number
       additionalProperties: false
   securitySchemes:
     oauth2:

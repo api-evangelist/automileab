@@ -665,55 +665,6 @@ paths:
       - oauth2: []
 components:
   schemas:
-    RPMModel:
-      description: PID012
-      type: object
-      properties:
-        RPMValue:
-          format: double
-          type: number
-        RecordTimeStamp:
-          format: date-time
-          type: string
-      additionalProperties: false
-    EngineCoolantTemperatureModel:
-      description: PID05
-      type: object
-      properties:
-        TemperatureInCelsius:
-          format: double
-          type: number
-        RecordTimeStamp:
-          format: date-time
-          type: string
-      additionalProperties: false
-    FuelLevelInputModel:
-      description: PID012
-      type: object
-      properties:
-        FuelLevelInPercentage:
-          format: double
-          type: number
-        RecordTimeStamp:
-          format: date-time
-          type: string
-      additionalProperties: false
-    TripStartEndGeoModel:
-      type: object
-      properties:
-        StartLatitude:
-          format: double
-          type: number
-        StartLongitude:
-          format: double
-          type: number
-        EndLatitude:
-          format: double
-          type: number
-        EndLongitude:
-          format: double
-          type: number
-      additionalProperties: false
     TripEditModel:
       type: object
       properties:
@@ -741,6 +692,67 @@ components:
         TripReason:
           type: string
       additionalProperties: false
+    TripSynchronized:
+      type: object
+      properties:
+        Trips:
+          type: array
+          items:
+            format: int32
+            type: integer
+      additionalProperties: false
+    TripTypeBatchUpdateModel:
+      type: object
+      properties:
+        TripType:
+          format: int32
+          enum:
+          - 0
+          - 1
+          - 2
+          - 3
+          type: integer
+        CustomCategory:
+          type: string
+        TripIdList:
+          type: array
+          items:
+            format: int32
+            type: integer
+      additionalProperties: false
+    AmbientAirTemperatureModel:
+      description: PID70
+      type: object
+      properties:
+        TemperatureInCelsius:
+          format: double
+          type: number
+        RecordTimeStamp:
+          format: date-time
+          type: string
+      additionalProperties: false
+    EngineCoolantTemperatureModel:
+      description: PID05
+      type: object
+      properties:
+        TemperatureInCelsius:
+          format: double
+          type: number
+        RecordTimeStamp:
+          format: date-time
+          type: string
+      additionalProperties: false
+    VehicleSpeedModel:
+      description: PID013
+      type: object
+      properties:
+        SpeedKmPerHour:
+          format: double
+          type: number
+        RecordTimeStamp:
+          format: date-time
+          type: string
+      additionalProperties: false
     TripAddNoteModel:
       type: object
       properties:
@@ -748,6 +760,17 @@ components:
           type: array
           items:
             type: string
+      additionalProperties: false
+    FuelLevelInputModel:
+      description: PID012
+      type: object
+      properties:
+        FuelLevelInPercentage:
+          format: double
+          type: number
+        RecordTimeStamp:
+          format: date-time
+          type: string
       additionalProperties: false
     TripGeoModel:
       type: object
@@ -771,24 +794,16 @@ components:
           format: int32
           type: integer
       additionalProperties: false
-    TripTypeBatchUpdateModel:
+    RPMModel:
+      description: PID012
       type: object
       properties:
-        TripType:
-          format: int32
-          enum:
-          - 0
-          - 1
-          - 2
-          - 3
-          type: integer
-        CustomCategory:
+        RPMValue:
+          format: double
+          type: number
+        RecordTimeStamp:
+          format: date-time
           type: string
-        TripIdList:
-          type: array
-          items:
-            format: int32
-            type: integer
       additionalProperties: false
     PIDModel:
       type: object
@@ -803,26 +818,128 @@ components:
           format: double
           type: number
       additionalProperties: false
-    AmbientAirTemperatureModel:
-      description: PID70
+    TripStartEndGeoModel:
       type: object
       properties:
-        TemperatureInCelsius:
+        StartLatitude:
           format: double
           type: number
-        RecordTimeStamp:
+        StartLongitude:
+          format: double
+          type: number
+        EndLatitude:
+          format: double
+          type: number
+        EndLongitude:
+          format: double
+          type: number
+      additionalProperties: false
+    TripModel:
+      type: object
+      properties:
+        TripId:
+          format: int32
+          type: integer
+        TripStartDateTime:
           format: date-time
           type: string
-      additionalProperties: false
-    VehicleSpeedModel:
-      description: PID013
-      type: object
-      properties:
-        SpeedKmPerHour:
+        TripEndDateTime:
+          format: date-time
+          type: string
+        DistanceKilometers:
           format: double
           type: number
-        RecordTimeStamp:
-          format: date-time
+        FuelConsumptionInLiters:
+          format: double
+          type: number
+        TripStartFormattedAddress:
+          type: string
+        TripEndFormattedAddress:
+          type: string
+        TripStartCustomAddress:
+          type: string
+        TripEndCustomAddress:
+          type: string
+        VehicleId:
+          format: int32
+          type: integer
+        TripType:
+          format: int32
+          enum:
+          - 0
+          - 1
+          - 2
+          - 3
+          type: integer
+        DriverContactId:
+          format: int32
+          type: integer
+        HasSpeedingViolation:
+          type: boolean
+        HasIdlingEvent:
+          type: boolean
+        HasAccelerationEvent:
+          type: boolean
+        HasAccident:
+          type: boolean
+        HasTurningEvent:
+          type: boolean
+        HasBrakingEvent:
+          type: boolean
+        ParkedForMinutesUntilNextTrip:
+          format: int32
+          type: integer
+        HasDrivingEvents:
+          type: boolean
+        CustomCategory:
+          type: string
+        TripTags:
+          type: string
+        HideStartRoute:
+          type: boolean
+        HideEndRoute:
+          type: boolean
+        VehicleType:
+          format: int32
+          enum:
+          - 0
+          - 1
+          - 2
+          - 3
+          - 4
+          - 5
+          - 6
+          - 255
+          type: integer
+        TripApprovalStatus:
+          format: int32
+          enum:
+          - 0
+          - 1
+          - 2
+          - 3
+          type: integer
+        IsMerged:
+          type: boolean
+        HasGermanTaxRules:
+          type: boolean
+        IsLocked:
+          type: boolean
+        LockReason:
+          format: int32
+          enum:
+          - 0
+          - 1
+          - 2
+          - 4
+          type: integer
+        TripStartCountry:
+          type: string
+        TripStartPostalCode:
+          type: string
+        TripEndCountry:
+          type: string
+        TripEndPostalCode:
           type: string
       additionalProperties: false
     TripDetailModel:
@@ -970,123 +1087,6 @@ components:
           - 2
           - 4
           type: integer
-      additionalProperties: false
-    TripModel:
-      type: object
-      properties:
-        TripId:
-          format: int32
-          type: integer
-        TripStartDateTime:
-          format: date-time
-          type: string
-        TripEndDateTime:
-          format: date-time
-          type: string
-        DistanceKilometers:
-          format: double
-          type: number
-        FuelConsumptionInLiters:
-          format: double
-          type: number
-        TripStartFormattedAddress:
-          type: string
-        TripEndFormattedAddress:
-          type: string
-        TripStartCustomAddress:
-          type: string
-        TripEndCustomAddress:
-          type: string
-        VehicleId:
-          format: int32
-          type: integer
-        TripType:
-          format: int32
-          enum:
-          - 0
-          - 1
-          - 2
-          - 3
-          type: integer
-        DriverContactId:
-          format: int32
-          type: integer
-        HasSpeedingViolation:
-          type: boolean
-        HasIdlingEvent:
-          type: boolean
-        HasAccelerationEvent:
-          type: boolean
-        HasAccident:
-          type: boolean
-        HasTurningEvent:
-          type: boolean
-        HasBrakingEvent:
-          type: boolean
-        ParkedForMinutesUntilNextTrip:
-          format: int32
-          type: integer
-        HasDrivingEvents:
-          type: boolean
-        CustomCategory:
-          type: string
-        TripTags:
-          type: string
-        HideStartRoute:
-          type: boolean
-        HideEndRoute:
-          type: boolean
-        VehicleType:
-          format: int32
-          enum:
-          - 0
-          - 1
-          - 2
-          - 3
-          - 4
-          - 5
-          - 6
-          - 255
-          type: integer
-        TripApprovalStatus:
-          format: int32
-          enum:
-          - 0
-          - 1
-          - 2
-          - 3
-          type: integer
-        IsMerged:
-          type: boolean
-        HasGermanTaxRules:
-          type: boolean
-        IsLocked:
-          type: boolean
-        LockReason:
-          format: int32
-          enum:
-          - 0
-          - 1
-          - 2
-          - 4
-          type: integer
-        TripStartCountry:
-          type: string
-        TripStartPostalCode:
-          type: string
-        TripEndCountry:
-          type: string
-        TripEndPostalCode:
-          type: string
-      additionalProperties: false
-    TripSynchronized:
-      type: object
-      properties:
-        Trips:
-          type: array
-          items:
-            format: int32
-            type: integer
       additionalProperties: false
   securitySchemes:
     oauth2:

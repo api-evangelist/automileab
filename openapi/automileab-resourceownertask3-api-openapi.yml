@@ -159,15 +159,28 @@ paths:
         description: The task model
 components:
   schemas:
-    PositionModel:
+    TaskDetailModel:
       type: object
       properties:
-        Longitude:
-          format: double
-          type: number
-        Latitude:
-          format: double
-          type: number
+        TaskId:
+          format: int32
+          type: integer
+        CreatedByContactId:
+          format: int32
+          type: integer
+        CreatedByContactName:
+          type: string
+        TaskAcquiredByContactId:
+          format: int32
+          type: integer
+        TaskAcquiredByContactName:
+          type: string
+        TaskMessages:
+          type: array
+          items:
+            $ref: '#/components/schemas/TaskMessageModel'
+        Title:
+          type: string
       additionalProperties: false
     TaskMessageModel:
       type: object
@@ -195,22 +208,15 @@ components:
         Position:
           $ref: '#/components/schemas/PositionModel'
       additionalProperties: false
-    TaskCreateModel:
+    TaskEditModel:
       type: object
       properties:
-        TaskType:
+        TaskStatusType:
           format: int32
           enum:
           - 0
           - 1
           type: integer
-        ToContactId:
-          format: int32
-          type: integer
-        TaskMessageText:
-          type: string
-        Position:
-          $ref: '#/components/schemas/PositionModel'
         Title:
           type: string
       additionalProperties: false
@@ -264,6 +270,16 @@ components:
         Title:
           type: string
       additionalProperties: false
+    PositionModel:
+      type: object
+      properties:
+        Longitude:
+          format: double
+          type: number
+        Latitude:
+          format: double
+          type: number
+      additionalProperties: false
     TaskContactModel:
       type: object
       properties:
@@ -279,38 +295,22 @@ components:
         IsCheckedIn:
           type: boolean
       additionalProperties: false
-    TaskEditModel:
+    TaskCreateModel:
       type: object
       properties:
-        TaskStatusType:
+        TaskType:
           format: int32
           enum:
           - 0
           - 1
           type: integer
-        Title:
-          type: string
-      additionalProperties: false
-    TaskDetailModel:
-      type: object
-      properties:
-        TaskId:
+        ToContactId:
           format: int32
           type: integer
-        CreatedByContactId:
-          format: int32
-          type: integer
-        CreatedByContactName:
+        TaskMessageText:
           type: string
-        TaskAcquiredByContactId:
-          format: int32
-          type: integer
-        TaskAcquiredByContactName:
-          type: string
-        TaskMessages:
-          type: array
-          items:
-            $ref: '#/components/schemas/TaskMessageModel'
+        Position:
+          $ref: '#/components/schemas/PositionModel'
         Title:
           type: string
       additionalProperties: false

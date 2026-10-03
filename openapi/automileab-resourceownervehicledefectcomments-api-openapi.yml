@@ -142,18 +142,18 @@ paths:
         description: The vehicle defect comment
 components:
   schemas:
+    VehicleDefectCommentsEditModel:
+      type: object
+      properties:
+        Comment:
+          type: string
+      additionalProperties: false
     VehicleDefectCommentsCreateModel:
       type: object
       properties:
         VehicleDefectId:
           format: int32
           type: integer
-        Comment:
-          type: string
-      additionalProperties: false
-    VehicleDefectCommentsEditModel:
-      type: object
-      properties:
         Comment:
           type: string
       additionalProperties: false

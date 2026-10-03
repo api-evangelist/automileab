@@ -102,17 +102,6 @@ paths:
         description: The TaskMessageCreateModel
 components:
   schemas:
-    TaskMessageCreateModel:
-      type: object
-      properties:
-        TaskId:
-          format: int32
-          type: integer
-        MessageText:
-          type: string
-        Position:
-          $ref: '#/components/schemas/PositionModel'
-      additionalProperties: false
     PositionModel:
       type: object
       properties:
@@ -152,6 +141,17 @@ components:
           type: string
         MessageIsRead:
           type: boolean
+        Position:
+          $ref: '#/components/schemas/PositionModel'
+      additionalProperties: false
+    TaskMessageCreateModel:
+      type: object
+      properties:
+        TaskId:
+          format: int32
+          type: integer
+        MessageText:
+          type: string
         Position:
           $ref: '#/components/schemas/PositionModel'
       additionalProperties: false

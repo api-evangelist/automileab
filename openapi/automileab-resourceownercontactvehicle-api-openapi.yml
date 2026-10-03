@@ -238,29 +238,6 @@ paths:
       - oauth2: []
 components:
   schemas:
-    ContactModel:
-      type: object
-      properties:
-        ContactId:
-          format: int32
-          type: integer
-        FirstName:
-          type: string
-        LastName:
-          type: string
-        EmailAddress:
-          type: string
-      additionalProperties: false
-    ContactVehicleEditModel:
-      type: object
-      properties:
-        VehicleId:
-          format: int32
-          type: integer
-        ContactId:
-          format: int32
-          type: integer
-      additionalProperties: false
     ProblemDetails:
       type: object
       properties:
@@ -276,18 +253,18 @@ components:
         instance:
           type: string
       additionalProperties: {}
-    ContactVehicleCreateModel:
-      required:
-      - ContactId
-      - VehicleId
+    ContactModel:
       type: object
       properties:
-        VehicleId:
-          format: int32
-          type: integer
         ContactId:
           format: int32
           type: integer
+        FirstName:
+          type: string
+        LastName:
+          type: string
+        EmailAddress:
+          type: string
       additionalProperties: false
     ContactVehicleDetailModel:
       type: object
@@ -317,6 +294,29 @@ components:
           type: array
           items:
             type: string
+      additionalProperties: false
+    ContactVehicleEditModel:
+      type: object
+      properties:
+        VehicleId:
+          format: int32
+          type: integer
+        ContactId:
+          format: int32
+          type: integer
+      additionalProperties: false
+    ContactVehicleCreateModel:
+      required:
+      - ContactId
+      - VehicleId
+      type: object
+      properties:
+        VehicleId:
+          format: int32
+          type: integer
+        ContactId:
+          format: int32
+          type: integer
       additionalProperties: false
   securitySchemes:
     oauth2:

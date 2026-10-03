@@ -160,6 +160,61 @@ paths:
       - oauth2: []
 components:
   schemas:
+    DrivingScoreModel:
+      type: object
+      properties:
+        Date:
+          format: date-time
+          type: string
+        DrivingScore:
+          format: int32
+          type: integer
+        OrganizationScore:
+          format: int32
+          type: integer
+        Reductions:
+          type: array
+          items:
+            $ref: '#/components/schemas/TripScoreReductionModel'
+        Strengths:
+          type: array
+          items:
+            $ref: '#/components/schemas/TripScoreReductionModel'
+      additionalProperties: false
+    TripScoreTripModel:
+      type: object
+      properties:
+        AuthorizedToViewTrip:
+          type: boolean
+        TripId:
+          format: int32
+          type: integer
+        TripEndAddress:
+          type: string
+        TripEndDateTime:
+          format: date-time
+          type: string
+        TripScore:
+          format: int32
+          type: integer
+        TripStartAddress:
+          type: string
+        TripStartDateTime:
+          format: date-time
+          type: string
+      additionalProperties: false
+    TripScoreReductionModel:
+      type: object
+      properties:
+        Type:
+          format: int32
+          type: integer
+        Value:
+          format: double
+          type: number
+        Text:
+          type: string
+      additionalProperties: false
     TripScoreChartDataModel:
       type: object
       properties:
@@ -203,61 +258,6 @@ components:
           items:
             $ref: '#/components/schemas/TripScoreChartDataModel'
           readOnly: true
-      additionalProperties: false
-    TripScoreReductionModel:
-      type: object
-      properties:
-        Type:
-          format: int32
-          type: integer
-        Value:
-          format: double
-          type: number
-        Text:
-          type: string
-      additionalProperties: false
-    TripScoreTripModel:
-      type: object
-      properties:
-        AuthorizedToViewTrip:
-          type: boolean
-        TripId:
-          format: int32
-          type: integer
-        TripEndAddress:
-          type: string
-        TripEndDateTime:
-          format: date-time
-          type: string
-        TripScore:
-          format: int32
-          type: integer
-        TripStartAddress:
-          type: string
-        TripStartDateTime:
-          format: date-time
-          type: string
-      additionalProperties: false
-    DrivingScoreModel:
-      type: object
-      properties:
-        Date:
-          format: date-time
-          type: string
-        DrivingScore:
-          format: int32
-          type: integer
-        OrganizationScore:
-          format: int32
-          type: integer
-        Reductions:
-          type: array
-          items:
-            $ref: '#/components/schemas/TripScoreReductionModel'
-        Strengths:
-          type: array
-          items:
-            $ref: '#/components/schemas/TripScoreReductionModel'
       additionalProperties: false
   securitySchemes:
     oauth2:

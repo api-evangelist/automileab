@@ -63,13 +63,13 @@ paths:
       - oauth2: []
 components:
   schemas:
-    VehickeMakesModel:
+    VehicleModelModel:
       type: object
       properties:
-        VehicleMakes:
-          type: array
-          items:
-            $ref: '#/components/schemas/VehicleMakeModel'
+        Make:
+          type: string
+        Model:
+          type: string
       additionalProperties: false
     VehicleMakeModel:
       type: object
@@ -79,14 +79,6 @@ components:
         MakeUrl:
           type: string
       additionalProperties: false
-    VehicleModelModel:
-      type: object
-      properties:
-        Make:
-          type: string
-        Model:
-          type: string
-      additionalProperties: false
     VehicleModelsModel:
       type: object
       properties:
@@ -94,6 +86,14 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/VehicleModelModel'
+      additionalProperties: false
+    VehickeMakesModel:
+      type: object
+      properties:
+        VehicleMakes:
+          type: array
+          items:
+            $ref: '#/components/schemas/VehicleMakeModel'
       additionalProperties: false
   securitySchemes:
     oauth2:

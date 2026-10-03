@@ -635,6 +635,41 @@ paths:
         description: The trip type and trips to update
 components:
   schemas:
+    TripTypeBatchUpdateModel:
+      type: object
+      properties:
+        TripType:
+          format: int32
+          enum:
+          - 0
+          - 1
+          - 2
+          - 3
+          type: integer
+        CustomCategory:
+          type: string
+        TripIdList:
+          type: array
+          items:
+            format: int32
+            type: integer
+      additionalProperties: false
+    Trip2StartEndGeoModel:
+      type: object
+      properties:
+        StartLatitude:
+          format: double
+          type: number
+        StartLongitude:
+          format: double
+          type: number
+        EndLatitude:
+          format: double
+          type: number
+        EndLongitude:
+          format: double
+          type: number
+      additionalProperties: false
     RegisteredTollModelGET:
       type: object
       properties:
@@ -802,28 +837,105 @@ components:
         TripEndPostalCode:
           type: string
       additionalProperties: false
-    RPM2Model:
+    TripConcatenationStartEndPoint:
       type: object
       properties:
-        RPMValue:
+        Latitude:
+          format: double
+          type: number
+        Longitude:
+          format: double
+          type: number
+      additionalProperties: false
+    TripConcatenationSpeedGroup:
+      type: object
+      properties:
+        SpeedGroup:
+          format: uuid
+          type: string
+        SpeedingForMoreThan30Seconds:
+          type: boolean
+        DistanceOfSpeeding:
+          format: double
+          type: number
+        DistanceInSeconds:
+          format: int32
+          type: integer
+        ThresholdType:
+          format: int32
+          type: integer
+        SpeedPoints:
+          type: array
+          items:
+            $ref: '#/components/schemas/TripConcatenationSpeedPoint'
+      additionalProperties: false
+    TripConcatenationEvent:
+      type: object
+      properties:
+        TripDrivingEventType:
+          format: int32
+          enum:
+          - 0
+          - 1
+          - 2
+          - 3
+          - 4
+          - 5
+          - 6
+          - 7
+          - 8
+          - 9
+          - 10
+          - 11
+          - 12
+          - 13
+          type: integer
+        Latitude:
+          format: double
+          type: number
+        Longitude:
+          format: double
+          type: number
+        RecordTimeStamp:
+          format: date-time
+          type: string
+        RecordTimeStampEpochMs:
+          format: int64
+          type: integer
+          readOnly: true
+      additionalProperties: false
+    EngineCoolantTemperature2Model:
+      type: object
+      properties:
+        TemperatureInCelsius:
           format: double
           type: number
         RecordTimeStamp:
           format: date-time
           type: string
       additionalProperties: false
-    PID2Model:
+    TripConcatenationSpeedPoint:
       type: object
       properties:
-        Data:
-          format: byte
-          type: string
+        Speed:
+          format: double
+          type: number
+        SpeedLimit:
+          format: double
+          type: number
+        Latitude:
+          format: double
+          type: number
+        Longitude:
+          format: double
+          type: number
         RecordTimeStamp:
           format: date-time
           type: string
-        Value:
-          format: double
-          type: number
+        RecordTimeStampEpochMs:
+          format: int64
+          type: integer
+          readOnly: true
       additionalProperties: false
     TripConcatenationModel:
       type: object
@@ -1001,72 +1113,25 @@ components:
           type: integer
           readOnly: true
       additionalProperties: false
-    TripConcatenationSpeedGroup:
+    FuelLevelInput2Model:
       type: object
       properties:
-        SpeedGroup:
-          format: uuid
-          type: string
-        SpeedingForMoreThan30Seconds:
-          type: boolean
-        DistanceOfSpeeding:
-          format: double
-          type: number
-        DistanceInSeconds:
-          format: int32
-          type: integer
-        ThresholdType:
-          format: int32
-          type: integer
-        SpeedPoints:
-          type: array
-          items:
-            $ref: '#/components/schemas/TripConcatenationSpeedPoint'
-      additionalProperties: false
-    VehicleSpeed2Model:
-      type: object
-      properties:
-        SpeedKmPerHour:
+        FuelLevelInPercentage:
           format: double
           type: number
         RecordTimeStamp:
           format: date-time
           type: string
       additionalProperties: false
-    TripConcatenationEvent:
+    RPM2Model:
       type: object
       properties:
-        TripDrivingEventType:
-          format: int32
-          enum:
-          - 0
-          - 1
-          - 2
-          - 3
-          - 4
-          - 5
-          - 6
-          - 7
-          - 8
-          - 9
-          - 10
-          - 11
-          - 12
-          - 13
-          type: integer
-        Latitude:
-          format: double
-          type: number
-        Longitude:
+        RPMValue:
           format: double
           type: number
         RecordTimeStamp:
           format: date-time
           type: string
-        RecordTimeStampEpochMs:
-          format: int64
-          type: integer
-          readOnly: true
       additionalProperties: false
     TripConcatenationIdling:
       type: object
@@ -1120,28 +1185,43 @@ components:
           format: int32
           type: integer
       additionalProperties: false
-    TripConcatenationSpeedPoint:
+    Trip2EditModel:
       type: object
       properties:
-        Speed:
-          format: double
-          type: number
-        SpeedLimit:
-          format: double
-          type: number
-        Latitude:
-          format: double
-          type: number
-        Longitude:
+        CustomCategory:
+          type: string
+        TripType:
+          format: int32
+          enum:
+          - 0
+          - 1
+          - 2
+          - 3
+          type: integer
+        TripTags:
+          type: array
+          items:
+            type: string
+        LastEditedByContactId:
+          format: int32
+          type: integer
+        BusinessContact:
+          type: string
+        BusinessContactCompany:
+          type: string
+        TripReason:
+          type: string
+      additionalProperties: false
+    AmbientAirTemperatureModel:
+      description: PID70
+      type: object
+      properties:
+        TemperatureInCelsius:
           format: double
           type: number
         RecordTimeStamp:
           format: date-time
           type: string
-        RecordTimeStampEpochMs:
-          format: int64
-          type: integer
-          readOnly: true
       additionalProperties: false
     Trip2DetailModel:
       type: object
@@ -1288,92 +1368,16 @@ components:
           - 4
           type: integer
       additionalProperties: false
-    TripConcatenationSimplePoint:
+    PID2Model:
       type: object
       properties:
-        Latitude:
-          format: double
-          type: number
-        Longitude:
-          format: double
-          type: number
+        Data:
+          format: byte
+          type: string
         RecordTimeStamp:
           format: date-time
           type: string
-        RecordTimeStampEpochMs:
-          format: int64
-          type: integer
-          readOnly: true
-      additionalProperties: false
-    Trip2EditModel:
-      type: object
-      properties:
-        CustomCategory:
-          type: string
-        TripType:
-          format: int32
-          enum:
-          - 0
-          - 1
-          - 2
-          - 3
-          type: integer
-        TripTags:
-          type: array
-          items:
-            type: string
-        LastEditedByContactId:
-          format: int32
-          type: integer
-        BusinessContact:
-          type: string
-        BusinessContactCompany:
-          type: string
-        TripReason:
-          type: string
-      additionalProperties: false
-    TripConcatenationStartEndPoint:
-      type: object
-      properties:
-        Latitude:
-          format: double
-          type: number
-        Longitude:
-          format: double
-          type: number
-      additionalProperties: false
-    TripTypeBatchUpdateModel:
-      type: object
-      properties:
-        TripType:
-          format: int32
-          enum:
-          - 0
-          - 1
-          - 2
-          - 3
-          type: integer
-        CustomCategory:
-          type: string
-        TripIdList:
-          type: array
-          items:
-            format: int32
-            type: integer
-      additionalProperties: false
-    Trip2StartEndGeoModel:
-      type: object
-      properties:
-        StartLatitude:
-          format: double
-          type: number
-        StartLongitude:
-          format: double
-          type: number
-        EndLatitude:
-          format: double
-          type: number
-        EndLongitude:
+        Value:
           format: double
           type: number
       additionalProperties: false
@@ -1399,36 +1403,22 @@ components:
           format: int32
           type: integer
       additionalProperties: false
-    EngineCoolantTemperature2Model:
+    TripConcatenationSimplePoint:
       type: object
       properties:
-        TemperatureInCelsius:
+        Latitude:
+          format: double
+          type: number
+        Longitude:
           format: double
           type: number
         RecordTimeStamp:
           format: date-time
           type: string
-      additionalProperties: false
-    AmbientAirTemperatureModel:
-      description: PID70
-      type: object
-      properties:
-        TemperatureInCelsius:
-          format: double
-          type: number
-        RecordTimeStamp:
-          format: date-time
-          type: string
-      additionalProperties: false
-    FuelLevelInput2Model:
-      type: object
-      properties:
-        FuelLevelInPercentage:
-          format: double
-          type: number
-        RecordTimeStamp:
-          format: date-time
-          type: string
+        RecordTimeStampEpochMs:
+          format: int64
+          type: integer
+          readOnly: true
       additionalProperties: false
     TripConcatenationData:
       type: object
@@ -1443,6 +1433,16 @@ components:
         Value:
           format: double
           type: number
+      additionalProperties: false
+    VehicleSpeed2Model:
+      type: object
+      properties:
+        SpeedKmPerHour:
+          format: double
+          type: number
+        RecordTimeStamp:
+          format: date-time
+          type: string
       additionalProperties: false
   securitySchemes:
     oauth2:

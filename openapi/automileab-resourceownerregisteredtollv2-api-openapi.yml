@@ -238,7 +238,7 @@ paths:
       - oauth2: []
 components:
   schemas:
-    RegisteredTollModelPUT:
+    RegisteredTollMultiEditModelPUT:
       type: object
       properties:
         TimestampUtc:
@@ -259,6 +259,9 @@ components:
         PriceAfterDiscount:
           format: double
           type: number
+        RegisteredTollId:
+          format: int32
+          type: integer
       additionalProperties: false
     RegisteredTollModelGET:
       type: object
@@ -317,32 +320,28 @@ components:
           - 3
           type: integer
       additionalProperties: false
-    RegisteredTollMultiEditModelPUT:
+    RegisteredTollBatchUpdateModelPUT:
       type: object
       properties:
-        TimestampUtc:
-          format: date-time
-          type: string
-        Fee:
-          format: double
-          type: number
-        TripId:
-          format: int32
-          type: integer
-        GeofenceId:
-          format: int32
-          type: integer
+        RegisteredTollList:
+          type: array
+          items:
+            $ref: '#/components/schemas/RegisteredTollMultiEditModelPUT'
+      additionalProperties: false
+    TollZoneModelGET:
+      type: object
+      properties:
         TollZoneId:
           format: int32
           type: integer
-        PriceAfterDiscount:
-          format: double
-          type: number
-        RegisteredTollId:
-          format: int32
-          type: integer
+        Name:
+          type: string
+        TollGeofenceList:
+          type: array
+          items:
+            $ref: '#/components/schemas/TollGeofenceModelGET'
       additionalProperties: false
-    RegisteredTollModelPOST:
+    RegisteredTollModelPUT:
       type: object
       properties:
         TimestampUtc:
@@ -373,26 +372,27 @@ components:
         Name:
           type: string
       additionalProperties: false
-    RegisteredTollBatchUpdateModelPUT:
+    RegisteredTollModelPOST:
       type: object
       properties:
-        RegisteredTollList:
-          type: array
-          items:
-            $ref: '#/components/schemas/RegisteredTollMultiEditModelPUT'
-      additionalProperties: false
-    TollZoneModelGET:
-      type: object
-      properties:
+        TimestampUtc:
+          format: date-time
+          type: string
+        Fee:
+          format: double
+          type: number
+        TripId:
+          format: int32
+          type: integer
+        GeofenceId:
+          format: int32
+          type: integer
         TollZoneId:
           format: int32
           type: integer
-        Name:
-          type: string
-        TollGeofenceList:
-          type: array
-          items:
-            $ref: '#/components/schemas/TollGeofenceModelGET'
+        PriceAfterDiscount:
+          format: double
+          type: number
       additionalProperties: false
   securitySchemes:
     oauth2:

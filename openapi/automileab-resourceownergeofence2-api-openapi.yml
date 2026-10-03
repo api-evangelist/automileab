@@ -159,6 +159,146 @@ paths:
         description: The new geofence model
 components:
   schemas:
+    Geofence2CreateModel:
+      required:
+      - Name
+      - VehicleIds
+      type: object
+      properties:
+        Name:
+          minLength: 1
+          type: string
+        Description:
+          type: string
+        VehicleIds:
+          type: array
+          items:
+            format: int32
+            type: integer
+        GeofencePolygon:
+          $ref: '#/components/schemas/GeofencePolygon'
+        GeofenceType:
+          format: int32
+          enum:
+          - 0
+          - 1
+          - 2
+          type: integer
+        Schedules:
+          type: array
+          items:
+            $ref: '#/components/schemas/GeofenceScheduleAddModel'
+      additionalProperties: false
+    Geofence2EditModel:
+      required:
+      - Name
+      - VehicleIds
+      type: object
+      properties:
+        Name:
+          minLength: 1
+          type: string
+        Description:
+          type: string
+        VehicleIds:
+          type: array
+          items:
+            format: int32
+            type: integer
+        GeofencePolygon:
+          $ref: '#/components/schemas/GeofencePolygon'
+        GeofenceType:
+          format: int32
+          enum:
+          - 0
+          - 1
+          - 2
+          type: integer
+        Schedules:
+          type: array
+          items:
+            $ref: '#/components/schemas/GeofenceScheduleEditModel'
+      additionalProperties: false
+    GeofenceScheduleEditModel:
+      type: object
+      properties:
+        GeofenceScheduleId:
+          format: int32
+          type: integer
+        Monday:
+          type: boolean
+        Tuesday:
+          type: boolean
+        Wednesday:
+          type: boolean
+        Thursday:
+          type: boolean
+        Friday:
+          type: boolean
+        Saturday:
+          type: boolean
+        Sunday:
+          type: boolean
+        StartTime:
+          $ref: '#/components/schemas/TimeSpan'
+        EndTime:
+          $ref: '#/components/schemas/TimeSpan'
+      additionalProperties: false
+    ProblemDetails:
+      type: object
+      properties:
+        type:
+          type: string
+        title:
+          type: string
+        status:
+          format: int32
+          type: integer
+        detail:
+          type: string
+        instance:
+          type: string
+      additionalProperties: {}
+    GeofenceScheduleAddModel:
+      type: object
+      properties:
+        Monday:
+          type: boolean
+        Tuesday:
+          type: boolean
+        Wednesday:
+          type: boolean
+        Thursday:
+          type: boolean
+        Friday:
+          type: boolean
+        Saturday:
+          type: boolean
+        Sunday:
+          type: boolean
+        StartTime:
+          $ref: '#/components/schemas/TimeSpan'
+        EndTime:
+          $ref: '#/components/schemas/TimeSpan'
+      additionalProperties: false
+    GeofencePolygon:
+      type: object
+      properties:
+        Coordinates:
+          type: array
+          items:
+            $ref: '#/components/schemas/GeographicPosition'
+      additionalProperties: false
+    GeographicPosition:
+      type: object
+      properties:
+        Latitude:
+          format: double
+          type: number
+        Longitude:
+          format: double
+          type: number
+      additionalProperties: false
     Geofence2Model:
       type: object
       properties:
@@ -189,28 +329,6 @@ components:
           items:
             format: int32
             type: integer
-      additionalProperties: false
-    GeofenceScheduleAddModel:
-      type: object
-      properties:
-        Monday:
-          type: boolean
-        Tuesday:
-          type: boolean
-        Wednesday:
-          type: boolean
-        Thursday:
-          type: boolean
-        Friday:
-          type: boolean
-        Saturday:
-          type: boolean
-        Sunday:
-          type: boolean
-        StartTime:
-          $ref: '#/components/schemas/TimeSpan'
-        EndTime:
-          $ref: '#/components/schemas/TimeSpan'
       additionalProperties: false
     GeofenceScheduleModel:
       type: object
@@ -299,124 +417,6 @@ components:
           format: double
           type: number
           readOnly: true
-      additionalProperties: false
-    ProblemDetails:
-      type: object
-      properties:
-        type:
-          type: string
-        title:
-          type: string
-        status:
-          format: int32
-          type: integer
-        detail:
-          type: string
-        instance:
-          type: string
-      additionalProperties: {}
-    Geofence2CreateModel:
-      required:
-      - Name
-      - VehicleIds
-      type: object
-      properties:
-        Name:
-          minLength: 1
-          type: string
-        Description:
-          type: string
-        VehicleIds:
-          type: array
-          items:
-            format: int32
-            type: integer
-        GeofencePolygon:
-          $ref: '#/components/schemas/GeofencePolygon'
-        GeofenceType:
-          format: int32
-          enum:
-          - 0
-          - 1
-          - 2
-          type: integer
-        Schedules:
-          type: array
-          items:
-            $ref: '#/components/schemas/GeofenceScheduleAddModel'
-      additionalProperties: false
-    GeographicPosition:
-      type: object
-      properties:
-        Latitude:
-          format: double
-          type: number
-        Longitude:
-          format: double
-          type: number
-      additionalProperties: false
-    GeofenceScheduleEditModel:
-      type: object
-      properties:
-        GeofenceScheduleId:
-          format: int32
-          type: integer
-        Monday:
-          type: boolean
-        Tuesday:
-          type: boolean
-        Wednesday:
-          type: boolean
-        Thursday:
-          type: boolean
-        Friday:
-          type: boolean
-        Saturday:
-          type: boolean
-        Sunday:
-          type: boolean
-        StartTime:
-          $ref: '#/components/schemas/TimeSpan'
-        EndTime:
-          $ref: '#/components/schemas/TimeSpan'
-      additionalProperties: false
-    GeofencePolygon:
-      type: object
-      properties:
-        Coordinates:
-          type: array
-          items:
-            $ref: '#/components/schemas/GeographicPosition'
-      additionalProperties: false
-    Geofence2EditModel:
-      required:
-      - Name
-      - VehicleIds
-      type: object
-      properties:
-        Name:
-          minLength: 1
-          type: string
-        Description:
-          type: string
-        VehicleIds:
-          type: array
-          items:
-            format: int32
-            type: integer
-        GeofencePolygon:
-          $ref: '#/components/schemas/GeofencePolygon'
-        GeofenceType:
-          format: int32
-          enum:
-          - 0
-          - 1
-          - 2
-          type: integer
-        Schedules:
-          type: array
-          items:
-            $ref: '#/components/schemas/GeofenceScheduleEditModel'
       additionalProperties: false
   securitySchemes:
     oauth2:

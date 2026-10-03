@@ -100,137 +100,6 @@ paths:
       - oauth2: []
 components:
   schemas:
-    OrganizationModel:
-      type: object
-      properties:
-        OrganizationName:
-          type: string
-        LegalIdentificationNumber:
-          type: string
-        VATNumber:
-          type: string
-        BillingAddress:
-          $ref: '#/components/schemas/AddressModel'
-        ShipmentAddress:
-          $ref: '#/components/schemas/AddressModel'
-        Culture:
-          type: string
-        UnitType:
-          format: int32
-          enum:
-          - 0
-          - 1
-          - 2
-          type: integer
-        IsHierarchyEnabled:
-          type: boolean
-        ISO4217CurrencyCode:
-          type: string
-        OrganizationId:
-          format: int32
-          type: integer
-      additionalProperties: false
-    AddressModel:
-      required:
-      - AddressLine2
-      - City
-      - ISO3166CountryCode
-      - ZipCode
-      type: object
-      properties:
-        AddressId:
-          format: int32
-          type: integer
-        CompanyName:
-          type: string
-        ContactNameAtAddress:
-          type: string
-        AddressLine2:
-          minLength: 1
-          type: string
-        AddressLine3:
-          type: string
-        AddressLine4:
-          type: string
-        ZipCode:
-          minLength: 1
-          type: string
-        City:
-          minLength: 1
-          type: string
-        StateOrProvince:
-          type: string
-        ISO3166CountryCode:
-          minLength: 1
-          type: string
-      additionalProperties: false
-    HttpMethod:
-      type: object
-      properties:
-        Method:
-          type: string
-      additionalProperties: false
-    HttpContent:
-      type: object
-      properties:
-        Headers:
-          type: array
-          items:
-            $ref: '#/components/schemas/StringStringIEnumerableKeyValuePair'
-          readOnly: true
-      additionalProperties: false
-    OrganizationEditModel:
-      type: object
-      properties:
-        OrganizationName:
-          type: string
-        LegalIdentificationNumber:
-          type: string
-        VATNumber:
-          type: string
-        BillingAddress:
-          $ref: '#/components/schemas/AddressModel'
-        ShipmentAddress:
-          $ref: '#/components/schemas/AddressModel'
-        Culture:
-          type: string
-        UnitType:
-          format: int32
-          enum:
-          - 0
-          - 1
-          - 2
-          type: integer
-      additionalProperties: false
-    StringStringIEnumerableKeyValuePair:
-      type: object
-      properties:
-        Key:
-          type: string
-        Value:
-          type: array
-          items:
-            type: string
-      additionalProperties: false
-    OrganizationNodeModel:
-      type: object
-      properties:
-        OrganizationNodeId:
-          format: int32
-          type: integer
-        Name:
-          type: string
-        ParentOrganizationNodeId:
-          format: int32
-          type: integer
-        Children:
-          type: array
-          items:
-            $ref: '#/components/schemas/OrganizationNodeModel'
-        HasChildren:
-          type: boolean
-          readOnly: true
-      additionalProperties: false
     HttpResponseMessage:
       type: object
       properties:
@@ -321,6 +190,56 @@ components:
           type: boolean
           readOnly: true
       additionalProperties: false
+    AddressModel:
+      required:
+      - AddressLine2
+      - City
+      - ISO3166CountryCode
+      - ZipCode
+      type: object
+      properties:
+        AddressId:
+          format: int32
+          type: integer
+        CompanyName:
+          type: string
+        ContactNameAtAddress:
+          type: string
+        AddressLine2:
+          minLength: 1
+          type: string
+        AddressLine3:
+          type: string
+        AddressLine4:
+          type: string
+        ZipCode:
+          minLength: 1
+          type: string
+        City:
+          minLength: 1
+          type: string
+        StateOrProvince:
+          type: string
+        ISO3166CountryCode:
+          minLength: 1
+          type: string
+      additionalProperties: false
+    StringStringIEnumerableKeyValuePair:
+      type: object
+      properties:
+        Key:
+          type: string
+        Value:
+          type: array
+          items:
+            type: string
+      additionalProperties: false
+    HttpMethod:
+      type: object
+      properties:
+        Method:
+          type: string
+      additionalProperties: false
     Version:
       type: object
       properties:
@@ -348,6 +267,87 @@ components:
           format: int32
           type: integer
           readOnly: true
+      additionalProperties: false
+    OrganizationNodeModel:
+      type: object
+      properties:
+        OrganizationNodeId:
+          format: int32
+          type: integer
+        Name:
+          type: string
+        ParentOrganizationNodeId:
+          format: int32
+          type: integer
+        Children:
+          type: array
+          items:
+            $ref: '#/components/schemas/OrganizationNodeModel'
+        HasChildren:
+          type: boolean
+          readOnly: true
+      additionalProperties: false
+    OrganizationModel:
+      type: object
+      properties:
+        OrganizationName:
+          type: string
+        LegalIdentificationNumber:
+          type: string
+        VATNumber:
+          type: string
+        BillingAddress:
+          $ref: '#/components/schemas/AddressModel'
+        ShipmentAddress:
+          $ref: '#/components/schemas/AddressModel'
+        Culture:
+          type: string
+        UnitType:
+          format: int32
+          enum:
+          - 0
+          - 1
+          - 2
+          type: integer
+        IsHierarchyEnabled:
+          type: boolean
+        ISO4217CurrencyCode:
+          type: string
+        OrganizationId:
+          format: int32
+          type: integer
+      additionalProperties: false
+    HttpContent:
+      type: object
+      properties:
+        Headers:
+          type: array
+          items:
+            $ref: '#/components/schemas/StringStringIEnumerableKeyValuePair'
+          readOnly: true
+      additionalProperties: false
+    OrganizationEditModel:
+      type: object
+      properties:
+        OrganizationName:
+          type: string
+        LegalIdentificationNumber:
+          type: string
+        VATNumber:
+          type: string
+        BillingAddress:
+          $ref: '#/components/schemas/AddressModel'
+        ShipmentAddress:
+          $ref: '#/components/schemas/AddressModel'
+        Culture:
+          type: string
+        UnitType:
+          format: int32
+          enum:
+          - 0
+          - 1
+          - 2
+          type: integer
       additionalProperties: false
     HttpRequestMessage:
       type: object

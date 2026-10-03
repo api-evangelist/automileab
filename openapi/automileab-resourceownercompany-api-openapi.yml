@@ -180,17 +180,6 @@ components:
         Description:
           type: string
       additionalProperties: false
-    CompanyModel:
-      type: object
-      properties:
-        CompanyId:
-          format: int32
-          type: integer
-        RegisteredCompanyName:
-          type: string
-        RegistrationNumber:
-          type: string
-      additionalProperties: false
     CompanyCreateModel:
       required:
       - CreateRelationshipToContactId
@@ -208,6 +197,17 @@ components:
         CreateRelationshipToContactId:
           format: int32
           type: integer
+      additionalProperties: false
+    CompanyModel:
+      type: object
+      properties:
+        CompanyId:
+          format: int32
+          type: integer
+        RegisteredCompanyName:
+          type: string
+        RegistrationNumber:
+          type: string
       additionalProperties: false
   securitySchemes:
     oauth2:

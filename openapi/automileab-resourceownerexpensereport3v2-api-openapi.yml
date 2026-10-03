@@ -334,16 +334,38 @@ paths:
       - oauth2: []
 components:
   schemas:
-    ExpenseReportRowContentModel:
+    ProblemDetails:
       type: object
       properties:
-        ExpenseReportRowContentId:
+        type:
+          type: string
+        title:
+          type: string
+        status:
           format: int32
           type: integer
-        ExpenseReportRowId:
+        detail:
+          type: string
+        instance:
+          type: string
+      additionalProperties: {}
+    ExpenseReportRowCreateModel:
+      type: object
+      properties:
+        ExpenseReportId:
           format: int32
           type: integer
-        ContentType:
+        AmountInCurrency:
+          format: double
+          type: number
+        VATInCurrency:
+          format: double
+          type: number
+        ISO4217CurrencyCode:
+          type: string
+        Notes:
+          type: string
+        Category:
           format: int32
           enum:
           - 0
@@ -351,19 +373,29 @@ components:
           - 2
           - 3
           - 4
+          - 5
+          - 6
+          - 7
+          - 8
+          - 9
+          - 10
           type: integer
-        ContentFileName:
+        ExpenseReportRowDateUtc:
+          format: date-time
+          type: string
+        ExpenseReportRowContent:
+          type: array
+          items:
+            $ref: '#/components/schemas/ExpenseReportRowContentCreateModel'
+        CustomCategory:
+          type: string
+        CategoryValue:
+          format: double
+          type: number
+        Merchant:
           type: string
       additionalProperties: false
-    EmailExpenseReportModel:
-      type: object
-      properties:
-        ToEmail:
-          type: string
-        ISO639LanguageCode:
-          type: string
-      additionalProperties: false
-    ExpenseReportEditModel:
+    ExpenseReportCreateModel:
       type: object
       properties:
         VehicleId:
@@ -378,6 +410,10 @@ components:
         ExpenseReportDateUtc:
           format: date-time
           type: string
+        ExpenseReportRows:
+          type: array
+          items:
+            $ref: '#/components/schemas/ExpenseReportRowCreateModel'
       additionalProperties: false
     ExpenseReportRowModel:
       type: object
@@ -428,58 +464,6 @@ components:
         Merchant:
           type: string
       additionalProperties: false
-    EmailExpenseReportsModel:
-      type: object
-      properties:
-        VehicleId:
-          format: int32
-          type: integer
-        FromDate:
-          format: date-time
-          type: string
-        ToDate:
-          format: date-time
-          type: string
-        ToEmail:
-          type: string
-        ISO639LanguageCode:
-          type: string
-      additionalProperties: false
-    ExpenseReportCreateModel:
-      type: object
-      properties:
-        VehicleId:
-          format: int32
-          type: integer
-        ContactId:
-          format: int32
-          type: integer
-        TripId:
-          format: int32
-          type: integer
-        ExpenseReportDateUtc:
-          format: date-time
-          type: string
-        ExpenseReportRows:
-          type: array
-          items:
-            $ref: '#/components/schemas/ExpenseReportRowCreateModel'
-      additionalProperties: false
-    ProblemDetails:
-      type: object
-      properties:
-        type:
-          type: string
-        title:
-          type: string
-        status:
-          format: int32
-          type: integer
-        detail:
-          type: string
-        instance:
-          type: string
-      additionalProperties: {}
     ExpenseReportModel:
       type: object
       properties:
@@ -509,50 +493,45 @@ components:
         IsEditable:
           type: boolean
       additionalProperties: false
-    ExpenseReportRowCreateModel:
+    ExpenseReportEditModel:
       type: object
       properties:
-        ExpenseReportId:
+        VehicleId:
           format: int32
           type: integer
-        AmountInCurrency:
-          format: double
-          type: number
-        VATInCurrency:
-          format: double
-          type: number
-        ISO4217CurrencyCode:
-          type: string
-        Notes:
-          type: string
-        Category:
+        ContactId:
           format: int32
-          enum:
-          - 0
-          - 1
-          - 2
-          - 3
-          - 4
-          - 5
-          - 6
-          - 7
-          - 8
-          - 9
-          - 10
           type: integer
-        ExpenseReportRowDateUtc:
+        TripId:
+          format: int32
+          type: integer
+        ExpenseReportDateUtc:
           format: date-time
           type: string
-        ExpenseReportRowContent:
-          type: array
-          items:
-            $ref: '#/components/schemas/ExpenseReportRowContentCreateModel'
-        CustomCategory:
+      additionalProperties: false
+    EmailExpenseReportModel:
+      type: object
+      properties:
+        ToEmail:
           type: string
-        CategoryValue:
-          format: double
-          type: number
-        Merchant:
+        ISO639LanguageCode:
+          type: string
+      additionalProperties: false
+    EmailExpenseReportsModel:
+      type: object
+      properties:
+        VehicleId:
+          format: int32
+          type: integer
+        FromDate:
+          format: date-time
+          type: string
+        ToDate:
+          format: date-time
+          type: string
+        ToEmail:
+          type: string
+        ISO639LanguageCode:
           type: string
       additionalProperties: false
     ExpenseReportRowContentCreateModel:
@@ -572,6 +551,27 @@ components:
           - 3
           - 4
           type: integer
+      additionalProperties: false
+    ExpenseReportRowContentModel:
+      type: object
+      properties:
+        ExpenseReportRowContentId:
+          format: int32
+          type: integer
+        ExpenseReportRowId:
+          format: int32
+          type: integer
+        ContentType:
+          format: int32
+          enum:
+          - 0
+          - 1
+          - 2
+          - 3
+          - 4
+          type: integer
+        ContentFileName:
+          type: string
       additionalProperties: false
   securitySchemes:
     oauth2:

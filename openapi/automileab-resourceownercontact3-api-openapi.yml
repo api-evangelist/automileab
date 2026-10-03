@@ -514,35 +514,78 @@ paths:
       - oauth2: []
 components:
   schemas:
-    TripScoreInformationModel:
+    HoursOfServiceSettingsModel:
       type: object
       properties:
-        CrownValue:
+        TimeZoneType:
           format: int32
+          enum:
+          - 0
+          - 1
+          - 2
+          - 3
+          - 4
+          - 5
+          - 6
+          - 7
+          - 8
           type: integer
-        EmptyMessage:
-          $ref: '#/components/schemas/TripScoreMessageModel'
-        HelpMessage:
-          $ref: '#/components/schemas/TripScoreMessageModel'
-        Levels:
-          type: array
-          items:
-            $ref: '#/components/schemas/TripScoreLevelModel'
-      additionalProperties: false
-    CustomCategoryModel:
-      type: object
-      properties:
-        CustomCategoryId:
+        WorkDayStartTime:
+          $ref: '#/components/schemas/TimeSpan'
+        CycleRuleType:
           format: int32
+          enum:
+          - 0
+          - 1
+          - 2
+          - 3
+          - 4
+          - 5
+          - 6
+          - 7
           type: integer
-        Value:
-          type: string
-        CustomCategoryType:
+        CargoTypeType:
+          format: int32
+          enum:
+          - 0
+          - 1
+          - 2
+          type: integer
+        RestartRuleType:
           format: int32
           enum:
           - 0
           - 1
           type: integer
+        RestBreakRuleType:
+          format: int32
+          enum:
+          - 0
+          - 1
+          type: integer
+        ShortHaulExceptionType:
+          format: int32
+          enum:
+          - 0
+          - 1
+          type: integer
+        OdometerUnitType:
+          format: int32
+          enum:
+          - 0
+          - 1
+          - 2
+          type: integer
+        WellSiteRuleType:
+          format: int32
+          enum:
+          - 0
+          - 1
+          type: integer
+        CarrierInfo:
+          $ref: '#/components/schemas/AddressModel'
+        IsEnabled:
+          type: boolean
       additionalProperties: false
     ProblemDetails:
       type: object
@@ -559,6 +602,90 @@ components:
         instance:
           type: string
       additionalProperties: {}
+    ContactWebSocketAuthenticationTokenModel:
+      type: object
+      properties:
+        ExpiresAtUtc:
+          format: date-time
+          type: string
+        EncryptedToken:
+          type: string
+        UseHeaderForAuthentication:
+          type: string
+      additionalProperties: false
+    CustomCategoryPostModel:
+      type: object
+      properties:
+        ContactId:
+          format: int32
+          type: integer
+        Added:
+          description: Custom categories to add
+          type: array
+          items:
+            $ref: '#/components/schemas/CustomCategoryCreateModel'
+        Removed:
+          description: Custom categories to delete
+          type: array
+          items:
+            format: int32
+            type: integer
+      additionalProperties: false
+    OrganizationModel:
+      type: object
+      properties:
+        OrganizationName:
+          type: string
+        LegalIdentificationNumber:
+          type: string
+        VATNumber:
+          type: string
+        BillingAddress:
+          $ref: '#/components/schemas/AddressModel'
+        ShipmentAddress:
+          $ref: '#/components/schemas/AddressModel'
+        Culture:
+          type: string
+        UnitType:
+          format: int32
+          enum:
+          - 0
+          - 1
+          - 2
+          type: integer
+        IsHierarchyEnabled:
+          type: boolean
+        ISO4217CurrencyCode:
+          type: string
+        OrganizationId:
+          format: int32
+          type: integer
+      additionalProperties: false
+    AccountInformationModel:
+      type: object
+      properties:
+        AccountOutstandingMessage:
+          $ref: '#/components/schemas/AccountOutstandingMessageModel'
+      additionalProperties: false
+    TripScoreMessageModel:
+      type: object
+      properties:
+        Title:
+          type: string
+        Message:
+          type: string
+      additionalProperties: false
+    TripScoreLevelModel:
+      type: object
+      properties:
+        Color:
+          type: string
+        MinValue:
+          format: int32
+          type: integer
+        Text:
+          type: string
+      additionalProperties: false
     Contact3DetailModel:
       type: object
       properties:
@@ -672,122 +799,12 @@ components:
         SSOConfig:
           $ref: '#/components/schemas/SSOConfigurationModel'
       additionalProperties: false
-    CustomCategoryPostModel:
+    CustomCategoryModel:
       type: object
       properties:
-        ContactId:
+        CustomCategoryId:
           format: int32
           type: integer
-        Added:
-          description: Custom categories to add
-          type: array
-          items:
-            $ref: '#/components/schemas/CustomCategoryCreateModel'
-        Removed:
-          description: Custom categories to delete
-          type: array
-          items:
-            format: int32
-            type: integer
-      additionalProperties: false
-    HoursOfServiceSettingsModel:
-      type: object
-      properties:
-        TimeZoneType:
-          format: int32
-          enum:
-          - 0
-          - 1
-          - 2
-          - 3
-          - 4
-          - 5
-          - 6
-          - 7
-          - 8
-          type: integer
-        WorkDayStartTime:
-          $ref: '#/components/schemas/TimeSpan'
-        CycleRuleType:
-          format: int32
-          enum:
-          - 0
-          - 1
-          - 2
-          - 3
-          - 4
-          - 5
-          - 6
-          - 7
-          type: integer
-        CargoTypeType:
-          format: int32
-          enum:
-          - 0
-          - 1
-          - 2
-          type: integer
-        RestartRuleType:
-          format: int32
-          enum:
-          - 0
-          - 1
-          type: integer
-        RestBreakRuleType:
-          format: int32
-          enum:
-          - 0
-          - 1
-          type: integer
-        ShortHaulExceptionType:
-          format: int32
-          enum:
-          - 0
-          - 1
-          type: integer
-        OdometerUnitType:
-          format: int32
-          enum:
-          - 0
-          - 1
-          - 2
-          type: integer
-        WellSiteRuleType:
-          format: int32
-          enum:
-          - 0
-          - 1
-          type: integer
-        CarrierInfo:
-          $ref: '#/components/schemas/AddressModel'
-        IsEnabled:
-          type: boolean
-      additionalProperties: false
-    ContactWebSocketAuthenticationTokenModel:
-      type: object
-      properties:
-        ExpiresAtUtc:
-          format: date-time
-          type: string
-        EncryptedToken:
-          type: string
-        UseHeaderForAuthentication:
-          type: string
-      additionalProperties: false
-    TripScoreLevelModel:
-      type: object
-      properties:
-        Color:
-          type: string
-        MinValue:
-          format: int32
-          type: integer
-        Text:
-          type: string
-      additionalProperties: false
-    CustomCategoryCreateModel:
-      type: object
-      properties:
         Value:
           type: string
         CustomCategoryType:
@@ -797,114 +814,39 @@ components:
           - 1
           type: integer
       additionalProperties: false
-    OrganizationModel:
+    AddressModel:
+      required:
+      - AddressLine2
+      - City
+      - ISO3166CountryCode
+      - ZipCode
       type: object
       properties:
-        OrganizationName:
+        AddressId:
+          format: int32
+          type: integer
+        CompanyName:
           type: string
-        LegalIdentificationNumber:
+        ContactNameAtAddress:
           type: string
-        VATNumber:
+        AddressLine2:
+          minLength: 1
           type: string
-        BillingAddress:
-          $ref: '#/components/schemas/AddressModel'
-        ShipmentAddress:
-          $ref: '#/components/schemas/AddressModel'
-        Culture:
+        AddressLine3:
           type: string
-        UnitType:
-          format: int32
-          enum:
-          - 0
-          - 1
-          - 2
-          type: integer
-        IsHierarchyEnabled:
-          type: boolean
-        ISO4217CurrencyCode:
+        AddressLine4:
           type: string
-        OrganizationId:
-          format: int32
-          type: integer
-      additionalProperties: false
-    CompanyScopesModel:
-      type: object
-      properties:
-        CompanyId:
-          format: int32
-          type: integer
-        VehicleIds:
-          type: array
-          items:
-            format: int32
-            type: integer
-        Scopes:
-          type: array
-          items:
-            type: string
-      additionalProperties: false
-    TimeSpan:
-      type: object
-      properties:
-        Ticks:
-          format: int64
-          type: integer
-        Days:
-          format: int32
-          type: integer
-          readOnly: true
-        Hours:
-          format: int32
-          type: integer
-          readOnly: true
-        Milliseconds:
-          format: int32
-          type: integer
-          readOnly: true
-        Microseconds:
-          format: int32
-          type: integer
-          readOnly: true
-        Nanoseconds:
-          format: int32
-          type: integer
-          readOnly: true
-        Minutes:
-          format: int32
-          type: integer
-          readOnly: true
-        Seconds:
-          format: int32
-          type: integer
-          readOnly: true
-        TotalDays:
-          format: double
-          type: number
-          readOnly: true
-        TotalHours:
-          format: double
-          type: number
-          readOnly: true
-        TotalMilliseconds:
-          format: double
-          type: number
-          readOnly: true
-        TotalMicroseconds:
-          format: double
-          type: number
-          readOnly: true
-        TotalNanoseconds:
-          format: double
-          type: number
-          readOnly: true
-        TotalMinutes:
-          format: double
-          type: number
-          readOnly: true
-        TotalSeconds:
-          format: double
-          type: number
-          readOnly: true
+        ZipCode:
+          minLength: 1
+          type: string
+        City:
+          minLength: 1
+          type: string
+        StateOrProvince:
+          type: string
+        ISO3166CountryCode:
+          minLength: 1
+          type: string
       additionalProperties: false
     OrganizationPermissionBooleans:
       type: object
@@ -970,13 +912,21 @@ components:
         Message:
           type: string
       additionalProperties: false
-    TripScoreMessageModel:
+    CompanyScopesModel:
       type: object
       properties:
-        Title:
-          type: string
-        Message:
-          type: string
+        CompanyId:
+          format: int32
+          type: integer
+        VehicleIds:
+          type: array
+          items:
+            format: int32
+            type: integer
+        Scopes:
+          type: array
+          items:
+            type: string
       additionalProperties: false
     ContactMenuLayoutModel:
       type: object
@@ -1001,17 +951,26 @@ components:
           description: UTC date time when menu layout cache was refreshed
           type: string
       additionalProperties: false
-    Contact3EditModel:
+    Contact3CreateModel:
+      required:
+      - CreateRelationshipToCompanyId
+      - FirstName
+      - LastName
       type: object
       properties:
         FirstName:
+          minLength: 1
           type: string
         LastName:
+          minLength: 1
           type: string
         EmailAddress:
           type: string
         Description:
           type: string
+        CreateRelationshipToCompanyId:
+          format: int32
+          type: integer
         CultureName:
           type: string
         CountryCodeIso1366:
@@ -1037,19 +996,6 @@ components:
           - 1
           - 2
           type: integer
-        CheckOutDateTimeUtc:
-          format: date-time
-          type: string
-        CheckedInTripType:
-          format: int32
-          enum:
-          - 0
-          - 1
-          - 2
-          - 3
-          type: integer
-        CheckedInCustomTripTypeName:
-          type: string
         CurrencyCode:
           description: ISO 4217 Currency code
           type: string
@@ -1116,26 +1062,17 @@ components:
         IsEditable:
           type: boolean
       additionalProperties: false
-    Contact3CreateModel:
-      required:
-      - CreateRelationshipToCompanyId
-      - FirstName
-      - LastName
+    Contact3EditModel:
       type: object
       properties:
         FirstName:
-          minLength: 1
           type: string
         LastName:
-          minLength: 1
           type: string
         EmailAddress:
           type: string
         Description:
           type: string
-        CreateRelationshipToCompanyId:
-          format: int32
-          type: integer
         CultureName:
           type: string
         CountryCodeIso1366:
@@ -1161,6 +1098,19 @@ components:
           - 1
           - 2
           type: integer
+        CheckOutDateTimeUtc:
+          format: date-time
+          type: string
+        CheckedInTripType:
+          format: int32
+          enum:
+          - 0
+          - 1
+          - 2
+          - 3
+          type: integer
+        CheckedInCustomTripTypeName:
+          type: string
         CurrencyCode:
           description: ISO 4217 Currency code
           type: string
@@ -1170,39 +1120,20 @@ components:
         OrganizationPermissions:
           $ref: '#/components/schemas/OrganizationPermissionBooleans'
       additionalProperties: false
-    AddressModel:
-      required:
-      - AddressLine2
-      - City
-      - ISO3166CountryCode
-      - ZipCode
+    TripScoreInformationModel:
       type: object
       properties:
-        AddressId:
+        CrownValue:
           format: int32
           type: integer
-        CompanyName:
-          type: string
-        ContactNameAtAddress:
-          type: string
-        AddressLine2:
-          minLength: 1
-          type: string
-        AddressLine3:
-          type: string
-        AddressLine4:
-          type: string
-        ZipCode:
-          minLength: 1
-          type: string
-        City:
-          minLength: 1
-          type: string
-        StateOrProvince:
-          type: string
-        ISO3166CountryCode:
-          minLength: 1
-          type: string
+        EmptyMessage:
+          $ref: '#/components/schemas/TripScoreMessageModel'
+        HelpMessage:
+          $ref: '#/components/schemas/TripScoreMessageModel'
+        Levels:
+          type: array
+          items:
+            $ref: '#/components/schemas/TripScoreLevelModel'
       additionalProperties: false
     SSOConfigurationModel:
       type: object
@@ -1216,11 +1147,80 @@ components:
           items:
             type: string
       additionalProperties: false
-    AccountInformationModel:
+    CustomCategoryCreateModel:
       type: object
       properties:
-        AccountOutstandingMessage:
-          $ref: '#/components/schemas/AccountOutstandingMessageModel'
+        Value:
+          type: string
+        CustomCategoryType:
+          format: int32
+          enum:
+          - 0
+          - 1
+          type: integer
+      additionalProperties: false
+    TimeSpan:
+      type: object
+      properties:
+        Ticks:
+          format: int64
+          type: integer
+        Days:
+          format: int32
+          type: integer
+          readOnly: true
+        Hours:
+          format: int32
+          type: integer
+          readOnly: true
+        Milliseconds:
+          format: int32
+          type: integer
+          readOnly: true
+        Microseconds:
+          format: int32
+          type: integer
+          readOnly: true
+        Nanoseconds:
+          format: int32
+          type: integer
+          readOnly: true
+        Minutes:
+          format: int32
+          type: integer
+          readOnly: true
+        Seconds:
+          format: int32
+          type: integer
+          readOnly: true
+        TotalDays:
+          format: double
+          type: number
+          readOnly: true
+        TotalHours:
+          format: double
+          type: number
+          readOnly: true
+        TotalMilliseconds:
+          format: double
+          type: number
+          readOnly: true
+        TotalMicroseconds:
+          format: double
+          type: number
+          readOnly: true
+        TotalNanoseconds:
+          format: double
+          type: number
+          readOnly: true
+        TotalMinutes:
+          format: double
+          type: number
+          readOnly: true
+        TotalSeconds:
+          format: double
+          type: number
+          readOnly: true
       additionalProperties: false
   securitySchemes:
     oauth2:

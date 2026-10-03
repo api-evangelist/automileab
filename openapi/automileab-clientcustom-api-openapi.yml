@@ -378,53 +378,89 @@ paths:
       - oauth2: []
 components:
   schemas:
-    UserPhoneNumberModel:
+    UsernameTakenModel:
+      type: object
+      properties:
+        Username:
+          type: string
+        Taken:
+          type: boolean
+      additionalProperties: false
+    ProblemDetails:
+      type: object
+      properties:
+        type:
+          type: string
+        title:
+          type: string
+        status:
+          format: int32
+          type: integer
+        detail:
+          type: string
+        instance:
+          type: string
+      additionalProperties: {}
+    UsernamesPhoneNumberModel:
       type: object
       properties:
         UserName:
-          type: string
-        PhoneNumber:
           type: string
         UserGuid:
           format: uuid
           type: string
-        OrganizationId:
-          format: int32
-          type: integer
-      additionalProperties: false
-    CustomUserCreateWithoutPasswordModel:
-      required:
-      - EmailAddress
-      - UserName
-      type: object
-      properties:
-        UserName:
-          minLength: 1
-          type: string
-        FirstName:
-          type: string
-        LastName:
-          type: string
-        EmailAddress:
-          format: email
-          minLength: 1
-          type: string
         MobilePhoneNumber:
           type: string
-        Description:
+        SSO:
+          type: boolean
+        SSOConfig:
+          $ref: '#/components/schemas/SSOConfigurationModel'
+      additionalProperties: false
+    SSOConfigurationModel:
+      type: object
+      properties:
+        ClientId:
           type: string
-        Culture:
+        TenantId:
           type: string
-        IMEI:
+        Scopes:
+          type: array
+          items:
+            type: string
+      additionalProperties: false
+    CreatedAtRoute:
+      type: object
+      properties:
+        RouteName:
           type: string
-        SerialNumber:
+          readOnly: true
+        RouteValues:
+          type: object
+          additionalProperties: {}
+          readOnly: true
+        StatusCode:
+          format: int32
+          type: integer
+          readOnly: true
+      additionalProperties: false
+    DeviceRegisteredModel:
+      type: object
+      properties:
+        QueriedDeviceIMEI:
           type: string
-        UnitType:
+        IsRegistered:
+          type: boolean
+      additionalProperties: false
+    ResetPasswordUserModel:
+      type: object
+      properties:
+        Email:
+          type: string
+        ResetPasswordType:
           format: int32
           enum:
           - 0
           - 1
-          - 2
           type: integer
       additionalProperties: false
     CustomUserCreateModel:
@@ -468,37 +504,19 @@ components:
           - 2
           type: integer
       additionalProperties: false
-    SSOConfigurationModel:
+    UserPhoneNumberModel:
       type: object
       properties:
-        ClientId:
+        UserName:
           type: string
-        TenantId:
+        PhoneNumber:
           type: string
-        Scopes:
-          type: array
-          items:
-            type: string
-      additionalProperties: false
-    ResetPasswordUserModel:
-      type: object
-      properties:
-        Email:
+        UserGuid:
+          format: uuid
           type: string
-        ResetPasswordType:
+        OrganizationId:
           format: int32
-          enum:
-          - 0
-          - 1
           type: integer
-      additionalProperties: false
-    DeviceRegisteredModel:
-      type: object
-      properties:
-        QueriedDeviceIMEI:
-          type: string
-        IsRegistered:
-          type: boolean
       additionalProperties: false
     UserCreatedPasswordModel:
       type: object
@@ -506,64 +524,46 @@ components:
         Password:
           type: string
       additionalProperties: false
-    UsernamesPhoneNumberModel:
-      type: object
-      properties:
-        UserName:
-          type: string
-        UserGuid:
-          format: uuid
-          type: string
-        MobilePhoneNumber:
-          type: string
-        SSO:
-          type: boolean
-        SSOConfig:
-          $ref: '#/components/schemas/SSOConfigurationModel'
-      additionalProperties: false
-    UsernameTakenModel:
-      type: object
-      properties:
-        Username:
-          type: string
-        Taken:
-          type: boolean
-      additionalProperties: false
-    ProblemDetails:
-      type: object
-      properties:
-        type:
-          type: string
-        title:
-          type: string
-        status:
-          format: int32
-          type: integer
-        detail:
-          type: string
-        instance:
-          type: string
-      additionalProperties: {}
-    CreatedAtRoute:
-      type: object
-      properties:
-        RouteName:
-          type: string
-          readOnly: true
-        RouteValues:
-          type: object
-          additionalProperties: {}
-          readOnly: true
-        StatusCode:
-          format: int32
-          type: integer
-          readOnly: true
-      additionalProperties: false
     ReverseGeocodingResult:
       type: object
       properties:
         FormattedAddress:
           type: string
+      additionalProperties: false
+    CustomUserCreateWithoutPasswordModel:
+      required:
+      - EmailAddress
+      - UserName
+      type: object
+      properties:
+        UserName:
+          minLength: 1
+          type: string
+        FirstName:
+          type: string
+        LastName:
+          type: string
+        EmailAddress:
+          format: email
+          minLength: 1
+          type: string
+        MobilePhoneNumber:
+          type: string
+        Description:
+          type: string
+        Culture:
+          type: string
+        IMEI:
+          type: string
+        SerialNumber:
+          type: string
+        UnitType:
+          format: int32
+          enum:
+          - 0
+          - 1
+          - 2
+          type: integer
       additionalProperties: false
   securitySchemes:
     oauth2:

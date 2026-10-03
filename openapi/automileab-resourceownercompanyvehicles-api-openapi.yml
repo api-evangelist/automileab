@@ -242,6 +242,19 @@ paths:
       - oauth2: []
 components:
   schemas:
+    CompanyVehicleModel:
+      type: object
+      properties:
+        CompanyVehicleId:
+          format: int32
+          type: integer
+        CompanyId:
+          format: int32
+          type: integer
+        VehicleId:
+          format: int32
+          type: integer
+      additionalProperties: false
     ProblemDetails:
       type: object
       properties:
@@ -257,7 +270,7 @@ components:
         instance:
           type: string
       additionalProperties: {}
-    CompanyVehicleEditModel:
+    CompanyVehicleCreateModel:
       required:
       - CompanyId
       - VehicleId
@@ -270,20 +283,7 @@ components:
           format: int32
           type: integer
       additionalProperties: false
-    CompanyVehicleModel:
-      type: object
-      properties:
-        CompanyVehicleId:
-          format: int32
-          type: integer
-        CompanyId:
-          format: int32
-          type: integer
-        VehicleId:
-          format: int32
-          type: integer
-      additionalProperties: false
-    CompanyVehicleCreateModel:
+    CompanyVehicleEditModel:
       required:
       - CompanyId
       - VehicleId
