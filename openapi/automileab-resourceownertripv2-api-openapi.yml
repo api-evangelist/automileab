@@ -701,30 +701,22 @@ components:
             format: int32
             type: integer
       additionalProperties: false
-    TripTypeBatchUpdateModel:
+    VehicleSpeedModel:
+      description: PID013
       type: object
       properties:
-        TripType:
-          format: int32
-          enum:
-          - 0
-          - 1
-          - 2
-          - 3
-          type: integer
-        CustomCategory:
+        SpeedKmPerHour:
+          format: double
+          type: number
+        RecordTimeStamp:
+          format: date-time
           type: string
-        TripIdList:
-          type: array
-          items:
-            format: int32
-            type: integer
       additionalProperties: false
-    AmbientAirTemperatureModel:
-      description: PID70
+    FuelLevelInputModel:
+      description: PID012
       type: object
       properties:
-        TemperatureInCelsius:
+        FuelLevelInPercentage:
           format: double
           type: number
         RecordTimeStamp:
@@ -742,17 +734,6 @@ components:
           format: date-time
           type: string
       additionalProperties: false
-    VehicleSpeedModel:
-      description: PID013
-      type: object
-      properties:
-        SpeedKmPerHour:
-          format: double
-          type: number
-        RecordTimeStamp:
-          format: date-time
-          type: string
-      additionalProperties: false
     TripAddNoteModel:
       type: object
       properties:
@@ -761,78 +742,16 @@ components:
           items:
             type: string
       additionalProperties: false
-    FuelLevelInputModel:
-      description: PID012
+    AmbientAirTemperatureModel:
+      description: PID70
       type: object
       properties:
-        FuelLevelInPercentage:
+        TemperatureInCelsius:
           format: double
           type: number
         RecordTimeStamp:
           format: date-time
           type: string
-      additionalProperties: false
-    TripGeoModel:
-      type: object
-      properties:
-        RecordTimeStamp:
-          format: date-time
-          type: string
-        Latitude:
-          format: double
-          type: number
-        Longitude:
-          format: double
-          type: number
-        HeadingDegrees:
-          format: int32
-          type: integer
-        NumberOfSatellites:
-          format: int32
-          type: integer
-        HDOP:
-          format: int32
-          type: integer
-      additionalProperties: false
-    RPMModel:
-      description: PID012
-      type: object
-      properties:
-        RPMValue:
-          format: double
-          type: number
-        RecordTimeStamp:
-          format: date-time
-          type: string
-      additionalProperties: false
-    PIDModel:
-      type: object
-      properties:
-        Data:
-          format: byte
-          type: string
-        RecordTimeStamp:
-          format: date-time
-          type: string
-        Value:
-          format: double
-          type: number
-      additionalProperties: false
-    TripStartEndGeoModel:
-      type: object
-      properties:
-        StartLatitude:
-          format: double
-          type: number
-        StartLongitude:
-          format: double
-          type: number
-        EndLatitude:
-          format: double
-          type: number
-        EndLongitude:
-          format: double
-          type: number
       additionalProperties: false
     TripModel:
       type: object
@@ -941,6 +860,19 @@ components:
           type: string
         TripEndPostalCode:
           type: string
+      additionalProperties: false
+    PIDModel:
+      type: object
+      properties:
+        Data:
+          format: byte
+          type: string
+        RecordTimeStamp:
+          format: date-time
+          type: string
+        Value:
+          format: double
+          type: number
       additionalProperties: false
     TripDetailModel:
       type: object
@@ -1087,6 +1019,74 @@ components:
           - 2
           - 4
           type: integer
+      additionalProperties: false
+    TripGeoModel:
+      type: object
+      properties:
+        RecordTimeStamp:
+          format: date-time
+          type: string
+        Latitude:
+          format: double
+          type: number
+        Longitude:
+          format: double
+          type: number
+        HeadingDegrees:
+          format: int32
+          type: integer
+        NumberOfSatellites:
+          format: int32
+          type: integer
+        HDOP:
+          format: int32
+          type: integer
+      additionalProperties: false
+    RPMModel:
+      description: PID012
+      type: object
+      properties:
+        RPMValue:
+          format: double
+          type: number
+        RecordTimeStamp:
+          format: date-time
+          type: string
+      additionalProperties: false
+    TripTypeBatchUpdateModel:
+      type: object
+      properties:
+        TripType:
+          format: int32
+          enum:
+          - 0
+          - 1
+          - 2
+          - 3
+          type: integer
+        CustomCategory:
+          type: string
+        TripIdList:
+          type: array
+          items:
+            format: int32
+            type: integer
+      additionalProperties: false
+    TripStartEndGeoModel:
+      type: object
+      properties:
+        StartLatitude:
+          format: double
+          type: number
+        StartLongitude:
+          format: double
+          type: number
+        EndLatitude:
+          format: double
+          type: number
+        EndLongitude:
+          format: double
+          type: number
       additionalProperties: false
   securitySchemes:
     oauth2:

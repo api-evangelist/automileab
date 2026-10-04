@@ -159,67 +159,6 @@ paths:
         description: The task model
 components:
   schemas:
-    TaskDetailModel:
-      type: object
-      properties:
-        TaskId:
-          format: int32
-          type: integer
-        CreatedByContactId:
-          format: int32
-          type: integer
-        CreatedByContactName:
-          type: string
-        TaskAcquiredByContactId:
-          format: int32
-          type: integer
-        TaskAcquiredByContactName:
-          type: string
-        TaskMessages:
-          type: array
-          items:
-            $ref: '#/components/schemas/TaskMessageModel'
-        Title:
-          type: string
-      additionalProperties: false
-    TaskMessageModel:
-      type: object
-      properties:
-        TaskMessageId:
-          format: int32
-          type: integer
-        SentByContactId:
-          format: int32
-          type: integer
-        ToContactId:
-          format: int32
-          type: integer
-        MessageText:
-          type: string
-        MessageSentAtUtc:
-          format: date-time
-          type: string
-        SentByContactName:
-          type: string
-        ToContactName:
-          type: string
-        MessageIsRead:
-          type: boolean
-        Position:
-          $ref: '#/components/schemas/PositionModel'
-      additionalProperties: false
-    TaskEditModel:
-      type: object
-      properties:
-        TaskStatusType:
-          format: int32
-          enum:
-          - 0
-          - 1
-          type: integer
-        Title:
-          type: string
-      additionalProperties: false
     TaskModel:
       type: object
       properties:
@@ -270,6 +209,41 @@ components:
         Title:
           type: string
       additionalProperties: false
+    TaskEditModel:
+      type: object
+      properties:
+        TaskStatusType:
+          format: int32
+          enum:
+          - 0
+          - 1
+          type: integer
+        Title:
+          type: string
+      additionalProperties: false
+    TaskDetailModel:
+      type: object
+      properties:
+        TaskId:
+          format: int32
+          type: integer
+        CreatedByContactId:
+          format: int32
+          type: integer
+        CreatedByContactName:
+          type: string
+        TaskAcquiredByContactId:
+          format: int32
+          type: integer
+        TaskAcquiredByContactName:
+          type: string
+        TaskMessages:
+          type: array
+          items:
+            $ref: '#/components/schemas/TaskMessageModel'
+        Title:
+          type: string
+      additionalProperties: false
     PositionModel:
       type: object
       properties:
@@ -280,20 +254,31 @@ components:
           format: double
           type: number
       additionalProperties: false
-    TaskContactModel:
+    TaskMessageModel:
       type: object
       properties:
-        ContactId:
+        TaskMessageId:
           format: int32
           type: integer
-        FirstName:
+        SentByContactId:
+          format: int32
+          type: integer
+        ToContactId:
+          format: int32
+          type: integer
+        MessageText:
           type: string
-        LastName:
+        MessageSentAtUtc:
+          format: date-time
           type: string
-        ProfileImageUrl:
+        SentByContactName:
           type: string
-        IsCheckedIn:
+        ToContactName:
+          type: string
+        MessageIsRead:
           type: boolean
+        Position:
+          $ref: '#/components/schemas/PositionModel'
       additionalProperties: false
     TaskCreateModel:
       type: object
@@ -313,6 +298,21 @@ components:
           $ref: '#/components/schemas/PositionModel'
         Title:
           type: string
+      additionalProperties: false
+    TaskContactModel:
+      type: object
+      properties:
+        ContactId:
+          format: int32
+          type: integer
+        FirstName:
+          type: string
+        LastName:
+          type: string
+        ProfileImageUrl:
+          type: string
+        IsCheckedIn:
+          type: boolean
       additionalProperties: false
   securitySchemes:
     oauth2:

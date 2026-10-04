@@ -242,19 +242,6 @@ paths:
       - oauth2: []
 components:
   schemas:
-    CompanyVehicleModel:
-      type: object
-      properties:
-        CompanyVehicleId:
-          format: int32
-          type: integer
-        CompanyId:
-          format: int32
-          type: integer
-        VehicleId:
-          format: int32
-          type: integer
-      additionalProperties: false
     ProblemDetails:
       type: object
       properties:
@@ -289,6 +276,19 @@ components:
       - VehicleId
       type: object
       properties:
+        CompanyId:
+          format: int32
+          type: integer
+        VehicleId:
+          format: int32
+          type: integer
+      additionalProperties: false
+    CompanyVehicleModel:
+      type: object
+      properties:
+        CompanyVehicleId:
+          format: int32
+          type: integer
         CompanyId:
           format: int32
           type: integer

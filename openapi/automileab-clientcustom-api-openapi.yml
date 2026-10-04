@@ -378,13 +378,17 @@ paths:
       - oauth2: []
 components:
   schemas:
-    UsernameTakenModel:
+    ResetPasswordUserModel:
       type: object
       properties:
-        Username:
+        Email:
           type: string
-        Taken:
-          type: boolean
+        ResetPasswordType:
+          format: int32
+          enum:
+          - 0
+          - 1
+          type: integer
       additionalProperties: false
     ProblemDetails:
       type: object
@@ -401,32 +405,54 @@ components:
         instance:
           type: string
       additionalProperties: {}
-    UsernamesPhoneNumberModel:
+    UserCreatedPasswordModel:
+      type: object
+      properties:
+        Password:
+          type: string
+      additionalProperties: false
+    CustomUserCreateWithoutPasswordModel:
+      required:
+      - EmailAddress
+      - UserName
       type: object
       properties:
         UserName:
+          minLength: 1
           type: string
-        UserGuid:
-          format: uuid
+        FirstName:
+          type: string
+        LastName:
+          type: string
+        EmailAddress:
+          format: email
+          minLength: 1
           type: string
         MobilePhoneNumber:
           type: string
-        SSO:
-          type: boolean
-        SSOConfig:
-          $ref: '#/components/schemas/SSOConfigurationModel'
+        Description:
+          type: string
+        Culture:
+          type: string
+        IMEI:
+          type: string
+        SerialNumber:
+          type: string
+        UnitType:
+          format: int32
+          enum:
+          - 0
+          - 1
+          - 2
+          type: integer
       additionalProperties: false
-    SSOConfigurationModel:
+    DeviceRegisteredModel:
       type: object
       properties:
-        ClientId:
+        QueriedDeviceIMEI:
           type: string
-        TenantId:
-          type: string
-        Scopes:
-          type: array
-          items:
-            type: string
+        IsRegistered:
+          type: boolean
       additionalProperties: false
     CreatedAtRoute:
       type: object
@@ -443,24 +469,24 @@ components:
           type: integer
           readOnly: true
       additionalProperties: false
-    DeviceRegisteredModel:
+    ReverseGeocodingResult:
       type: object
       properties:
-        QueriedDeviceIMEI:
+        FormattedAddress:
           type: string
-        IsRegistered:
-          type: boolean
       additionalProperties: false
-    ResetPasswordUserModel:
+    UserPhoneNumberModel:
       type: object
       properties:
-        Email:
+        UserName:
           type: string
-        ResetPasswordType:
+        PhoneNumber:
+          type: string
+        UserGuid:
+          format: uuid
+          type: string
+        OrganizationId:
           format: int32
-          enum:
-          - 0
-          - 1
           type: integer
       additionalProperties: false
     CustomUserCreateModel:
@@ -504,66 +530,40 @@ components:
           - 2
           type: integer
       additionalProperties: false
-    UserPhoneNumberModel:
+    UsernameTakenModel:
+      type: object
+      properties:
+        Username:
+          type: string
+        Taken:
+          type: boolean
+      additionalProperties: false
+    SSOConfigurationModel:
+      type: object
+      properties:
+        ClientId:
+          type: string
+        TenantId:
+          type: string
+        Scopes:
+          type: array
+          items:
+            type: string
+      additionalProperties: false
+    UsernamesPhoneNumberModel:
       type: object
       properties:
         UserName:
-          type: string
-        PhoneNumber:
           type: string
         UserGuid:
           format: uuid
           type: string
-        OrganizationId:
-          format: int32
-          type: integer
-      additionalProperties: false
-    UserCreatedPasswordModel:
-      type: object
-      properties:
-        Password:
-          type: string
-      additionalProperties: false
-    ReverseGeocodingResult:
-      type: object
-      properties:
-        FormattedAddress:
-          type: string
-      additionalProperties: false
-    CustomUserCreateWithoutPasswordModel:
-      required:
-      - EmailAddress
-      - UserName
-      type: object
-      properties:
-        UserName:
-          minLength: 1
-          type: string
-        FirstName:
-          type: string
-        LastName:
-          type: string
-        EmailAddress:
-          format: email
-          minLength: 1
-          type: string
         MobilePhoneNumber:
           type: string
-        Description:
-          type: string
-        Culture:
-          type: string
-        IMEI:
-          type: string
-        SerialNumber:
-          type: string
-        UnitType:
-          format: int32
-          enum:
-          - 0
-          - 1
-          - 2
-          type: integer
+        SSO:
+          type: boolean
+        SSOConfig:
+          $ref: '#/components/schemas/SSOConfigurationModel'
       additionalProperties: false
   securitySchemes:
     oauth2:

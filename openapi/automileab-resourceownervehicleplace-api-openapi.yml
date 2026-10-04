@@ -169,19 +169,11 @@ paths:
         description: The model which to create the association between vehicle and place
 components:
   schemas:
-    VehiclePlaceCreateModel:
+    VehiclePlaceEditModel:
       required:
-      - PlaceId
       - Radius
-      - VehicleId
       type: object
       properties:
-        VehicleId:
-          format: int32
-          type: integer
-        PlaceId:
-          format: int32
-          type: integer
         Description:
           type: string
         TripType:
@@ -207,11 +199,19 @@ components:
           format: int32
           type: integer
       additionalProperties: false
-    VehiclePlaceEditModel:
+    VehiclePlaceCreateModel:
       required:
+      - PlaceId
       - Radius
+      - VehicleId
       type: object
       properties:
+        VehicleId:
+          format: int32
+          type: integer
+        PlaceId:
+          format: int32
+          type: integer
         Description:
           type: string
         TripType:

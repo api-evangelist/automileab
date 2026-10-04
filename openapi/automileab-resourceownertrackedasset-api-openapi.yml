@@ -555,44 +555,12 @@ paths:
       - oauth2: []
 components:
   schemas:
-    PropertyModel:
+    EnumTypeModelGET:
       type: object
       properties:
-        PropertyType:
-          format: int32
-          enum:
-          - 0
-          - 1
-          - 2
-          - 3
-          - 5
-          - 6
-          - 7
-          - 8
-          - 9
-          - 10
-          - 11
-          - 12
-          - 13
-          - 14
-          - 15
-          - 16
-          type: integer
-        PropertyName:
-          type: string
-        ValueType:
-          type: string
-        Value:
-          type: string
-        Unit:
-          type: string
-      additionalProperties: false
-    TrackedAssetUpdateIntervalModelGET:
-      type: object
-      properties:
-        UpdateIntervalInSecondsList:
-          type: array
-          items:
+        EnumValueList:
+          type: object
+          additionalProperties:
             format: int32
             type: integer
       additionalProperties: false
@@ -604,6 +572,18 @@ components:
           items:
             format: int32
             type: integer
+      additionalProperties: false
+    TrackedAssetTrackConfigurationModelPUT:
+      required:
+      - MinutesToTrack
+      type: object
+      properties:
+        MinutesToTrack:
+          format: int32
+          type: integer
+        OriginalTriggerMessageHistoryId:
+          format: int32
+          type: integer
       additionalProperties: false
     ExternalDeviceModelGET:
       type: object
@@ -646,121 +626,49 @@ components:
           type: boolean
           readOnly: true
       additionalProperties: false
-    ExternalDeviceHistoryModelGET:
+    TrackedAssetModelEdit:
+      required:
+      - AssetType
       type: object
       properties:
-        ExternalDeviceHistoryId:
+        Name:
+          type: string
+        ImageUrl:
+          type: string
+        DefaultSleepTimeInMinutes:
           format: int32
           type: integer
+        AssetType:
+          format: int32
+          enum:
+          - 0
+          - 1
+          - 2
+          - 3
+          - 4
+          - 5
+          - 6
+          - 255
+          type: integer
+        UpdateIntervalInSeconds:
+          format: int32
+          type: integer
+        IsBluetoothDiscoverable:
+          type: boolean
+        IsRegistrationModeOn:
+          type: boolean
+      additionalProperties: false
+    ExternalDeviceModelPUT:
+      type: object
+      properties:
         ExternalDeviceId:
           format: int32
           type: integer
-        OccuredAtUtc:
-          format: date-time
+        Name:
           type: string
-        GroupList:
-          type: array
-          items:
-            $ref: '#/components/schemas/ExternalDeviceHistoryGroupModelGET'
-        HistoryType:
-          format: int32
-          enum:
-          - 0
-          - 1
-          - 2
-          - 3
-          - 4
-          - 5
-          - 6
-          - 7
-          - 8
-          - 9
-          - 10
-          type: integer
-        Position:
-          $ref: '#/components/schemas/PositionPointModel'
-        PropertyList:
-          type: array
-          items:
-            $ref: '#/components/schemas/PropertyModel'
-        TrackedAssetId:
+        UpdateIntervalInSeconds:
           format: int32
           type: integer
-        TrackerName:
-          type: string
-          readOnly: true
-      additionalProperties: false
-    TrackedAssetHistoryModelGET:
-      type: object
-      properties:
-        TrackedAssetHistoryId:
-          format: int32
-          type: integer
-        OccuredAt:
-          format: date-time
-          type: string
-        HistoryType:
-          format: int32
-          enum:
-          - 0
-          - 1
-          - 2
-          - 3
-          - 4
-          - 5
-          - 6
-          - 7
-          - 8
-          - 9
-          - 10
-          type: integer
-        Position:
-          $ref: '#/components/schemas/PositionPointModel'
-        IsNew:
-          type: boolean
-        PropertyList:
-          type: array
-          items:
-            $ref: '#/components/schemas/PropertyModel'
-      additionalProperties: false
-    EnumTypeModelGET:
-      type: object
-      properties:
-        EnumValueList:
-          type: object
-          additionalProperties:
-            format: int32
-            type: integer
-      additionalProperties: false
-    TrackedAssetTrackConfigurationModelPUT:
-      required:
-      - MinutesToTrack
-      type: object
-      properties:
-        MinutesToTrack:
-          format: int32
-          type: integer
-        OriginalTriggerMessageHistoryId:
-          format: int32
-          type: integer
-      additionalProperties: false
-    ExternalDeviceHistoryGroupModelGET:
-      type: object
-      properties:
-        OccuredAtUtc:
-          format: date-time
-          type: string
-        Value:
-          type: string
-      additionalProperties: false
-    ExternalDeviceUpdateIntervalModelGET:
-      type: object
-      properties:
-        UpdateIntervalInSecondsList:
-          type: array
-          items:
-            format: int32
-            type: integer
       additionalProperties: false
     TrackedAssetModelGet:
       required:
@@ -856,6 +764,43 @@ components:
         MountedInCradle:
           type: boolean
       additionalProperties: false
+    TrackedAssetSleepConfigurationModelPUT:
+      required:
+      - MinutesToSleep
+      type: object
+      properties:
+        MinutesToSleep:
+          format: int32
+          type: integer
+      additionalProperties: false
+    ExternalDeviceHistoryGroupModelGET:
+      type: object
+      properties:
+        OccuredAtUtc:
+          format: date-time
+          type: string
+        Value:
+          type: string
+      additionalProperties: false
+    PositionPointModel:
+      type: object
+      properties:
+        Longitude:
+          format: double
+          type: number
+        Latitude:
+          format: double
+          type: number
+      additionalProperties: false
+    ExternalDeviceUpdateIntervalModelGET:
+      type: object
+      properties:
+        UpdateIntervalInSecondsList:
+          type: array
+          items:
+            format: int32
+            type: integer
+      additionalProperties: false
     AssetCommandModel:
       type: object
       properties:
@@ -877,50 +822,16 @@ components:
             format: int32
             type: integer
       additionalProperties: false
-    ExternalDeviceModelPUT:
+    TrackedAssetHistoryModelGET:
       type: object
       properties:
-        ExternalDeviceId:
+        TrackedAssetHistoryId:
           format: int32
           type: integer
-        Name:
+        OccuredAt:
+          format: date-time
           type: string
-        UpdateIntervalInSeconds:
-          format: int32
-          type: integer
-      additionalProperties: false
-    PositionPointModel:
-      type: object
-      properties:
-        Longitude:
-          format: double
-          type: number
-        Latitude:
-          format: double
-          type: number
-      additionalProperties: false
-    TrackedAssetSleepConfigurationModelPUT:
-      required:
-      - MinutesToSleep
-      type: object
-      properties:
-        MinutesToSleep:
-          format: int32
-          type: integer
-      additionalProperties: false
-    TrackedAssetModelEdit:
-      required:
-      - AssetType
-      type: object
-      properties:
-        Name:
-          type: string
-        ImageUrl:
-          type: string
-        DefaultSleepTimeInMinutes:
-          format: int32
-          type: integer
-        AssetType:
+        HistoryType:
           format: int32
           enum:
           - 0
@@ -930,15 +841,104 @@ components:
           - 4
           - 5
           - 6
-          - 255
+          - 7
+          - 8
+          - 9
+          - 10
           type: integer
-        UpdateIntervalInSeconds:
+        Position:
+          $ref: '#/components/schemas/PositionPointModel'
+        IsNew:
+          type: boolean
+        PropertyList:
+          type: array
+          items:
+            $ref: '#/components/schemas/PropertyModel'
+      additionalProperties: false
+    ExternalDeviceHistoryModelGET:
+      type: object
+      properties:
+        ExternalDeviceHistoryId:
           format: int32
           type: integer
-        IsBluetoothDiscoverable:
-          type: boolean
-        IsRegistrationModeOn:
-          type: boolean
+        ExternalDeviceId:
+          format: int32
+          type: integer
+        OccuredAtUtc:
+          format: date-time
+          type: string
+        GroupList:
+          type: array
+          items:
+            $ref: '#/components/schemas/ExternalDeviceHistoryGroupModelGET'
+        HistoryType:
+          format: int32
+          enum:
+          - 0
+          - 1
+          - 2
+          - 3
+          - 4
+          - 5
+          - 6
+          - 7
+          - 8
+          - 9
+          - 10
+          type: integer
+        Position:
+          $ref: '#/components/schemas/PositionPointModel'
+        PropertyList:
+          type: array
+          items:
+            $ref: '#/components/schemas/PropertyModel'
+        TrackedAssetId:
+          format: int32
+          type: integer
+        TrackerName:
+          type: string
+          readOnly: true
+      additionalProperties: false
+    PropertyModel:
+      type: object
+      properties:
+        PropertyType:
+          format: int32
+          enum:
+          - 0
+          - 1
+          - 2
+          - 3
+          - 5
+          - 6
+          - 7
+          - 8
+          - 9
+          - 10
+          - 11
+          - 12
+          - 13
+          - 14
+          - 15
+          - 16
+          type: integer
+        PropertyName:
+          type: string
+        ValueType:
+          type: string
+        Value:
+          type: string
+        Unit:
+          type: string
+      additionalProperties: false
+    TrackedAssetUpdateIntervalModelGET:
+      type: object
+      properties:
+        UpdateIntervalInSecondsList:
+          type: array
+          items:
+            format: int32
+            type: integer
       additionalProperties: false
   securitySchemes:
     oauth2:

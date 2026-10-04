@@ -242,6 +242,46 @@ components:
           format: int32
           type: integer
       additionalProperties: false
+    VehicleModel:
+      type: object
+      properties:
+        VehicleId:
+          format: int32
+          type: integer
+        VehicleIdentificationNumber:
+          type: string
+        NumberPlate:
+          type: string
+        Make:
+          type: string
+        Model:
+          type: string
+        OwnerContactId:
+          format: int32
+          type: integer
+        OwnerCompanyId:
+          format: int32
+          type: integer
+        CurrentOdometerInKilometers:
+          format: double
+          type: number
+        VehicleType:
+          format: int32
+          enum:
+          - 0
+          - 1
+          - 2
+          - 3
+          - 4
+          - 5
+          - 6
+          - 255
+          type: integer
+        DeleteTripDetailsAfter:
+          $ref: '#/components/schemas/TimeSpan'
+        DeleteTripsAfter:
+          $ref: '#/components/schemas/TimeSpan'
+      additionalProperties: false
     VehicleEditModel:
       type: object
       properties:
@@ -415,46 +455,6 @@ components:
           type: integer
         MakeImageUrl:
           type: string
-        CurrentOdometerInKilometers:
-          format: double
-          type: number
-        VehicleType:
-          format: int32
-          enum:
-          - 0
-          - 1
-          - 2
-          - 3
-          - 4
-          - 5
-          - 6
-          - 255
-          type: integer
-        DeleteTripDetailsAfter:
-          $ref: '#/components/schemas/TimeSpan'
-        DeleteTripsAfter:
-          $ref: '#/components/schemas/TimeSpan'
-      additionalProperties: false
-    VehicleModel:
-      type: object
-      properties:
-        VehicleId:
-          format: int32
-          type: integer
-        VehicleIdentificationNumber:
-          type: string
-        NumberPlate:
-          type: string
-        Make:
-          type: string
-        Model:
-          type: string
-        OwnerContactId:
-          format: int32
-          type: integer
-        OwnerCompanyId:
-          format: int32
-          type: integer
         CurrentOdometerInKilometers:
           format: double
           type: number

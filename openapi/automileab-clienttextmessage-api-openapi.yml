@@ -109,30 +109,6 @@ paths:
               $ref: '#/components/schemas/ValidatePinModel'
 components:
   schemas:
-    CreatePinModel:
-      type: object
-      properties:
-        UserName:
-          type: string
-        MobilePhoneNumber:
-          type: string
-        UserGuid:
-          format: uuid
-          type: string
-        Culture:
-          type: string
-      additionalProperties: false
-    ValidatePinModel:
-      type: object
-      properties:
-        UserName:
-          type: string
-        Pin:
-          type: string
-        UserGuid:
-          format: uuid
-          type: string
-      additionalProperties: false
     ProblemDetails:
       type: object
       properties:
@@ -148,6 +124,17 @@ components:
         instance:
           type: string
       additionalProperties: {}
+    ValidatePinModel:
+      type: object
+      properties:
+        UserName:
+          type: string
+        Pin:
+          type: string
+        UserGuid:
+          format: uuid
+          type: string
+      additionalProperties: false
     TokenResponse:
       description: The token response
       type: object
@@ -166,6 +153,19 @@ components:
           format: date-time
           type: string
         RefreshToken:
+          type: string
+      additionalProperties: false
+    CreatePinModel:
+      type: object
+      properties:
+        UserName:
+          type: string
+        MobilePhoneNumber:
+          type: string
+        UserGuid:
+          format: uuid
+          type: string
+        Culture:
           type: string
       additionalProperties: false
   securitySchemes:

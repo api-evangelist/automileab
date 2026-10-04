@@ -409,6 +409,30 @@ components:
         IsEnabled:
           type: boolean
       additionalProperties: false
+    HoursOfServiceCycles:
+      type: object
+      properties:
+        Cycles:
+          type: array
+          items:
+            $ref: '#/components/schemas/Cycle'
+      additionalProperties: false
+    HoursOfServiceStatusSynchModel:
+      type: object
+      properties:
+        LastSynchDate:
+          format: date-time
+          type: string
+          readOnly: true
+        Added:
+          type: array
+          items:
+            $ref: '#/components/schemas/HoursOfServiceDutyStatusModel'
+        Updated:
+          type: array
+          items:
+            $ref: '#/components/schemas/HoursOfServiceDutyStatusModel'
+      additionalProperties: false
     AddressModel:
       required:
       - AddressLine2
@@ -443,72 +467,6 @@ components:
           minLength: 1
           type: string
       additionalProperties: false
-    HoursOfServiceExportModel:
-      type: object
-      properties:
-        FromDate:
-          format: date-time
-          type: string
-        ToDate:
-          format: date-time
-          type: string
-        EmailAddress:
-          description: Recipient of the report
-          type: string
-      additionalProperties: false
-    Cycle:
-      type: object
-      properties:
-        WorkShifts:
-          type: array
-          items:
-            $ref: '#/components/schemas/WorkShift'
-        TotalTime:
-          $ref: '#/components/schemas/TimeSpan'
-        OffDutyTime:
-          $ref: '#/components/schemas/TimeSpan'
-        OnDutyTime:
-          $ref: '#/components/schemas/TimeSpan'
-        DrivingTime:
-          $ref: '#/components/schemas/TimeSpan'
-        SleeperBerthTime:
-          $ref: '#/components/schemas/TimeSpan'
-        NumberOfDays:
-          format: double
-          type: number
-          readOnly: true
-        OnDutyAndDriving:
-          format: double
-          type: number
-          readOnly: true
-      additionalProperties: false
-    HoursOfServiceStatusPostModel:
-      type: object
-      properties:
-        Added:
-          type: array
-          items:
-            $ref: '#/components/schemas/HoursOfServiceDutyStatusCreateModel'
-        Updated:
-          type: array
-          items:
-            $ref: '#/components/schemas/HoursOfServiceDutyStatusModel'
-        LastSynchDate:
-          format: date-time
-          type: string
-      additionalProperties: false
-    HoursOfServiceDutyStatusesModel:
-      type: object
-      properties:
-        LastSynchDate:
-          format: date-time
-          type: string
-          readOnly: true
-        DutyStatuses:
-          type: array
-          items:
-            $ref: '#/components/schemas/HoursOfServiceDutyStatusModel'
-      additionalProperties: false
     HoursOfServiceDutyStatusCreateModel:
       type: object
       properties:
@@ -538,6 +496,38 @@ components:
         ExternalId:
           format: uuid
           type: string
+      additionalProperties: false
+    WorkShift:
+      type: object
+      properties:
+        TotalTime:
+          $ref: '#/components/schemas/TimeSpan'
+        OffDutyTime:
+          $ref: '#/components/schemas/TimeSpan'
+        OnDutyTime:
+          $ref: '#/components/schemas/TimeSpan'
+        DrivingTime:
+          $ref: '#/components/schemas/TimeSpan'
+        SleeperBerthTime:
+          $ref: '#/components/schemas/TimeSpan'
+        DutyStatuses:
+          type: array
+          items:
+            $ref: '#/components/schemas/DutyStatus'
+        WorkShiftTime:
+          $ref: '#/components/schemas/TimeSpan'
+      additionalProperties: false
+    HoursOfServiceDutyStatusesModel:
+      type: object
+      properties:
+        LastSynchDate:
+          format: date-time
+          type: string
+          readOnly: true
+        DutyStatuses:
+          type: array
+          items:
+            $ref: '#/components/schemas/HoursOfServiceDutyStatusModel'
       additionalProperties: false
     HoursOfServiceDutyStatusModel:
       type: object
@@ -599,25 +589,13 @@ components:
         IsDeleted:
           type: boolean
       additionalProperties: false
-    HoursOfServiceStatusSynchModel:
+    Cycle:
       type: object
       properties:
-        LastSynchDate:
-          format: date-time
-          type: string
-          readOnly: true
-        Added:
+        WorkShifts:
           type: array
           items:
-            $ref: '#/components/schemas/HoursOfServiceDutyStatusModel'
-        Updated:
-          type: array
-          items:
-            $ref: '#/components/schemas/HoursOfServiceDutyStatusModel'
-      additionalProperties: false
-    WorkShift:
-      type: object
-      properties:
+            $ref: '#/components/schemas/WorkShift'
         TotalTime:
           $ref: '#/components/schemas/TimeSpan'
         OffDutyTime:
@@ -628,12 +606,42 @@ components:
           $ref: '#/components/schemas/TimeSpan'
         SleeperBerthTime:
           $ref: '#/components/schemas/TimeSpan'
-        DutyStatuses:
+        NumberOfDays:
+          format: double
+          type: number
+          readOnly: true
+        OnDutyAndDriving:
+          format: double
+          type: number
+          readOnly: true
+      additionalProperties: false
+    HoursOfServiceStatusPostModel:
+      type: object
+      properties:
+        Added:
           type: array
           items:
-            $ref: '#/components/schemas/DutyStatus'
-        WorkShiftTime:
-          $ref: '#/components/schemas/TimeSpan'
+            $ref: '#/components/schemas/HoursOfServiceDutyStatusCreateModel'
+        Updated:
+          type: array
+          items:
+            $ref: '#/components/schemas/HoursOfServiceDutyStatusModel'
+        LastSynchDate:
+          format: date-time
+          type: string
+      additionalProperties: false
+    HoursOfServiceExportModel:
+      type: object
+      properties:
+        FromDate:
+          format: date-time
+          type: string
+        ToDate:
+          format: date-time
+          type: string
+        EmailAddress:
+          description: Recipient of the report
+          type: string
       additionalProperties: false
     DutyStatus:
       type: object
@@ -670,14 +678,6 @@ components:
         DistanceInKm:
           format: double
           type: number
-      additionalProperties: false
-    HoursOfServiceCycles:
-      type: object
-      properties:
-        Cycles:
-          type: array
-          items:
-            $ref: '#/components/schemas/Cycle'
       additionalProperties: false
     TimeSpan:
       type: object

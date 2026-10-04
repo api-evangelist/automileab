@@ -172,17 +172,18 @@ paths:
       - oauth2: []
 components:
   schemas:
-    IMEIConfigCreateModel:
+    IMEIConfigModel:
       type: object
       properties:
+        IMEIConfigId:
+          format: int32
+          type: integer
         IMEI:
           type: string
         VehicleId:
           format: int32
           type: integer
-        SerialNumber:
-          type: string
-        IMEIDeviceType:
+        DeviceType:
           format: int32
           enum:
           - 0
@@ -195,10 +196,6 @@ components:
           - 7
           - 8
           - 9
-          - 10
-          - 11
-          - 12
-          - 13
           - 255
           type: integer
       additionalProperties: false
@@ -253,18 +250,17 @@ components:
           - 255
           type: integer
       additionalProperties: false
-    IMEIConfigModel:
+    IMEIConfigCreateModel:
       type: object
       properties:
-        IMEIConfigId:
-          format: int32
-          type: integer
         IMEI:
           type: string
         VehicleId:
           format: int32
           type: integer
-        DeviceType:
+        SerialNumber:
+          type: string
+        IMEIDeviceType:
           format: int32
           enum:
           - 0
@@ -277,6 +273,10 @@ components:
           - 7
           - 8
           - 9
+          - 10
+          - 11
+          - 12
+          - 13
           - 255
           type: integer
       additionalProperties: false

@@ -83,23 +83,6 @@ paths:
       - oauth2: []
 components:
   schemas:
-    DTCEvent:
-      type: object
-      properties:
-        Occured:
-          format: date-time
-          type: string
-        DTCEventDetails:
-          type: array
-          items:
-            $ref: '#/components/schemas/DTCEventDetail'
-        Latitude:
-          format: double
-          type: number
-        Longitude:
-          format: double
-          type: number
-      additionalProperties: false
     MILEvent:
       type: object
       properties:
@@ -137,6 +120,23 @@ components:
           type: string
         ProbableCause:
           type: string
+      additionalProperties: false
+    DTCEvent:
+      type: object
+      properties:
+        Occured:
+          format: date-time
+          type: string
+        DTCEventDetails:
+          type: array
+          items:
+            $ref: '#/components/schemas/DTCEventDetail'
+        Latitude:
+          format: double
+          type: number
+        Longitude:
+          format: double
+          type: number
       additionalProperties: false
     BatteryEvent:
       type: object

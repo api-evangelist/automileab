@@ -148,15 +148,6 @@ components:
         Comment:
           type: string
       additionalProperties: false
-    VehicleDefectCommentsCreateModel:
-      type: object
-      properties:
-        VehicleDefectId:
-          format: int32
-          type: integer
-        Comment:
-          type: string
-      additionalProperties: false
     VehicleDefectCommentsModel:
       type: object
       properties:
@@ -173,6 +164,15 @@ components:
           type: string
         CommentDateUtc:
           format: date-time
+          type: string
+      additionalProperties: false
+    VehicleDefectCommentsCreateModel:
+      type: object
+      properties:
+        VehicleDefectId:
+          format: int32
+          type: integer
+        Comment:
           type: string
       additionalProperties: false
   securitySchemes:
