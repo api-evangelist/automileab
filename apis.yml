@@ -28,6 +28,11 @@ tags:
 - Fleet Management
 - GPS Tracking
 - Mileage Logging
+- Software-as-a-Service
+tags_raw:
+- Fleet Management
+- GPS Tracking
+- Mileage Logging
 - API
 - SaaS
 
@@ -38,6 +43,9 @@ maintainers:
   email: info@apis.io
 
 common:
+- type: CapabilityMap
+  url: capabilities/automileab-capability-edges.yml
+  name: Automileab Business Capability Map
 - type: AgenticAccess
   url: agentic-access/automileab-agentic-access.yml
 - type: Spectral
@@ -78,6 +86,8 @@ apis:
   humanURL: https://automile.com/en/developers
   baseURL: https://api.automile.com
   tags:
+  - Client API
+  tags_raw:
   - ClientApi
   properties:
   - type: OpenAPI
@@ -119,6 +129,8 @@ apis:
   humanURL: https://automile.com/en/developers
   baseURL: https://api.automile.com
   tags:
+  - Client Onboarding
+  tags_raw:
   - ClientOnboarding
   properties:
   - type: OpenAPI
@@ -159,6 +171,8 @@ apis:
   humanURL: https://automile.com/en/developers
   baseURL: https://api.automile.com
   tags:
+  - Homes
+  tags_raw:
   - Home
   properties:
   - type: OpenAPI
@@ -179,6 +193,8 @@ apis:
   humanURL: https://automile.com/en/developers
   baseURL: https://api.automile.com
   tags:
+  - Authentication
+  tags_raw:
   - OAuth
   properties:
   - type: OpenAPI
