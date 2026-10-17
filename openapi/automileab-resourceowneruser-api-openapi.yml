@@ -170,17 +170,11 @@ paths:
         description: Model containing the users client device id
 components:
   schemas:
-    ResetPasswordUserModel:
+    ChangeUserNameModel:
       type: object
       properties:
-        Email:
+        NewUserName:
           type: string
-        ResetPasswordType:
-          format: int32
-          enum:
-          - 0
-          - 1
-          type: integer
       additionalProperties: false
     ChangePasswordModel:
       type: object
@@ -205,6 +199,24 @@ components:
           format: int32
           type: integer
       additionalProperties: false
+    UserExistingPasswordModel:
+      type: object
+      properties:
+        HasPassword:
+          type: boolean
+      additionalProperties: false
+    ResetPasswordUserModel:
+      type: object
+      properties:
+        Email:
+          type: string
+        ResetPasswordType:
+          format: int32
+          enum:
+          - 0
+          - 1
+          type: integer
+      additionalProperties: false
     LogoutModel:
       required:
       - UserDeviceId
@@ -213,18 +225,6 @@ components:
         UserDeviceId:
           format: int32
           type: integer
-      additionalProperties: false
-    ChangeUserNameModel:
-      type: object
-      properties:
-        NewUserName:
-          type: string
-      additionalProperties: false
-    UserExistingPasswordModel:
-      type: object
-      properties:
-        HasPassword:
-          type: boolean
       additionalProperties: false
   securitySchemes:
     oauth2:

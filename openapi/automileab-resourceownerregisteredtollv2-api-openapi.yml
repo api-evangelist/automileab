@@ -238,7 +238,7 @@ paths:
       - oauth2: []
 components:
   schemas:
-    RegisteredTollModelPOST:
+    RegisteredTollModelPUT:
       type: object
       properties:
         TimestampUtc:
@@ -260,6 +260,14 @@ components:
           format: double
           type: number
       additionalProperties: false
+    RegisteredTollBatchUpdateModelPUT:
+      type: object
+      properties:
+        RegisteredTollList:
+          type: array
+          items:
+            $ref: '#/components/schemas/RegisteredTollMultiEditModelPUT'
+      additionalProperties: false
     TollGeofenceModelGET:
       type: object
       properties:
@@ -268,14 +276,6 @@ components:
           type: integer
         Name:
           type: string
-      additionalProperties: false
-    RegisteredTollBatchUpdateModelPUT:
-      type: object
-      properties:
-        RegisteredTollList:
-          type: array
-          items:
-            $ref: '#/components/schemas/RegisteredTollMultiEditModelPUT'
       additionalProperties: false
     RegisteredTollModelGET:
       type: object
@@ -372,7 +372,7 @@ components:
           items:
             $ref: '#/components/schemas/TollGeofenceModelGET'
       additionalProperties: false
-    RegisteredTollModelPUT:
+    RegisteredTollModelPOST:
       type: object
       properties:
         TimestampUtc:

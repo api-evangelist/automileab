@@ -63,14 +63,6 @@ paths:
       - oauth2: []
 components:
   schemas:
-    VehicleModelsModel:
-      type: object
-      properties:
-        VehicleModels:
-          type: array
-          items:
-            $ref: '#/components/schemas/VehicleModelModel'
-      additionalProperties: false
     VehickeMakesModel:
       type: object
       properties:
@@ -78,6 +70,14 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/VehicleMakeModel'
+      additionalProperties: false
+    VehicleModelsModel:
+      type: object
+      properties:
+        VehicleModels:
+          type: array
+          items:
+            $ref: '#/components/schemas/VehicleModelModel'
       additionalProperties: false
     VehicleModelModel:
       type: object

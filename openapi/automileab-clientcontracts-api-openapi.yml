@@ -98,15 +98,44 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
-    StringStringIEnumerableKeyValuePair:
+    HttpMethod:
       type: object
       properties:
-        Key:
+        Method:
           type: string
-        Value:
+      additionalProperties: false
+    HttpRequestMessage:
+      type: object
+      properties:
+        Version:
+          $ref: '#/components/schemas/Version'
+        VersionPolicy:
+          format: int32
+          enum:
+          - 0
+          - 1
+          - 2
+          type: integer
+        Content:
+          $ref: '#/components/schemas/HttpContent'
+        Method:
+          $ref: '#/components/schemas/HttpMethod'
+        RequestUri:
+          format: uri
+          type: string
+        Headers:
           type: array
           items:
-            type: string
+            $ref: '#/components/schemas/StringStringIEnumerableKeyValuePair'
+          readOnly: true
+        Properties:
+          type: object
+          additionalProperties: {}
+          readOnly: true
+        Options:
+          type: object
+          additionalProperties: {}
+          readOnly: true
       additionalProperties: false
     HttpResponseMessage:
       type: object
@@ -198,6 +227,16 @@ components:
           type: boolean
           readOnly: true
       additionalProperties: false
+    StringStringIEnumerableKeyValuePair:
+      type: object
+      properties:
+        Key:
+          type: string
+        Value:
+          type: array
+          items:
+            type: string
+      additionalProperties: false
     Version:
       type: object
       properties:
@@ -224,45 +263,6 @@ components:
         MinorRevision:
           format: int32
           type: integer
-          readOnly: true
-      additionalProperties: false
-    HttpMethod:
-      type: object
-      properties:
-        Method:
-          type: string
-      additionalProperties: false
-    HttpRequestMessage:
-      type: object
-      properties:
-        Version:
-          $ref: '#/components/schemas/Version'
-        VersionPolicy:
-          format: int32
-          enum:
-          - 0
-          - 1
-          - 2
-          type: integer
-        Content:
-          $ref: '#/components/schemas/HttpContent'
-        Method:
-          $ref: '#/components/schemas/HttpMethod'
-        RequestUri:
-          format: uri
-          type: string
-        Headers:
-          type: array
-          items:
-            $ref: '#/components/schemas/StringStringIEnumerableKeyValuePair'
-          readOnly: true
-        Properties:
-          type: object
-          additionalProperties: {}
-          readOnly: true
-        Options:
-          type: object
-          additionalProperties: {}
           readOnly: true
       additionalProperties: false
     HttpContent:

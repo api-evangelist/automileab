@@ -279,16 +279,6 @@ components:
         instance:
           type: string
       additionalProperties: {}
-    ContactVehicleEditModel:
-      type: object
-      properties:
-        VehicleId:
-          format: int32
-          type: integer
-        ContactId:
-          format: int32
-          type: integer
-      additionalProperties: false
     ContactVehicleDetailModel:
       type: object
       properties:
@@ -317,6 +307,16 @@ components:
           type: array
           items:
             type: string
+      additionalProperties: false
+    ContactVehicleEditModel:
+      type: object
+      properties:
+        VehicleId:
+          format: int32
+          type: integer
+        ContactId:
+          format: int32
+          type: integer
       additionalProperties: false
   securitySchemes:
     oauth2:

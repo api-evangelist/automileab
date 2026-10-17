@@ -113,12 +113,6 @@ components:
         Position:
           $ref: '#/components/schemas/PositionModel'
       additionalProperties: false
-    TaskMessageEditModel:
-      type: object
-      properties:
-        IsRead:
-          type: boolean
-      additionalProperties: false
     PositionModel:
       type: object
       properties:
@@ -154,6 +148,12 @@ components:
           type: boolean
         Position:
           $ref: '#/components/schemas/PositionModel'
+      additionalProperties: false
+    TaskMessageEditModel:
+      type: object
+      properties:
+        IsRead:
+          type: boolean
       additionalProperties: false
   securitySchemes:
     oauth2:

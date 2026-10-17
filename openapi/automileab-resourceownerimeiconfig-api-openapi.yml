@@ -172,7 +172,7 @@ paths:
       - oauth2: []
 components:
   schemas:
-    IMEIConfigModel:
+    IMEIConfigDetailModel:
       type: object
       properties:
         IMEIConfigId:
@@ -223,7 +223,7 @@ components:
           - 255
           type: integer
       additionalProperties: false
-    IMEIConfigDetailModel:
+    IMEIConfigModel:
       type: object
       properties:
         IMEIConfigId:

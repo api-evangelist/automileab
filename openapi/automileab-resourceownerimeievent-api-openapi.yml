@@ -151,42 +151,6 @@ paths:
       - oauth2: []
 components:
   schemas:
-    IMEIEventStatusModel:
-      type: object
-      properties:
-        Description:
-          type: string
-        TimeStamp:
-          format: date-time
-          type: string
-        TimeZone:
-          format: int32
-          type: integer
-        EventType:
-          type: string
-        PositionLongitude:
-          format: double
-          type: number
-        PositionLatitude:
-          format: double
-          type: number
-        PositionFormattedAddress:
-          type: string
-        CellTower:
-          format: int32
-          type: integer
-        CellTowerTimeZone:
-          format: int32
-          type: integer
-        VehicleIdentificationNumber:
-          type: string
-        IMEI:
-          type: string
-        DeviceSerialNumber:
-          type: string
-        Status:
-          type: string
-      additionalProperties: false
     IMEIEventModel:
       type: object
       properties:
@@ -266,6 +230,42 @@ components:
         FaultLocation:
           type: string
         ProbableCause:
+          type: string
+      additionalProperties: false
+    IMEIEventStatusModel:
+      type: object
+      properties:
+        Description:
+          type: string
+        TimeStamp:
+          format: date-time
+          type: string
+        TimeZone:
+          format: int32
+          type: integer
+        EventType:
+          type: string
+        PositionLongitude:
+          format: double
+          type: number
+        PositionLatitude:
+          format: double
+          type: number
+        PositionFormattedAddress:
+          type: string
+        CellTower:
+          format: int32
+          type: integer
+        CellTowerTimeZone:
+          format: int32
+          type: integer
+        VehicleIdentificationNumber:
+          type: string
+        IMEI:
+          type: string
+        DeviceSerialNumber:
+          type: string
+        Status:
           type: string
       additionalProperties: false
     IMEIEventDTCModel:

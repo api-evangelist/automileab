@@ -165,6 +165,17 @@ components:
           format: int32
           type: integer
       additionalProperties: false
+    CompanyModel:
+      type: object
+      properties:
+        CompanyId:
+          format: int32
+          type: integer
+        RegisteredCompanyName:
+          type: string
+        RegistrationNumber:
+          type: string
+      additionalProperties: false
     CompanyEditModel:
       required:
       - RegisteredCompanyName
@@ -177,17 +188,6 @@ components:
         RegistrationNumber:
           type: string
         Description:
-          type: string
-      additionalProperties: false
-    CompanyModel:
-      type: object
-      properties:
-        CompanyId:
-          format: int32
-          type: integer
-        RegisteredCompanyName:
-          type: string
-        RegistrationNumber:
           type: string
       additionalProperties: false
     CompanyDetailModel:

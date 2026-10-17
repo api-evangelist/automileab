@@ -301,6 +301,22 @@ paths:
       x-summary-source: derived
 components:
   schemas:
+    UpdateStopModel:
+      type: object
+      properties:
+        RouteStopId:
+          format: int32
+          type: integer
+        Status:
+          format: int32
+          enum:
+          - 0
+          - 1
+          - 3
+          type: integer
+        DriverNotes:
+          type: string
+      additionalProperties: false
     RouteRequest:
       type: object
       properties:
@@ -422,22 +438,6 @@ components:
         Longitude:
           format: double
           type: number
-      additionalProperties: false
-    UpdateStopModel:
-      type: object
-      properties:
-        RouteStopId:
-          format: int32
-          type: integer
-        Status:
-          format: int32
-          enum:
-          - 0
-          - 1
-          - 3
-          type: integer
-        DriverNotes:
-          type: string
       additionalProperties: false
   securitySchemes:
     oauth2:

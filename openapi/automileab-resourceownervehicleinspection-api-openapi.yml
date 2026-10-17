@@ -200,70 +200,72 @@ paths:
         description: The model containing reciving email address and language of the email
 components:
   schemas:
-    VehicleDefectAttachmentEditModel:
+    VehicleDefectEditModel:
       type: object
       properties:
-        VehicleDefectAttachmentId:
-          format: int32
-          type: integer
-        AttachmentType:
-          format: int32
-          enum:
-          - 0
-          - 1
-          - 2
-          - 3
-          type: integer
-        Data:
-          type: string
-      additionalProperties: false
-    VehicleDefectCommentsModel:
-      type: object
-      properties:
-        VehicleDefectCommentId:
-          format: int32
-          type: integer
         VehicleDefectId:
           format: int32
           type: integer
-        CreatedByContactId:
-          format: int32
-          type: integer
-        Comment:
-          type: string
-        CommentDateUtc:
-          format: date-time
-          type: string
-      additionalProperties: false
-    VehicleDefectCommentEditModel:
-      type: object
-      properties:
-        VehicleDefectCommentId:
-          format: int32
-          type: integer
-        Comment:
-          type: string
-      additionalProperties: false
-    VehicleInspectionExportModel:
-      type: object
-      properties:
-        ToEmail:
-          type: string
-        ISO639LanguageCode:
-          type: string
-      additionalProperties: false
-    VehicleDefectAttachmentCreateModel:
-      type: object
-      properties:
-        AttachmentType:
+        DefectType:
           format: int32
           enum:
           - 0
           - 1
           - 2
           - 3
+          - 4
+          - 5
+          - 6
+          - 7
+          - 8
+          - 9
+          - 10
+          - 11
+          - 12
+          - 13
+          - 14
+          - 15
+          - 16
+          - 17
+          - 18
+          - 19
+          - 20
+          - 21
+          - 22
+          - 23
+          - 24
+          - 25
+          - 26
+          - 27
+          - 28
+          - 29
+          - 30
+          - 31
           type: integer
-        Data:
+        Notes:
+          type: string
+        DefectStatusType:
+          format: int32
+          enum:
+          - 0
+          - 1
+          type: integer
+        VehicleDefectAttachments:
+          type: array
+          items:
+            $ref: '#/components/schemas/VehicleDefectAttachmentEditModel'
+        VehicleDefectComments:
+          type: array
+          items:
+            $ref: '#/components/schemas/VehicleDefectCommentEditModel'
+      additionalProperties: false
+    VehicleDefectCommentsCreateModel:
+      type: object
+      properties:
+        VehicleDefectId:
+          format: int32
+          type: integer
+        Comment:
           type: string
       additionalProperties: false
     VehicleDefectCreateModel:
@@ -320,60 +322,6 @@ components:
           items:
             $ref: '#/components/schemas/VehicleDefectCommentsCreateModel'
       additionalProperties: false
-    VehicleDefectCommentsCreateModel:
-      type: object
-      properties:
-        VehicleDefectId:
-          format: int32
-          type: integer
-        Comment:
-          type: string
-      additionalProperties: false
-    VehicleDefectAttachmentModel:
-      type: object
-      properties:
-        VehicleDefectAttachmentId:
-          format: int32
-          type: integer
-        VehicleDefectId:
-          format: int32
-          type: integer
-        AttachmentType:
-          format: int32
-          enum:
-          - 0
-          - 1
-          - 2
-          - 3
-          type: integer
-        AttachmentLocation:
-          type: string
-        AttachmentDateUtc:
-          format: date-time
-          type: string
-      additionalProperties: false
-    VehicleDefectStatusModel:
-      type: object
-      properties:
-        VehicleDefectStatusId:
-          format: int32
-          type: integer
-        VehicleDefectId:
-          format: int32
-          type: integer
-        CreatedByContactId:
-          format: int32
-          type: integer
-        DefectStatus:
-          format: int32
-          enum:
-          - 0
-          - 1
-          type: integer
-        DefectStatusDateUtc:
-          format: date-time
-          type: string
-      additionalProperties: false
     VehicleInspectionStatusModel:
       type: object
       properties:
@@ -401,6 +349,62 @@ components:
         StatusDateUtc:
           format: date-time
           type: string
+      additionalProperties: false
+    VehicleDefectAttachmentModel:
+      type: object
+      properties:
+        VehicleDefectAttachmentId:
+          format: int32
+          type: integer
+        VehicleDefectId:
+          format: int32
+          type: integer
+        AttachmentType:
+          format: int32
+          enum:
+          - 0
+          - 1
+          - 2
+          - 3
+          type: integer
+        AttachmentLocation:
+          type: string
+        AttachmentDateUtc:
+          format: date-time
+          type: string
+      additionalProperties: false
+    VehicleDefectStatusCreateModel:
+      type: object
+      properties:
+        DefectStatus:
+          format: int32
+          enum:
+          - 0
+          - 1
+          type: integer
+      additionalProperties: false
+    VehicleInspectionEditModel:
+      type: object
+      properties:
+        VehicleId:
+          format: int32
+          type: integer
+        InspectionStatusType:
+          format: int32
+          enum:
+          - 0
+          - 1
+          - 2
+          - 3
+          - 4
+          - 5
+          - 6
+          - 7
+          type: integer
+        VehicleDefects:
+          type: array
+          items:
+            $ref: '#/components/schemas/VehicleDefectEditModel'
       additionalProperties: false
     VehicleDefectModel:
       type: object
@@ -474,39 +478,6 @@ components:
           items:
             $ref: '#/components/schemas/VehicleDefectCommentsModel'
       additionalProperties: false
-    VehicleDefectStatusCreateModel:
-      type: object
-      properties:
-        DefectStatus:
-          format: int32
-          enum:
-          - 0
-          - 1
-          type: integer
-      additionalProperties: false
-    VehicleInspectionEditModel:
-      type: object
-      properties:
-        VehicleId:
-          format: int32
-          type: integer
-        InspectionStatusType:
-          format: int32
-          enum:
-          - 0
-          - 1
-          - 2
-          - 3
-          - 4
-          - 5
-          - 6
-          - 7
-          type: integer
-        VehicleDefects:
-          type: array
-          items:
-            $ref: '#/components/schemas/VehicleDefectEditModel'
-      additionalProperties: false
     VehicleInspectionCreateModel:
       type: object
       properties:
@@ -520,6 +491,54 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/VehicleDefectCreateModel'
+      additionalProperties: false
+    VehicleDefectCommentsModel:
+      type: object
+      properties:
+        VehicleDefectCommentId:
+          format: int32
+          type: integer
+        VehicleDefectId:
+          format: int32
+          type: integer
+        CreatedByContactId:
+          format: int32
+          type: integer
+        Comment:
+          type: string
+        CommentDateUtc:
+          format: date-time
+          type: string
+      additionalProperties: false
+    VehicleDefectStatusModel:
+      type: object
+      properties:
+        VehicleDefectStatusId:
+          format: int32
+          type: integer
+        VehicleDefectId:
+          format: int32
+          type: integer
+        CreatedByContactId:
+          format: int32
+          type: integer
+        DefectStatus:
+          format: int32
+          enum:
+          - 0
+          - 1
+          type: integer
+        DefectStatusDateUtc:
+          format: date-time
+          type: string
+      additionalProperties: false
+    VehicleInspectionExportModel:
+      type: object
+      properties:
+        ToEmail:
+          type: string
+        ISO639LanguageCode:
+          type: string
       additionalProperties: false
     VehicleInspectionModel:
       type: object
@@ -557,64 +576,45 @@ components:
           items:
             $ref: '#/components/schemas/VehicleInspectionStatusModel'
       additionalProperties: false
-    VehicleDefectEditModel:
+    VehicleDefectAttachmentEditModel:
       type: object
       properties:
-        VehicleDefectId:
+        VehicleDefectAttachmentId:
           format: int32
           type: integer
-        DefectType:
+        AttachmentType:
           format: int32
           enum:
           - 0
           - 1
           - 2
           - 3
-          - 4
-          - 5
-          - 6
-          - 7
-          - 8
-          - 9
-          - 10
-          - 11
-          - 12
-          - 13
-          - 14
-          - 15
-          - 16
-          - 17
-          - 18
-          - 19
-          - 20
-          - 21
-          - 22
-          - 23
-          - 24
-          - 25
-          - 26
-          - 27
-          - 28
-          - 29
-          - 30
-          - 31
           type: integer
-        Notes:
+        Data:
           type: string
-        DefectStatusType:
+      additionalProperties: false
+    VehicleDefectCommentEditModel:
+      type: object
+      properties:
+        VehicleDefectCommentId:
+          format: int32
+          type: integer
+        Comment:
+          type: string
+      additionalProperties: false
+    VehicleDefectAttachmentCreateModel:
+      type: object
+      properties:
+        AttachmentType:
           format: int32
           enum:
           - 0
           - 1
+          - 2
+          - 3
           type: integer
-        VehicleDefectAttachments:
-          type: array
-          items:
-            $ref: '#/components/schemas/VehicleDefectAttachmentEditModel'
-        VehicleDefectComments:
-          type: array
-          items:
-            $ref: '#/components/schemas/VehicleDefectCommentEditModel'
+        Data:
+          type: string
       additionalProperties: false
   securitySchemes:
     oauth2:

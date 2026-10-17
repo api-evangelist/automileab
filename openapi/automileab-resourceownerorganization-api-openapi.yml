@@ -123,15 +123,30 @@ components:
           - 2
           type: integer
       additionalProperties: false
-    StringStringIEnumerableKeyValuePair:
+    HttpMethod:
       type: object
       properties:
-        Key:
+        Method:
           type: string
-        Value:
+      additionalProperties: false
+    OrganizationNodeModel:
+      type: object
+      properties:
+        OrganizationNodeId:
+          format: int32
+          type: integer
+        Name:
+          type: string
+        ParentOrganizationNodeId:
+          format: int32
+          type: integer
+        Children:
           type: array
           items:
-            type: string
+            $ref: '#/components/schemas/OrganizationNodeModel'
+        HasChildren:
+          type: boolean
+          readOnly: true
       additionalProperties: false
     HttpRequestMessage:
       type: object
@@ -290,58 +305,15 @@ components:
           type: boolean
           readOnly: true
       additionalProperties: false
-    OrganizationNodeModel:
+    StringStringIEnumerableKeyValuePair:
       type: object
       properties:
-        OrganizationNodeId:
-          format: int32
-          type: integer
-        Name:
+        Key:
           type: string
-        ParentOrganizationNodeId:
-          format: int32
-          type: integer
-        Children:
+        Value:
           type: array
           items:
-            $ref: '#/components/schemas/OrganizationNodeModel'
-        HasChildren:
-          type: boolean
-          readOnly: true
-      additionalProperties: false
-    Version:
-      type: object
-      properties:
-        Major:
-          format: int32
-          type: integer
-          readOnly: true
-        Minor:
-          format: int32
-          type: integer
-          readOnly: true
-        Build:
-          format: int32
-          type: integer
-          readOnly: true
-        Revision:
-          format: int32
-          type: integer
-          readOnly: true
-        MajorRevision:
-          format: int32
-          type: integer
-          readOnly: true
-        MinorRevision:
-          format: int32
-          type: integer
-          readOnly: true
-      additionalProperties: false
-    HttpMethod:
-      type: object
-      properties:
-        Method:
-          type: string
+            type: string
       additionalProperties: false
     OrganizationModel:
       type: object
@@ -372,6 +344,34 @@ components:
         OrganizationId:
           format: int32
           type: integer
+      additionalProperties: false
+    Version:
+      type: object
+      properties:
+        Major:
+          format: int32
+          type: integer
+          readOnly: true
+        Minor:
+          format: int32
+          type: integer
+          readOnly: true
+        Build:
+          format: int32
+          type: integer
+          readOnly: true
+        Revision:
+          format: int32
+          type: integer
+          readOnly: true
+        MajorRevision:
+          format: int32
+          type: integer
+          readOnly: true
+        MinorRevision:
+          format: int32
+          type: integer
+          readOnly: true
       additionalProperties: false
     HttpContent:
       type: object

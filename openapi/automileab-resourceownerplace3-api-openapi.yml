@@ -176,7 +176,7 @@ components:
           format: double
           type: number
       additionalProperties: false
-    Place3EditModel:
+    Place3CreateModel:
       required:
       - Name
       - PositionPoint
@@ -216,7 +216,7 @@ components:
           format: int32
           type: integer
       additionalProperties: false
-    Place3CreateModel:
+    Place3EditModel:
       required:
       - Name
       - PositionPoint
